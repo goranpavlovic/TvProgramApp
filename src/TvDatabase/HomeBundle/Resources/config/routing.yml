@@ -7,6 +7,6 @@ tv_database_stations_page:
     defaults: { _controller:TvDatabaseHomeBundle:Default:tvStations }
 
 tv_database_program_page:
-   pattern: /tvprogram
-   defaults: { _controller:TvDatabaseHomeBundle:Default:tvProgram }
+   pattern: /advancedsearch
+   defaults: { _controller:TvDatabaseHomeBundle:Default:advancedSearch }
 

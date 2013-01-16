@@ -3,6 +3,11 @@
 	<head>
 		<title>Tv Program database</title>
 		<link rel="stylesheet" href="{{ asset('bundles/tvdatabasehome/css/index.css') }}" />
+		{% block stylesheets %}
+		{% endblock %}
+		<script type="text/javascript" src="{{ asset('bundles/tvdatabasehome/javascript/main.js') }}"></script>
+		{% block script %}
+		{% endblock %}
 	</head>
 	<body>
 		<div id="container">
@@ -10,19 +15,22 @@
 				<h1>Tv Program Schedule Database</h1>
 			</div>
 			<div id="menu">
-				<ul>
-					<li><a href="/">Home</a></li>
-					<li><a href="/tvstations">Tv Stations</a></li>
-					<li><a href="/tvprogram">Tv Program</a></li>
-				</ul>
+				<div id="menuitems">
+					<ul>
+						<li><a href="/">Home</a></li>
+						<li><a href="/tvstations">Tv Stations</a></li>
+						<li><a href="/advancedsearch">Advanced Search</a></li>
+					</ul>
+				</div>
 			</div>
 			<div id="content">
 				{% block content %}
 				{% endblock %}
 			</div>
 			<div id="footer">
-				test4
-			<div>
+				Praksa2012
+			</div>
 		</div>
 	</body>
 </html>
+

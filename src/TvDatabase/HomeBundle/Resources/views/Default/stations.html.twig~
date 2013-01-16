@@ -1,9 +1,27 @@
 {% extends '::base.html.twig' %}
 
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('bundles/tvdatabasehome/css/stations.css') }}" />
+{% endblock %}
+
+{% block script %}
+
+
+{% endblock %}
+
 {% block content %} 
-
-	znaci menja se
-
+	<div id="stations_table">
+		<table>
+			<tr>
+				<th>TV Station</th>
+			</tr>
+			{% for name in names %}
+				<tr>
+					<td>{{name}}</td>
+				</tr>			
+			{% endfor %}
+		</table>
+	</div>
 {% endblock %}
 
 

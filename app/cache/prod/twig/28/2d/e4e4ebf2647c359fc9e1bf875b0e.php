@@ -10,6 +10,8 @@ class __TwigTemplate_282de4e4ebf2647c359fc9e1bf875b0e extends Twig_Template
         $this->parent = $this->env->loadTemplate("::base.html.twig");
 
         $this->blocks = array(
+            'stylesheets' => array($this, 'block_stylesheets'),
+            'script' => array($this, 'block_script'),
             'content' => array($this, 'block_content'),
         );
     }
@@ -25,12 +27,52 @@ class __TwigTemplate_282de4e4ebf2647c359fc9e1bf875b0e extends Twig_Template
     }
 
     // line 3
+    public function block_stylesheets($context, array $blocks = array())
+    {
+        // line 4
+        echo "\t<link rel=\"stylesheet\" href=\"";
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/tvdatabasehome/css/stations.css"), "html", null, true);
+        echo "\" />
+";
+    }
+
+    // line 7
+    public function block_script($context, array $blocks = array())
+    {
+        // line 8
+        echo "
+";
+    }
+
+    // line 11
     public function block_content($context, array $blocks = array())
     {
         echo " 
-
-\tstanice
-
+\t<div id=\"stations_table\">
+\t\t<table>
+\t\t\t<tr>
+\t\t\t\t<th>TV Station</th>
+\t\t\t</tr>
+\t\t\t";
+        // line 17
+        $context['_parent'] = (array) $context;
+        $context['_seq'] = twig_ensure_traversable((isset($context["names"]) ? $context["names"] : $this->getContext($context, "names")));
+        foreach ($context['_seq'] as $context["_key"] => $context["name"]) {
+            // line 18
+            echo "\t\t\t\t<tr>
+\t\t\t\t\t<td>";
+            // line 19
+            echo twig_escape_filter($this->env, (isset($context["name"]) ? $context["name"] : $this->getContext($context, "name")), "html", null, true);
+            echo "</td>
+\t\t\t\t</tr>\t\t\t
+\t\t\t";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['name'], $context['_parent'], $context['loop']);
+        $context = array_merge($_parent, array_intersect_key($context, $_parent));
+        // line 22
+        echo "\t\t</table>
+\t</div>
 ";
     }
 
@@ -46,6 +88,6 @@ class __TwigTemplate_282de4e4ebf2647c359fc9e1bf875b0e extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  28 => 3,);
+        return array (  74 => 22,  65 => 19,  62 => 18,  58 => 17,  48 => 11,  43 => 8,  40 => 7,  33 => 4,  30 => 3,);
     }
 }

@@ -1,0 +1,32 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+{% block content %} 
+
+	<form action="">
+		<label>Tip Emisije: </label>
+		<select id="broadcastType">
+			{% for type in types %}
+				<option>{{type}}</option>
+			{% endfor %}
+		</select>
+		<br />
+		<label>Televizija: </label>
+		<select id="Televizija">
+			{% for name in televisions %}
+				<option>{{name}}</option>
+			{% endfor %}
+		</select>
+		<br />
+		<label>Datum i vreme od: </label><br />
+		<label>Datum i vreme do: </label>
+	</form>
+
+{% endblock %}
+
+

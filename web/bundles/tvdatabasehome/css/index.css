@@ -1,37 +1,71 @@
+html, body
+{
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+div
+{
+	margin: 0;
+	padding: 0;
+}
+
 #container
 {
 	width: 80%;
+	margin: 0 auto;
 }
 
 #content 
 {
 	margin-left: 20%;
 	width: 80%;
+	background-color:#ffaaff;
 }
 
 #menu 
 {
 	float: left;
 	width: 20%;
+	background-color:#aaffff;
+}
+
+#menuitems
+{
+	margin-left: 20%;
+	margin-top: 10%;
+}
+
+#menu, #content
+{
+	min-height: 900px;
 }
 
 #footer 
 {
 	clear: both;
 	text-align: center;
+	height: 30px;
+	background-color: #cccccc;
 }
 
 #header 
 {
 	text-align: center;
+	background-color:#ffffaa;
+	height: 100px;
 }
 
-ul li
+ul, li
 {
 	list-style: none;
+	margin: 0;
+	padding: 0;
 }
 
 h1
 {
-	margin-bottom:0;
+	margin: 0;
 }
+

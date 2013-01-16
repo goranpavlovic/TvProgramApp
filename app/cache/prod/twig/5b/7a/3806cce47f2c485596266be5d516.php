@@ -10,6 +10,8 @@ class __TwigTemplate_5b7a3806cce47f2c485596266be5d516 extends Twig_Template
         $this->parent = false;
 
         $this->blocks = array(
+            'stylesheets' => array($this, 'block_stylesheets'),
+            'script' => array($this, 'block_script'),
             'content' => array($this, 'block_content'),
         );
     }
@@ -25,38 +27,66 @@ class __TwigTemplate_5b7a3806cce47f2c485596266be5d516 extends Twig_Template
         // line 5
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/tvdatabasehome/css/index.css"), "html", null, true);
         echo "\" />
-\t</head>
+\t\t";
+        // line 6
+        $this->displayBlock('stylesheets', $context, $blocks);
+        // line 8
+        echo "\t\t<script type=\"text/javascript\" src=\"";
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/tvdatabasehome/javascript/main.js"), "html", null, true);
+        echo "\"></script>
+\t\t";
+        // line 9
+        $this->displayBlock('script', $context, $blocks);
+        // line 11
+        echo "\t</head>
 \t<body>
 \t\t<div id=\"container\">
 \t\t\t<div id=\"header\">
 \t\t\t\t<h1>Tv Program Schedule Database</h1>
 \t\t\t</div>
 \t\t\t<div id=\"menu\">
-\t\t\t\t<ul>
-\t\t\t\t\t<li><a href=\"/\">Home</a></li>
-\t\t\t\t\t<li><a href=\"/tvstations\">Tv Stations</a></li>
-\t\t\t\t\t<li><a href=\"/tvprogram\">Tv Program</a></li>
-\t\t\t\t</ul>
+\t\t\t\t<div id=\"menuitems\">
+\t\t\t\t\t<ul>
+\t\t\t\t\t\t<li><a href=\"/\">Home</a></li>
+\t\t\t\t\t\t<li><a href=\"/tvstations\">Tv Stations</a></li>
+\t\t\t\t\t\t<li><a href=\"/advancedsearch\">Advanced Search</a></li>
+\t\t\t\t\t</ul>
+\t\t\t\t</div>
 \t\t\t</div>
 \t\t\t<div id=\"content\">
 \t\t\t\t";
-        // line 20
+        // line 27
         $this->displayBlock('content', $context, $blocks);
-        // line 22
+        // line 29
         echo "\t\t\t</div>
 \t\t\t<div id=\"footer\">
-\t\t\t\ttest4
-\t\t\t<div>
+\t\t\t\tPraksa2012
+\t\t\t</div>
 \t\t</div>
 \t</body>
 </html>
+
 ";
     }
 
-    // line 20
+    // line 6
+    public function block_stylesheets($context, array $blocks = array())
+    {
+        // line 7
+        echo "\t\t";
+    }
+
+    // line 9
+    public function block_script($context, array $blocks = array())
+    {
+        // line 10
+        echo "\t\t";
+    }
+
+    // line 27
     public function block_content($context, array $blocks = array())
     {
-        // line 21
+        // line 28
         echo "\t\t\t\t";
     }
 
@@ -72,6 +102,6 @@ class __TwigTemplate_5b7a3806cce47f2c485596266be5d516 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  60 => 21,  57 => 20,  46 => 22,  44 => 20,  26 => 5,  20 => 1,);
+        return array (  90 => 28,  87 => 27,  83 => 10,  80 => 9,  76 => 7,  73 => 6,  61 => 29,  59 => 27,  41 => 11,  39 => 9,  34 => 8,  32 => 6,  28 => 5,  22 => 1,);
     }
 }

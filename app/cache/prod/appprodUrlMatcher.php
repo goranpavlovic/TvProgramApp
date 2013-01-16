@@ -40,8 +40,8 @@ class appprodUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
         }
 
         // tv_database_program_page
-        if ($pathinfo === '/tvprogram') {
-            return array (  '_controller' => 'TvDatabase\\HomeBundle\\Controller\\DefaultController::tvProgramAction',  '_route' => 'tv_database_program_page',);
+        if ($pathinfo === '/advancedsearch') {
+            return array (  '_controller' => 'TvDatabase\\HomeBundle\\Controller\\DefaultController::advancedSearchAction',  '_route' => 'tv_database_program_page',);
         }
 
         // acme_store_default_index

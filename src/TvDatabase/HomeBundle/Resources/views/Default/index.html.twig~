@@ -1,8 +1,25 @@
 {% extends '::base.html.twig' %}
 
-{% block content %} 
+{% block stylesheet %}
 
-	znaci menja se
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}
+
+{% block content %} 
+	{% for result in results %}
+	<div type="TV">
+	{{ tv }}
+		<div type="currentShow">
+		{{ result.shows }} - {{ result.name }}
+		</div>
+		<div type="nextShow">
+		{{ result.showsNext }}
+		</div>
+	</div>
+	{% endfor %}
 
 {% endblock %}
 
