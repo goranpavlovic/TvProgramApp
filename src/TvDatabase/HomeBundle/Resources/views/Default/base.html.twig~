@@ -1,0 +1,27 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
+<html>
+	<head>
+		<title>Tv Program database</title>
+		<link rel="stylesheet" href="{{ asset('bundles/tvdatabasehome/css/index.css') }}" />
+	</head>
+	<body>
+		<div id="container">
+			<div id="header">
+				<h1>Tv Program Schedule Database</h1>
+			</div>
+			<div id="menu">
+				<ul>
+					<li><a href="">Home</a></li>
+					<li><a href="">Tv Stations</a></li>
+					<li><a href="">Tv Program</a></li>
+				</ul>
+			</div>
+			<div id="content">
+				test3
+			</div>
+			<div id="footer">
+				test4
+			<div>
+		</div>
+	</body>
+</html>

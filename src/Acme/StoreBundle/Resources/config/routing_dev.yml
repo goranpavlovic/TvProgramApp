@@ -1,0 +1,3 @@
+_store:
+    pattern:  /Store/Show/{id}
+    defaults: { _controller: AcmeStoreBundle:Default:Show }

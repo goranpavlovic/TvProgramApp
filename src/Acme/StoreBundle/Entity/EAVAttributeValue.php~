@@ -1,0 +1,150 @@
+<?php
+
+namespace Acme\StoreBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * EAVAttributeValue
+ *
+ * @ORM\Table()
+ * @ORM\Entity
+ */
+class EAVAttributeValue
+{
+    /**
+     * @var string
+     *
+     * @ORM\Id
+     * @ORM\Column(name="ValueId", type="string", length=32)
+     */
+    private $ValueId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="AttributeId", type="integer", length=11)
+     */
+    private $AttributeId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Value", type="string", length=255)
+     */
+    private $Value;
+
+    /**
+    * @ORM\ManyToOne(targetEntity="EAVEntity", inversedBy="attributes")
+    * @ORM\JoinColumn(name="EntityId", referencedColumnName="EntityId")
+    */
+    private $entity;
+
+    /**
+    * @ORM\ManyToOne(targetEntity="MetaEAVAttribute", inversedBy="values")
+    * @ORM\JoinColumn(name="AttributeId", referencedColumnName="AttributeId")
+    */
+    private $attributeMeta;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set ValueId
+     *
+     * @param \char $valueId
+     * @return EAVAttributeValue
+     */
+    public function setValueId(\char $valueId)
+    {
+        $this->ValueId = $valueId;
+    
+        return $this;
+    }
+
+    /**
+     * Get ValueId
+     *
+     * @return \char 
+     */
+    public function getValueId()
+    {
+        return $this->ValueId;
+    }
+
+    /**
+     * Set AttributeId
+     *
+     * @param \int $attributeId
+     * @return EAVAttributeValue
+     */
+    public function setAttributeId(\int $attributeId)
+    {
+        $this->AttributeId = $attributeId;
+    
+        return $this;
+    }
+
+    /**
+     * Get AttributeId
+     *
+     * @return \int 
+     */
+    public function getAttributeId()
+    {
+        return $this->AttributeId;
+    }
+
+    /**
+     * Set Value
+     *
+     * @param \varchar $value
+     * @return EAVAttributeValue
+     */
+    public function setValue(\varchar $value)
+    {
+        $this->Value = $value;
+    
+        return $this;
+    }
+
+    /**
+     * Get Value
+     *
+     * @return \varchar 
+     */
+    public function getValue()
+    {
+        return $this->Value;
+    }
+
+    /**
+     * Set entity
+     *
+     * @param \Acme\StoreBundle\Entity\EAVEntity $entity
+     * @return EAVAttributeValue
+     */
+    public function setEntity(\Acme\StoreBundle\Entity\EAVEntity $entity = null)
+    {
+        $this->entity = $entity;
+    
+        return $this;
+    }
+
+    /**
+     * Get entity
+     *
+     * @return \Acme\StoreBundle\Entity\EAVEntity 
+     */
+    public function getEntity()
+    {
+        return $this->entity;
+    }
+}

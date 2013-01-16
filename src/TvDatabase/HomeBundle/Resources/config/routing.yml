@@ -1,0 +1,12 @@
+tv_database_home_homepage:
+    pattern:  /
+    defaults: { _controller: TvDatabaseHomeBundle:Default:index }
+
+tv_database_stations_page:
+    pattern: /tvstations
+    defaults: { _controller:TvDatabaseHomeBundle:Default:tvStations }
+
+tv_database_program_page:
+   pattern: /tvprogram
+   defaults: { _controller:TvDatabaseHomeBundle:Default:tvProgram }
+

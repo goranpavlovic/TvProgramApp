@@ -1,0 +1,7 @@
+parameters:
+#    tv_database_home.example.class: TvDatabase\HomeBundle\Example
+
+services:
+#    tv_database_home.example:
+#        class: %tv_database_home.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

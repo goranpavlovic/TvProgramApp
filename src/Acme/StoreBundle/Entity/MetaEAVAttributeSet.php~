@@ -1,0 +1,184 @@
+<?php
+
+namespace Acme\StoreBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * MetaEAVAttributeSet
+ *
+ * @ORM\Table()
+ * @ORM\Entity
+ */
+class MetaEAVAttributeSet
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="AttributeSetId", type="integer", length=11)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $AttributeSetId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="AttributeSetName", type="string", length=45)
+     */
+    private $AttributeSetName;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="Required", type="boolean")
+     */
+    private $Required;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="MetaEAVEntityType")
+     * @ORM\JoinTable(name="MetaEntitySetDependency",
+     *      joinColumns={@ORM\JoinColumn(name="AttributeSetId", referencedColumnName="AttributeSetId")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="EntityTypeId", referencedColumnName="EntityTypeId")}
+     *      )
+     */
+    private $entityTypes;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="MetaEAVAttribute")
+     * @ORM\JoinTable(name="MetaAtrSetDependecy",
+     *      joinColumns={@ORM\JoinColumn(name="AttributeSetId", referencedColumnName="AttributeSetId")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="AttributeId", referencedColumnName="AttributeId")}
+     *      )
+     */
+    private $attributes;
+
+    public function __construct()
+    {
+	$entityTypes = new ArrayCollection();
+	$attributes = new ArrayCollection();
+    }
+
+    /**
+     * Get AttributeSetId
+     *
+     * @return integer 
+     */
+    public function getAttributeSetId()
+    {
+        return $this->AttributeSetId;
+    }
+
+    /**
+     * Set AttributeSetName
+     *
+     * @param string $attributeSetName
+     * @return MetaEAVAttributeSet
+     */
+    public function setAttributeSetName($attributeSetName)
+    {
+        $this->AttributeSetName = $attributeSetName;
+    
+        return $this;
+    }
+
+    /**
+     * Get AttributeSetName
+     *
+     * @return string 
+     */
+    public function getAttributeSetName()
+    {
+        return $this->AttributeSetName;
+    }
+
+    /**
+     * Set Required
+     *
+     * @param boolean $required
+     * @return MetaEAVAttributeSet
+     */
+    public function setRequired($required)
+    {
+        $this->Required = $required;
+    
+        return $this;
+    }
+
+    /**
+     * Get Required
+     *
+     * @return boolean 
+     */
+    public function getRequired()
+    {
+        return $this->Required;
+    }
+
+    /**
+     * Add entityTypes
+     *
+     * @param \Acme\StoreBundle\Entity\MetaEAVEntityType $entityTypes
+     * @return MetaEAVAttributeSet
+     */
+    public function addEntityType(\Acme\StoreBundle\Entity\MetaEAVEntityType $entityTypes)
+    {
+        $this->entityTypes[] = $entityTypes;
+    
+        return $this;
+    }
+
+    /**
+     * Remove entityTypes
+     *
+     * @param \Acme\StoreBundle\Entity\MetaEAVEntityType $entityTypes
+     */
+    public function removeEntityType(\Acme\StoreBundle\Entity\MetaEAVEntityType $entityTypes)
+    {
+        $this->entityTypes->removeElement($entityTypes);
+    }
+
+    /**
+     * Get entityTypes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEntityTypes()
+    {
+        return $this->entityTypes;
+    }
+
+    /**
+     * Add attributes
+     *
+     * @param \Acme\StoreBundle\Entity\MetaEAVAttribute $attributes
+     * @return MetaEAVAttributeSet
+     */
+    public function addAttribute(\Acme\StoreBundle\Entity\MetaEAVAttribute $attributes)
+    {
+        $this->attributes[] = $attributes;
+    
+        return $this;
+    }
+
+    /**
+     * Remove attributes
+     *
+     * @param \Acme\StoreBundle\Entity\MetaEAVAttribute $attributes
+     */
+    public function removeAttribute(\Acme\StoreBundle\Entity\MetaEAVAttribute $attributes)
+    {
+        $this->attributes->removeElement($attributes);
+    }
+
+    /**
+     * Get attributes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAttributes()
+    {
+        return $this->attributes;
+    }
+}
