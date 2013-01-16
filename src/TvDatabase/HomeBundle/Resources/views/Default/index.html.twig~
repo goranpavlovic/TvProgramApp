@@ -11,7 +11,7 @@
 {% block content %} 
 	{% for result in results %}
 	<div type="TV">
-	{{ tv }}
+	{{ result.tv }}
 		<div type="currentShow">
 		{{ result.shows }} - {{ result.name }}
 		</div>

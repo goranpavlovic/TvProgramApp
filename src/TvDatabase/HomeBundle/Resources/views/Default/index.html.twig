@@ -11,12 +11,12 @@
 {% block content %} 
 	{% for result in results %}
 	<div type="TV">
-	{{ tv }}
+	{{ result.tv }}
 		<div type="currentShow">
 		{{ result.shows }} - {{ result.name }}
 		</div>
 		<div type="nextShow">
-		{{ result.showsNext }}
+		{{ result.showsNext }} - {{ result.nameNext }}
 		</div>
 	</div>
 	{% endfor %}
