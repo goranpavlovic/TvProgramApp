@@ -25,15 +25,6 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         $allow = array();
         $pathinfo = rawurldecode($pathinfo);
 
-        // _welcome
-        if (rtrim($pathinfo, '/') === '') {
-            if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', '_welcome');
-            }
-
-            return array (  '_controller' => 'Acme\\DemoBundle\\Controller\\WelcomeController::indexAction',  '_route' => '_welcome',);
-        }
-
         // _store
         if (0 === strpos($pathinfo, '/Store/Show') && preg_match('#^/Store/Show/(?P<id>[^/]+)$#s', $pathinfo, $matches)) {
             return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Acme\\StoreBundle\\Controller\\DefaultController::ShowAction',)), array('_route' => '_store'));
@@ -184,6 +175,11 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         // tv_database_program_page
         if ($pathinfo === '/advancedsearch') {
             return array (  '_controller' => 'TvDatabase\\HomeBundle\\Controller\\DefaultController::advancedSearchAction',  '_route' => 'tv_database_program_page',);
+        }
+
+        // tv_database_show_broadcast
+        if (0 === strpos($pathinfo, '/show') && preg_match('#^/show/(?P<id>[^/]+)$#s', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'TvDatabase\\HomeBundle\\Controller\\DefaultController::showAction',)), array('_route' => 'tv_database_show_broadcast'));
         }
 
         // acme_store_default_index

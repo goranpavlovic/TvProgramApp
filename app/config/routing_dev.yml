@@ -1,7 +1,3 @@
-_welcome:
-    pattern:  /
-    defaults: { _controller: AcmeDemoBundle:Welcome:index }
-
 _store:
     prefix:  /
     resource: "@AcmeStoreBundle/Controller/DefaultController.php"

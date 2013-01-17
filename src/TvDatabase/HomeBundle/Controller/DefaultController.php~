@@ -42,18 +42,17 @@ class DefaultController extends Controller
 							));
 		$query->setMaxResults(1);
 		$showsNext = $query->getResult();
-		if($showsNext)
-		{
-			$nameNext = $em->getRepository('AcmeStoreBundle:EAVAttributeValue')->
-						findOneBy(array('entity' => $showsNext[0]->getEntityId(), 'AttributeId' => 7));
-		}
+		$nameNext = $em->getRepository('AcmeStoreBundle:EAVAttributeValue')->
+					findOneBy(array('entity' => $showsNext[0]->getEntityId(), 'AttributeId' => 7));
 		//$shows = $em->getRepository('AcmeStoreBundle:EAVEntity')->findBy(array('TvStation' => $tv->GetTvId()));
 		array_push($results,array(
 				'tv'=> $tv->GetTvName(),
 				'shows'=> $shows[0]->getDatetime()->format('H:i'),
 				'name'=> $name->getValue(),
+				'nameId' => $shows->getEntityId(),
 				'showsNext'=> $showsNext[0]->getDatetime()->format('H:i'),
-				'nameNext' => $nameNext->getValue()
+				'nameNext' => $nameNext->getValue(),
+				'nameNextId' => $showsNext->getEntityId()
 				));
 	}
 	
@@ -93,4 +92,26 @@ class DefaultController extends Controller
     {
 	return $this->render('TvDatabaseHomeBundle:Default:advsearchresponse.html.twig');
     }
+
+    public function showAction($id)
+    {
+	$em = $this->getDoctrine()->GetManager();
+	$show = $em->getRepository('AcmeStoreBundle:EAVEntity')->find($id);
+	$result = array();
+	foreach($show->getAttributes() as $attribute)
+	{
+		$name = $em->getRepository('AcmeStoreBundle:MetaEAVAttribute')->find($attribute->getAttributeId());
+		array_push($result, array('name' => $name->getAttributeName(),'value' => $attribute->getValue()));
+	}
+	return $this->render('TvDatabaseHomeBundle:Default:show.html.twig', array('attributes' => $result));
+	
+    }
 }
+
+
+
+
+
+
+
+

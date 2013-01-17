@@ -44,6 +44,11 @@ class appprodUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
             return array (  '_controller' => 'TvDatabase\\HomeBundle\\Controller\\DefaultController::advancedSearchAction',  '_route' => 'tv_database_program_page',);
         }
 
+        // tv_database_show_broadcast
+        if (0 === strpos($pathinfo, '/show') && preg_match('#^/show/(?P<id>[^/]+)$#s', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'TvDatabase\\HomeBundle\\Controller\\DefaultController::showAction',)), array('_route' => 'tv_database_show_broadcast'));
+        }
+
         // acme_store_default_index
         if (0 === strpos($pathinfo, '/hello') && preg_match('#^/hello/(?P<name>[^/]+)$#s', $pathinfo, $matches)) {
             return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Acme\\StoreBundle\\Controller\\DefaultController::indexAction',)), array('_route' => 'acme_store_default_index'));

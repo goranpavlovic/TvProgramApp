@@ -49,8 +49,10 @@ class DefaultController extends Controller
 				'tv'=> $tv->GetTvName(),
 				'shows'=> $shows[0]->getDatetime()->format('H:i'),
 				'name'=> $name->getValue(),
+				'nameId' => $shows[0]->getEntityId(),
 				'showsNext'=> $showsNext[0]->getDatetime()->format('H:i'),
-				'nameNext' => $nameNext->getValue()
+				'nameNext' => $nameNext->getValue(),
+				'nameNextId' => $showsNext[0]->getEntityId()
 				));
 	}
 	
@@ -90,4 +92,26 @@ class DefaultController extends Controller
     {
 	return $this->render('TvDatabaseHomeBundle:Default:advsearchresponse.html.twig');
     }
+
+    public function showAction($id)
+    {
+	$em = $this->getDoctrine()->GetManager();
+	$show = $em->getRepository('AcmeStoreBundle:EAVEntity')->find($id);
+	$result = array();
+	foreach($show->getAttributes() as $attribute)
+	{
+		$name = $em->getRepository('AcmeStoreBundle:MetaEAVAttribute')->find($attribute->getAttributeId());
+		array_push($result, array('name' => $name->getAttributeName(),'value' => $attribute->getValue()));
+	}
+	return $this->render('TvDatabaseHomeBundle:Default:show.html.twig', array('attributes' => $result));
+	
+    }
 }
+
+
+
+
+
+
+
+

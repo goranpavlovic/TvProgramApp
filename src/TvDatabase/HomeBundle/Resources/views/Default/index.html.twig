@@ -13,10 +13,10 @@
 	<div type="TV">
 	{{ result.tv }}
 		<div type="currentShow">
-		{{ result.shows }} - {{ result.name }}
+		{{ result.shows }} - {{ result.name }} <a href="/show/{{ result.nameId }}">details-></a>
 		</div>
 		<div type="nextShow">
-		{{ result.showsNext }} - {{ result.nameNext }}
+		{{ result.showsNext }} - {{ result.nameNext }} <a href="/show/{{ result.nameNextId }}">details-></a>
 		</div>
 	</div>
 	{% endfor %}

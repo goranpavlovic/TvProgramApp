@@ -13,7 +13,6 @@ use Symfony\Component\HttpKernel\Log\LoggerInterface;
 class appdevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerator
 {
     static private $declaredRoutes = array(
-        '_welcome' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'Acme\\DemoBundle\\Controller\\WelcomeController::indexAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/',    ),  ),),
         '_store' => array (  0 =>   array (    0 => 'id',  ),  1 =>   array (    '_controller' => 'Acme\\StoreBundle\\Controller\\DefaultController::ShowAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'variable',      1 => '/',      2 => '[^/]+',      3 => 'id',    ),    1 =>     array (      0 => 'text',      1 => '/Store/Show',    ),  ),),
         '_demo_login' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'Acme\\DemoBundle\\Controller\\SecuredController::loginAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/demo/secured/login',    ),  ),),
         '_security_check' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'Acme\\DemoBundle\\Controller\\SecuredController::securityCheckAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/demo/secured/login_check',    ),  ),),
@@ -40,6 +39,7 @@ class appdevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
         'tv_database_home_homepage' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'TvDatabase\\HomeBundle\\Controller\\DefaultController::indexAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/',    ),  ),),
         'tv_database_stations_page' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'TvDatabase\\HomeBundle\\Controller\\DefaultController::tvStationsAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/tvstations',    ),  ),),
         'tv_database_program_page' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'TvDatabase\\HomeBundle\\Controller\\DefaultController::advancedSearchAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/advancedsearch',    ),  ),),
+        'tv_database_show_broadcast' => array (  0 =>   array (    0 => 'id',  ),  1 =>   array (    '_controller' => 'TvDatabase\\HomeBundle\\Controller\\DefaultController::showAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'variable',      1 => '/',      2 => '[^/]+',      3 => 'id',    ),    1 =>     array (      0 => 'text',      1 => '/show',    ),  ),),
         'acme_store_default_index' => array (  0 =>   array (    0 => 'name',  ),  1 =>   array (    '_controller' => 'Acme\\StoreBundle\\Controller\\DefaultController::indexAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'variable',      1 => '/',      2 => '[^/]+',      3 => 'name',    ),    1 =>     array (      0 => 'text',      1 => '/hello',    ),  ),),
     );
 

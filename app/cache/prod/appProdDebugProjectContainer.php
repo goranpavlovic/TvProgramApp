@@ -191,7 +191,7 @@ class appProdDebugProjectContainer extends Container
         $b = new \Doctrine\DBAL\Configuration();
         $b->setSQLLogger($a);
 
-        return $this->services['doctrine.dbal.default_connection'] = $this->get('doctrine.dbal.connection_factory')->createConnection(array('dbname' => 'Praksa2012', 'host' => 'localhost', 'port' => NULL, 'user' => 'root', 'password' => 'neskafa', 'charset' => 'UTF8', 'driver' => 'pdo_mysql', 'driverOptions' => array()), $b, new \Symfony\Bridge\Doctrine\ContainerAwareEventManager($this), array());
+        return $this->services['doctrine.dbal.default_connection'] = $this->get('doctrine.dbal.connection_factory')->createConnection(array('dbname' => 'Praksa2012', 'host' => 'localhost', 'port' => NULL, 'user' => 'root', 'password' => 'Praksa2012', 'charset' => 'UTF8', 'driver' => 'pdo_mysql', 'driverOptions' => array()), $b, new \Symfony\Bridge\Doctrine\ContainerAwareEventManager($this), array());
     }
 
     /**
@@ -200,11 +200,11 @@ class appProdDebugProjectContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return EntityManager50f70c0f5efb6_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager50f70c0f5efb6_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
+     * @return EntityManager50f8164d7a91e_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager50f8164d7a91e_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
      */
     protected function getDoctrine_Orm_DefaultEntityManagerService()
     {
-        require_once '/home/nikola/public_html/www.symfonyserver.com/app/cache/prod/jms_diextra/doctrine/EntityManager_50f70c0f5efb6.php';
+        require_once '/home/nikola/public_html/www.symfonyserver.com/app/cache/prod/jms_diextra/doctrine/EntityManager_50f8164d7a91e.php';
 
         $a = new \Doctrine\Common\Cache\ArrayCache();
         $a->setNamespace('sf2orm_default_47dec262b9c72159fa09bc92e1190f51');
@@ -234,7 +234,7 @@ class appProdDebugProjectContainer extends Container
         $f = call_user_func(array('Doctrine\\ORM\\EntityManager', 'create'), $this->get('doctrine.dbal.default_connection'), $e);
         $this->get('doctrine.orm.default_manager_configurator')->configure($f);
 
-        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager50f70c0f5efb6_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($f, $this);
+        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager50f8164d7a91e_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($f, $this);
     }
 
     /**
@@ -2394,7 +2394,7 @@ class appProdDebugProjectContainer extends Container
     /**
      * Gets the doctrine.orm.entity_manager service alias.
      *
-     * @return EntityManager50f70c0f5efb6_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager An instance of the doctrine.orm.default_entity_manager service
+     * @return EntityManager50f8164d7a91e_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager An instance of the doctrine.orm.default_entity_manager service
      */
     protected function getDoctrine_Orm_EntityManagerService()
     {
@@ -2692,7 +2692,7 @@ class appProdDebugProjectContainer extends Container
             'database_port' => NULL,
             'database_name' => 'Praksa2012',
             'database_user' => 'root',
-            'database_password' => 'neskafa',
+            'database_password' => 'Praksa2012',
             'mailer_transport' => 'smtp',
             'mailer_host' => '127.0.0.1',
             'mailer_user' => NULL,
@@ -3123,8 +3123,8 @@ class appProdDebugProjectContainer extends Container
             ),
             'jms_di_extra.cache_dir' => '/home/nikola/public_html/www.symfonyserver.com/app/cache/prod/jms_diextra',
             'jms_di_extra.doctrine_integration' => true,
-            'jms_di_extra.doctrine_integration.entity_manager.file' => '/home/nikola/public_html/www.symfonyserver.com/app/cache/prod/jms_diextra/doctrine/EntityManager_50f70c0f5efb6.php',
-            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager50f70c0f5efb6_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
+            'jms_di_extra.doctrine_integration.entity_manager.file' => '/home/nikola/public_html/www.symfonyserver.com/app/cache/prod/jms_diextra/doctrine/EntityManager_50f8164d7a91e.php',
+            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager50f8164d7a91e_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
             'security.secured_services' => array(
 
             ),

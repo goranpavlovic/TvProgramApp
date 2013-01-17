@@ -10,3 +10,7 @@ tv_database_program_page:
    pattern: /advancedsearch
    defaults: { _controller:TvDatabaseHomeBundle:Default:advancedSearch }
 
+tv_database_show_broadcast:
+    pattern: /show/{id}
+    defaults: { _controller:TvDatabaseHomeBundle:Default:show }
+
