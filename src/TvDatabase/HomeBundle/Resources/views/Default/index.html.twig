@@ -11,7 +11,7 @@
 {% block content %} 
 	{% for result in results %}
 	<div id="TV">
-	{{ result.tv }}
+	<a href="/tv/{{result.tv.tvid}}">{{ result.tv.tvname }}</a>
 	<div id="broadcast table">
 		<table>
 			<tr>

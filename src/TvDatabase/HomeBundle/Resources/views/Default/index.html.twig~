@@ -11,7 +11,8 @@
 {% block content %} 
 	{% for result in results %}
 	<div id="TV">
-	{{ result.tv }}
+	<a href="/TV/{{result.tv.tvid}}">{{ result.tv.tvname }}</a>
+	<div id="broadcast table">
 		<table>
 			<tr>
 				<td>{{ result.shows }}</td>
@@ -24,6 +25,7 @@
 				<td id="details"><a href="/show/{{ result.nameNextId }}">details-></a>
 			</tr>
 		</table>
+	</div>
 	</div>
 	{% endfor %}
 
