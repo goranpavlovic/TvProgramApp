@@ -10,14 +10,20 @@
 
 {% block content %} 
 	{% for result in results %}
-	<div type="TV">
+	<div id="TV">
 	{{ result.tv }}
-		<div type="currentShow">
-		{{ result.shows }} - {{ result.name }} <a href="/show/{{ result.nameId }}">details-></a>
-		</div>
-		<div type="nextShow">
-		{{ result.showsNext }} - {{ result.nameNext }}
-		</div>
+		<table>
+			<tr>
+				<td>{{ result.shows }}</td>
+				<td>{{ result.name }}</td>
+				<td id="details"><a href="/show/{{ result.nameId }}">details-></a>
+			</tr>
+			<tr>
+				<td>{{ result.showsNext }}</td>
+				<td>{{ result.nameNext }}</td>
+				<td id="details"><a href="/show/{{ result.nameNextId }}">details-></a>
+			</tr>
+		</table>
 	</div>
 	{% endfor %}
 
