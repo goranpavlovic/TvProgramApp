@@ -8,6 +8,12 @@
 
 {% endblock %}
 
+{% block mainmany %}
+	<li class="current_page_item" ><a href="/">Home</a></li>
+	<li><a href="/tvstations">Tv Stations</a></li>
+	<li><a href="/advancedsearch">Advanced Search</a></li>
+{% endblock %}
+
 {% block content %} 
 	{% for result in results %}
 	<div type="TV">

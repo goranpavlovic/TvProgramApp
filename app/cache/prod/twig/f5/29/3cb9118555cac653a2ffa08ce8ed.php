@@ -12,6 +12,7 @@ class __TwigTemplate_f5293cb9118555cac653a2ffa08ce8ed extends Twig_Template
         $this->blocks = array(
             'stylesheets' => array($this, 'block_stylesheets'),
             'script' => array($this, 'block_script'),
+            'mainmany' => array($this, 'block_mainmany'),
             'content' => array($this, 'block_content'),
         );
     }
@@ -37,6 +38,16 @@ class __TwigTemplate_f5293cb9118555cac653a2ffa08ce8ed extends Twig_Template
     }
 
     // line 9
+    public function block_mainmany($context, array $blocks = array())
+    {
+        // line 10
+        echo "\t<li><a href=\"/\">Home</a></li>
+\t<li><a href=\"/tvstations\">Tv Stations</a></li>
+\t<li class=\"current_page_item\" ><a href=\"/advancedsearch\">Advanced Search</a></li>
+";
+    }
+
+    // line 15
     public function block_content($context, array $blocks = array())
     {
         echo " 
@@ -45,11 +56,11 @@ class __TwigTemplate_f5293cb9118555cac653a2ffa08ce8ed extends Twig_Template
 \t\t<label>Tip Emisije: </label>
 \t\t<select id=\"broadcastType\">
 \t\t\t";
-        // line 14
+        // line 20
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["types"]) ? $context["types"] : $this->getContext($context, "types")));
         foreach ($context['_seq'] as $context["_key"] => $context["type"]) {
-            // line 15
+            // line 21
             echo "\t\t\t\t<option>";
             echo twig_escape_filter($this->env, (isset($context["type"]) ? $context["type"] : $this->getContext($context, "type")), "html", null, true);
             echo "</option>
@@ -58,17 +69,17 @@ class __TwigTemplate_f5293cb9118555cac653a2ffa08ce8ed extends Twig_Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['type'], $context['_parent'], $context['loop']);
         $context = array_merge($_parent, array_intersect_key($context, $_parent));
-        // line 17
+        // line 23
         echo "\t\t</select>
 \t\t<br />
 \t\t<label>Televizija: </label>
 \t\t<select id=\"Televizija\">
 \t\t\t";
-        // line 21
+        // line 27
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["televisions"]) ? $context["televisions"] : $this->getContext($context, "televisions")));
         foreach ($context['_seq'] as $context["_key"] => $context["name"]) {
-            // line 22
+            // line 28
             echo "\t\t\t\t<option>";
             echo twig_escape_filter($this->env, (isset($context["name"]) ? $context["name"] : $this->getContext($context, "name")), "html", null, true);
             echo "</option>
@@ -77,7 +88,7 @@ class __TwigTemplate_f5293cb9118555cac653a2ffa08ce8ed extends Twig_Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['name'], $context['_parent'], $context['loop']);
         $context = array_merge($_parent, array_intersect_key($context, $_parent));
-        // line 24
+        // line 30
         echo "\t\t</select>
 \t\t<br />
 \t\t<label>Datum i vreme od: </label><br />
@@ -99,6 +110,6 @@ class __TwigTemplate_f5293cb9118555cac653a2ffa08ce8ed extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  81 => 24,  72 => 22,  68 => 21,  62 => 17,  53 => 15,  49 => 14,  40 => 9,  35 => 6,  30 => 3,);
+        return array (  92 => 30,  83 => 28,  79 => 27,  73 => 23,  64 => 21,  60 => 20,  51 => 15,  44 => 10,  41 => 9,  36 => 6,  31 => 3,);
     }
 }

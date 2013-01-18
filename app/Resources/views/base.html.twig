@@ -1,36 +1,96 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
-<html>
-	<head>
-		<title>Tv Program database</title>
-		<link rel="stylesheet" href="{{ asset('bundles/tvdatabasehome/css/index.css') }}" />
-		{% block stylesheets %}
-		{% endblock %}
-		<script type="text/javascript" src="{{ asset('bundles/tvdatabasehome/javascript/main.js') }}"></script>
-		{% block script %}
-		{% endblock %}
-	</head>
-	<body>
-		<div id="container">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>Tv Program Schedule Database</title>
+	<link href="http://fonts.googleapis.com/css?family=Oswald" rel="stylesheet" type="text/css" />
+	<link href='http://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'>
+	<link href="{{ asset('bundles/tvdatabasehome/css/style.css') }}" rel="stylesheet" type="text/css" media="screen" />
+	{% block stylesheets %}
+	{% endblock %}
+	{% block script %}
+	{% endblock %}
+</head>
+<body>
+	<div id="wrapper">
+		<div id="header-wrapper">
 			<div id="header">
-				<h1>Tv Program Schedule Database</h1>
-			</div>
-			<div id="menu">
-				<div id="menuitems">
-					<ul>
-						<li><a href="/">Home</a></li>
-						<li><a href="/tvstations">Tv Stations</a></li>
-						<li><a href="/advancedsearch">Advanced Search</a></li>
-					</ul>
+				<div id="logo">
+					<h1><a href="#">Tv Program Schedule Database</a></h1>
 				</div>
 			</div>
-			<div id="content">
-				{% block content %}
+		</div>
+	</div>
+	<div id="menu-wrapper">
+		<div id="menu">
+			<ul>
+				<!--li class="current_page_item"><a href="#">Homepage</a></li-->
+				{% block mainmany %}
+					<li class="current_page_item" ><a href="/">Home</a></li>
+					<li><a href="/tvstations">Tv Stations</a></li>
+					<li><a href="/advancedsearch">Advanced Search</a></li>
 				{% endblock %}
-			</div>
-			<div id="footer">
-				Praksa2012
+			</ul>
+		</div>
+	</div>
+	<div id="page">
+		<div id="page-bgtop">
+			<div id="page-bgbtm">
+				<div id="page-content">
+					<div id="content">
+						{% block content %}
+						{% endblock %}
+						<div style="clear: both;">&nbsp;</div>
+					</div>
+					<div id="sidebar">
+						<ul>
+							<li>
+								<h2>Aliquam tempus</h2>
+								<p>Mauris vitae nisl nec metus placerat perdiet est. Phasellus dapibus semper consectetuer hendrerit.</p>
+							</li>
+							<li>
+								<h2>Categories</h2>
+								<ul>
+									<li><a href="#">Aliquam libero</a></li>
+									<li><a href="#">Consectetuer adipiscing elit</a></li>
+									<li><a href="#">Metus aliquam pellentesque</a></li>
+									<li><a href="#">Suspendisse iaculis mauris</a></li>
+									<li><a href="#">Urnanet non molestie semper</a></li>
+									<li><a href="#">Proin gravida orci porttitor</a></li>
+								</ul>
+							</li>
+							<li>
+								<h2>Blogroll</h2>
+								<ul>
+									<li><a href="#">Aliquam libero</a></li>
+									<li><a href="#">Consectetuer adipiscing elit</a></li>
+									<li><a href="#">Metus aliquam pellentesque</a></li>
+									<li><a href="#">Suspendisse iaculis mauris</a></li>
+									<li><a href="#">Urnanet non molestie semper</a></li>
+									<li><a href="#">Proin gravida orci porttitor</a></li>
+								</ul>
+							</li>
+							<li>
+								<h2>Archives</h2>
+								<ul>
+									<li><a href="#">Aliquam libero</a></li>
+									<li><a href="#">Consectetuer adipiscing elit</a></li>
+									<li><a href="#">Metus aliquam pellentesque</a></li>
+									<li><a href="#">Suspendisse iaculis mauris</a></li>
+									<li><a href="#">Urnanet non molestie semper</a></li>
+									<li><a href="#">Proin gravida orci porttitor</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div style="clear: both;">&nbsp;</div>
 			</div>
 		</div>
-	</body>
+	</div>
+	<div id="footer">
+	<p>Praksa 2012</p>
+</div>
+</body>
 </html>
-

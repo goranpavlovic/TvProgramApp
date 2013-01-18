@@ -16,7 +16,7 @@
 		{{ result.shows }} - {{ result.name }}
 		</div>
 		<div type="nextShow">
-		{{ result.showsNext }}
+		{{ result.showsNext }} - {{ result.nameNext }}
 		</div>
 	</div>
 	{% endfor %}
