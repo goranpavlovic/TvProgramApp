@@ -124,11 +124,11 @@ class DefaultController extends Controller
 	{
 		$nameId = $em->getRepository('AcmeStoreBundle:MetaEAVAttribute')
 						->findOneBy(array('AttributeName' => 'Name'));
-		*$name = $em->getRepository('AcmeStoreBundle:EAVAttributeValue')
+		$name = $em->getRepository('AcmeStoreBundle:EAVAttributeValue')
 						->findOneBy(array('AttributeId' => $nameId->getAttributeId(),
 								'entity' => $result->getEntityId()));
 		array_push($results,array('time' => $result->getDatetime()->format('H:i'),
-					'name' => 'ime emisije zeza i jos uvek ne znam zasto...',//$name->getValue(),
+					'name' => $name->getValue(),
 					'id' => $result->getEntityId()));
 	}
 	return $this->render('TvDatabaseHomeBundle:Default:showTV.html.twig',

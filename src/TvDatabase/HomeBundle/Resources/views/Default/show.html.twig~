@@ -1,0 +1,27 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('bundles/tvdatabasehome/css/stations.css') }}" />
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}
+
+{% block content %} 
+	<div id="show">
+
+		{% for attribute in attributes %}
+			{% if attribute.name == "Link" %}
+				<a href={{ attribute.value }}> link </a>
+			{% elseif attribute.name == "Picture" %}
+				<img src={{ attribute.value }}>
+			{% else %}
+				{{ attribute.name }}: {{ attribute.value }}
+			{% endif %}
+		{% endfor %}
+
+	</div>
+{% endblock %}
+
+  
