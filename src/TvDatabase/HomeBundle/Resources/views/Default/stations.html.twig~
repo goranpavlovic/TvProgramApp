@@ -15,18 +15,28 @@
 {% endblock %}
 
 {% block content %} 
-	<div id="stations_table">
+	<!--div id="stations_table">
 		<table>
 			<tr>
 				<th>TV Station</th>
 			</tr>
-			{% for name in names %}
+			{% for station in tvStations %}
 				<tr>
-					<td>{{name}}</td>
+					<td><a href="/tv/{{station.TvID}}">{{station.TvName}}</a></td>
 				</tr>			
 			{% endfor %}
 		</table>
-	</div>
+	</div-->
+	<div class="post">
+							<!--h2 class="title"><a href="#">Tv Stations</a></h2-->
+							<div class="entry">
+								<ul class='tvmenyItem'>
+									{% for station in tvStations %}
+										<li class='tvMenu'><a href="/tv/{{station.TvID}}"><span class='tventry'>{{station.TvName}}</span></a></li>
+									{% endfor %}
+								<ul>
+							</div>
+						</div>
 {% endblock %}
 
 

@@ -76,7 +76,7 @@ class DefaultController extends Controller
 	{
 		array_push($nameArray, $tv->getTvName());
 	}
-	return $this->render('TvDatabaseHomeBundle:Default:stations.html.twig', array( 'names' => $nameArray) );
+	return $this->render('TvDatabaseHomeBundle:Default:stations.html.twig', array( 'tvStations' => $tvStation));
     }
     public function advancedSearchAction()
     {
@@ -116,9 +116,12 @@ class DefaultController extends Controller
 	
     }
 
-    public function showTVAction($id)
+    public function showTVAction($id, $date)
     {
-	$today = $today = date_create('2013-01-11 11:45:00');
+	if($date === 'today')
+		$today = date_create('2013-01-11 11:45:00');
+	else
+		$today = date_create($date . '12:00:00');
 	$em = $this->getDoctrine()->getManager();
 	$tv = $em->getRepository('AcmeStoreBundle:TVStation')->find($id);
 	$query = $em->createQuery('SELECT ent from AcmeStoreBundle:EAVEntity as ent 

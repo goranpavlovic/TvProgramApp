@@ -69,14 +69,13 @@ class DefaultController extends Controller
     }
     public function tvStationsAction()
     {
-
 	$tvStation = $this->getDoctrine()->getRepository('AcmeStoreBundle:TVStation')->findAll();
 	$nameArray = array();
 	foreach($tvStation as $tv)
 	{
 		array_push($nameArray, $tv->getTvName());
 	}
-	return $this->render('TvDatabaseHomeBundle:Default:stations.html.twig', array( 'names' => $nameArray) );
+	return $this->render('TvDatabaseHomeBundle:Default:stations.html.twig', array( 'tvStations' => $tvStation));
     }
     public function advancedSearchAction()
     {
@@ -101,7 +100,6 @@ class DefaultController extends Controller
     {
 	return $this->render('TvDatabaseHomeBundle:Default:advsearchresponse.html.twig');
     }
-
     public function showAction($id)
     {
 	$em = $this->getDoctrine()->GetManager();
@@ -113,7 +111,6 @@ class DefaultController extends Controller
 		array_push($result, array('name' => $name->getAttributeName(),'value' => $attribute->getValue()));
 	}
 	return $this->render('TvDatabaseHomeBundle:Default:show.html.twig', array('attributes' => $result));
-	
     }
 
     public function showTVAction($id)
@@ -142,7 +139,7 @@ class DefaultController extends Controller
 		else
 			$resName = 'Name not in database';
 		array_push($results,array('time' => $result->getDatetime()->format('H:i'),
-					'name' => $resName->getValue(),
+					'name' => $resName,
 					'id' => $result->getEntityId()));
 	}
 	return $this->render('TvDatabaseHomeBundle:Default:showTV.html.twig',

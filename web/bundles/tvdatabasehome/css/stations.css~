@@ -5,5 +5,30 @@ table, th, td
 
 #stations_table
 {
-	padding: 5%;
+	padding: 2%;
+}
+
+.tvMenu
+{
+	list-style-type: none;
+}
+
+.tvmenyItem
+{
+	list-style-type: none;
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+	border-top-style: solid;
+	border-bottom-style: solid;
+	border-top-color: #007E9E;
+	border-bottom-color: #007E9E;
+	padding: 8px 0px;
+	margin-bottom: 1px;
+}
+
+.tventry
+{
+	font-family:Georgia,serif;
+        font-size: 14px;
+        margin-top: .5em; color: #002C45;
 }
