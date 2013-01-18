@@ -51,7 +51,7 @@ class DefaultController extends Controller
 				'name'=> $name->getValue(),
 				'nameId' => $shows[0]->getEntityId(),
 				'showsNext'=> $showsNext[0]->getDatetime()->format('H:i'),
-				'nameNext' => $nameNext->getValue(),
+				'nameNext' => 'blabla',//$nameNext->getValue(),
 				'nameNextId' => $showsNext[0]->getEntityId()
 				));
 	}
@@ -128,7 +128,7 @@ class DefaultController extends Controller
 						->findOneBy(array('AttributeId' => $nameId->getAttributeId(),
 								'entity' => $result->getEntityId()));
 		array_push($results,array('time' => $result->getDatetime()->format('H:i'),
-					'name' => 'ime emisije zeza i jos uvek ne znam zasto...',//$name->getValue(),
+					'name' => $name->getValue(),
 					'id' => $result->getEntityId()));
 	}
 	return $this->render('TvDatabaseHomeBundle:Default:showTV.html.twig',
