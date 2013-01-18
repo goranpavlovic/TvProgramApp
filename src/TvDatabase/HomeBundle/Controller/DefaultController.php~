@@ -42,18 +42,17 @@ class DefaultController extends Controller
 							));
 		$query->setMaxResults(1);
 		$showsNext = $query->getResult();
-		if($showsNext)
-		{
-			$nameNext = $em->getRepository('AcmeStoreBundle:EAVAttributeValue')->
-						findOneBy(array('entity' => $showsNext[0]->getEntityId(), 'AttributeId' => 7));
-		}
+		$nameNext = $em->getRepository('AcmeStoreBundle:EAVAttributeValue')->
+					findOneBy(array('entity' => $showsNext[0]->getEntityId(), 'AttributeId' => 7));
 		//$shows = $em->getRepository('AcmeStoreBundle:EAVEntity')->findBy(array('TvStation' => $tv->GetTvId()));
 		array_push($results,array(
-				'tv'=> $tv->GetTvName(),
+				'tv'=> $tv,
 				'shows'=> $shows[0]->getDatetime()->format('H:i'),
 				'name'=> $name->getValue(),
+				'nameId' => $shows[0]->getEntityId(),
 				'showsNext'=> $showsNext[0]->getDatetime()->format('H:i'),
-				'nameNext' => $nameNext->getValue()
+				'nameNext' => $nameNext->getValue(),
+				'nameNextId' => $showsNext[0]->getEntityId()
 				));
 	}
 	
@@ -93,4 +92,54 @@ class DefaultController extends Controller
     {
 	return $this->render('TvDatabaseHomeBundle:Default:advsearchresponse.html.twig');
     }
+
+    public function showAction($id)
+    {
+	$em = $this->getDoctrine()->GetManager();
+	$show = $em->getRepository('AcmeStoreBundle:EAVEntity')->find($id);
+	$result = array();
+	foreach($show->getAttributes() as $attribute)
+	{
+		$name = $em->getRepository('AcmeStoreBundle:MetaEAVAttribute')->find($attribute->getAttributeId());
+		array_push($result, array('name' => $name->getAttributeName(),'value' => $attribute->getValue()));
+	}
+	return $this->render('TvDatabaseHomeBundle:Default:show.html.twig', array('attributes' => $result));
+	
+    }
+
+    public function showTVAction($id)
+    {
+	$today = $today = date_create('2013-01-11 11:45:00');
+	$em = $this->getDoctrine()->getManager();
+	$tv = $em->getRepository('AcmeStoreBundle:TVStation')->find($id);
+	$query = $em->createQuery('SELECT ent from AcmeStoreBundle:EAVEntity as ent 
+				WHERE ent.Datetime < :preDate AND ent.Datetime > :postDate 
+				AND ent.TvStation = :tv ORDER BY ent.Datetime ASC')
+				->setParameters(array(
+						'postDate' => $today->format('Y-m-d') . ' 00:00:00',
+						'preDate' => $today->format('Y-m-d') . ' 24:00:00',
+						'tv' => $tv->getTvId()));
+	$results = array();
+	foreach($query->getResult() as $result)
+	{
+		$nameId = $em->getRepository('AcmeStoreBundle:MetaEAVAttribute')
+						->findOneBy(array('AttributeName' => 'Name'));
+		*$name = $em->getRepository('AcmeStoreBundle:EAVAttributeValue')
+						->findOneBy(array('AttributeId' => $nameId->getAttributeId(),
+								'entity' => $result->getEntityId()));
+		array_push($results,array('time' => $result->getDatetime()->format('H:i'),
+					'name' => 'ime emisije zeza i jos uvek ne znam zasto...',//$name->getValue(),
+					'id' => $result->getEntityId()));
+	}
+	return $this->render('TvDatabaseHomeBundle:Default:showTV.html.twig',
+				array('results' => $results,'tv' => $tv->getTvName()));
+    }
 }
+
+
+
+
+
+
+
+

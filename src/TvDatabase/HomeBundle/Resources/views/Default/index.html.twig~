@@ -10,6 +10,7 @@
 
 {% block content %} 
 	{% for result in results %}
+<<<<<<< HEAD
 	<div type="TV">
 	{{ result.tv }}
 		<div type="currentShow">
@@ -18,6 +19,24 @@
 		<div type="nextShow">
 		{{ result.showsNext }} - {{ result.nameNext }}
 		</div>
+=======
+	<div id="TV">
+	<a href="/TV/{{result.tv.tvid}}">{{ result.tv.tvname }}</a>
+	<div id="broadcast table">
+		<table>
+			<tr>
+				<td>{{ result.shows }}</td>
+				<td>{{ result.name }}</td>
+				<td id="details"><a href="/show/{{ result.nameId }}">details-></a>
+			</tr>
+			<tr>
+				<td>{{ result.showsNext }}</td>
+				<td>{{ result.nameNext }}</td>
+				<td id="details"><a href="/show/{{ result.nameNextId }}">details-></a>
+			</tr>
+		</table>
+	</div>
+>>>>>>> 1976ea28e3b9d345895029bb892e6ffb2b4ae2a8
 	</div>
 	{% endfor %}
 
