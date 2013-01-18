@@ -76,7 +76,7 @@ class DefaultController extends Controller
 	{
 		array_push($nameArray, $tv->getTvName());
 	}
-	return $this->render('TvDatabaseHomeBundle:Default:stations.html.twig', array( 'names' => $nameArray) );
+	return $this->render('TvDatabaseHomeBundle:Default:stations.html.twig', array( 'tvStations' => $tvStation));
     }
     public function advancedSearchAction()
     {
