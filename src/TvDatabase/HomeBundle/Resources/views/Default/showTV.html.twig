@@ -17,8 +17,7 @@
 			{% for attribute in results %}
 				<tr>
 					<td>{{ attribute.time }}</td>
-					<td>{{ attribute.name }}</td>
-					<td id="link"><a href="/show/{{attribute.id}}">details</a></td>
+					<td><a href="/show/{{attribute.id}}">{{ attribute.name }}</td>
 				</tr>			
 			{% endfor %}
 		</table>

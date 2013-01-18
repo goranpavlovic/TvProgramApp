@@ -22,13 +22,11 @@
 		<table>
 			<tr>
 				<td>{{ result.shows }}</td>
-				<td>{{ result.name }}</td>
-				<td id="details"><a href="/show/{{ result.nameId }}">details-></a>
+				<td><a href="/show/{{ result.nameId }}">{{ result.name }}</td>
 			</tr>
 			<tr>
 				<td>{{ result.showsNext }}</td>
-				<td>{{ result.nameNext }}</td>
-				<td id="details"><a href="/show/{{ result.nameNextId }}">details-></a>
+				<td><a href="/show/{{ result.nameNextId }}">{{ result.nameNext }}</td>
 			</tr>
 		</table>
 	</div>
