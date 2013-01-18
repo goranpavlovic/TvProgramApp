@@ -23,7 +23,7 @@ class DefaultController extends Controller
 		$em = $this->getDoctrine()->GetManager();
 		$tv =	$em->getRepository('AcmeStoreBundle:TVStation')->findOneBy(array('TvName' => $display));
 		$query = $em->createQuery
-			('SELECT e FROM AcmeStoreBundle:EAVEntity as e WHERE e.TvStation = :tv AND e.Datetime < :stampmax ORDER BY e.Datetime DESC')
+			('SELECT e FROM AcmeStoreBundle:EAVEntity as e WHERE e.TvStation = :tv AND e.Datetime <= :stampmax ORDER BY e.Datetime DESC')
 				->setParameters(array('tv' => $tv->getTvId(),
 							'stampmax' => $today->format('Y-m-d H-i-s')
 							/*'stampmin' => date_sub($today,date_interval_create_from_date_string('1 day'))*/
@@ -32,10 +32,14 @@ class DefaultController extends Controller
 		$shows = $query->getResult();
 		$name = $em->getRepository('AcmeStoreBundle:EAVAttributeValue')->
 						findOneBy(array('entity' => $shows[0]->getEntityId(), 'AttributeId' => 7));
+		$resName = '';
+		if($name)
+			$resName = $name->getValue();
+		else
+			$resName = 'Name not in database';
 		//sledeca
 			$queryNext = $em->createQuery
-			('SELECT e FROM AcmeStoreBundle:EAVEntity as e WHERE e.TvStation = :tv AND e.Datetime > :stampmax 
-			ORDER BY e.Datetime ASC')
+			('SELECT e FROM AcmeStoreBundle:EAVEntity as e WHERE e.TvStation = :tv AND e.Datetime >= :stampmax ORDER BY e.Datetime ASC')
 				->setParameters(array('tv' => $tv->getTvId(),
 							'stampmax' => $today->format('Y-m-d H-i-s')
 							//'stampmin' => date_add($today,date_interval_create_from_date_string('1 day'))
@@ -44,14 +48,19 @@ class DefaultController extends Controller
 		$showsNext = $queryNext->getResult();
 		$nameNext = $this->getDoctrine()->getRepository('AcmeStoreBundle:EAVAttributeValue')->
 						findOneBy(array('entity' => $showsNext[0]->getEntityId(), 'AttributeId' => 7));
+		$nNext = '';
+		if($nameNext)
+			$nNext=$nameNext->getValue();
+		else
+			$nNext = 'Name not in database';
 		//$shows = $em->getRepository('AcmeStoreBundle:EAVEntity')->findBy(array('TvStation' => $tv->GetTvId()));
 		array_push($results,array(
 				'tv'=> $tv,
 				'shows'=> $shows[0]->getDatetime()->format('H:i'),
-				'name'=> $name->getValue(),
+				'name'=> $resName,
 				'nameId' => $shows[0]->getEntityId(),
 				'showsNext'=> $showsNext[0]->getDatetime()->format('H:i'),
-				'nameNext' => 'nece',//$nameNext->getValue(),
+				'nameNext' => $nNext,
 				'nameNextId' => $showsNext[0]->getEntityId()
 				));
 	}
@@ -127,8 +136,13 @@ class DefaultController extends Controller
 		$name = $em->getRepository('AcmeStoreBundle:EAVAttributeValue')
 						->findOneBy(array('AttributeId' => $nameId->getAttributeId(),
 								'entity' => $result->getEntityId()));
+		$resName = '';
+		if($name)
+			$resName = $name->getValue();
+		else
+			$resName = 'Name not in database';
 		array_push($results,array('time' => $result->getDatetime()->format('H:i'),
-					'name' => $name->getValue(),
+					'name' => $resName->getValue(),
 					'id' => $result->getEntityId()));
 	}
 	return $this->render('TvDatabaseHomeBundle:Default:showTV.html.twig',
