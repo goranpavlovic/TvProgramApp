@@ -33,17 +33,17 @@ class DefaultController extends Controller
 		$name = $em->getRepository('AcmeStoreBundle:EAVAttributeValue')->
 						findOneBy(array('entity' => $shows[0]->getEntityId(), 'AttributeId' => 7));
 		//sledeca
-			$query = $em->createQuery
+			$queryNext = $em->createQuery
 			('SELECT e FROM AcmeStoreBundle:EAVEntity as e WHERE e.TvStation = :tv AND e.Datetime > :stampmax 
 			ORDER BY e.Datetime ASC')
 				->setParameters(array('tv' => $tv->getTvId(),
 							'stampmax' => $today->format('Y-m-d H-i-s')
 							//'stampmin' => date_add($today,date_interval_create_from_date_string('1 day'))
 							));
-		$query->setMaxResults(1);
-		$showsNext = $query->getResult();
-		$nameNext = $em->getRepository('AcmeStoreBundle:EAVAttributeValue')->
-					findOneBy(array('entity' => $showsNext[0]->getEntityId(), 'AttributeId' => 7));
+		$queryNext->setMaxResults(1);
+		$showsNext = $queryNext->getResult();
+		$nameNext = $this->getDoctrine()->getRepository('AcmeStoreBundle:EAVAttributeValue')->
+						findOneBy(array('entity' => $showsNext[0]->getEntityId(), 'AttributeId' => 7));
 		//$shows = $em->getRepository('AcmeStoreBundle:EAVEntity')->findBy(array('TvStation' => $tv->GetTvId()));
 		array_push($results,array(
 				'tv'=> $tv,
@@ -51,7 +51,7 @@ class DefaultController extends Controller
 				'name'=> $name->getValue(),
 				'nameId' => $shows[0]->getEntityId(),
 				'showsNext'=> $showsNext[0]->getDatetime()->format('H:i'),
-				'nameNext' => 'blabla',//$nameNext->getValue(),
+				'nameNext' => 'nece',//$nameNext->getValue(),
 				'nameNextId' => $showsNext[0]->getEntityId()
 				));
 	}
