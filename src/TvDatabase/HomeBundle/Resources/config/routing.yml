@@ -15,6 +15,6 @@ tv_database_show_broadcast:
     defaults: { _controller:TvDatabaseHomeBundle:Default:show }
 
 tv_database_show_tv:
-    pattern: /tv/{id}
-    defaults: { _controller:TvDatabaseHomeBundle:Default:showTV }
+    pattern: /tv/{id}/{date}
+    defaults: { _controller:TvDatabaseHomeBundle:Default:showTV, date: today }
 
