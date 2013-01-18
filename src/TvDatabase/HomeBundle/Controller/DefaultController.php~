@@ -57,7 +57,7 @@ class DefaultController extends Controller
 		array_push($results,array(
 				'tv'=> $tv,
 				'shows'=> $shows[0]->getDatetime()->format('H:i'),
-				'name'=> $name->getValue(),
+				'name'=> $resName,
 				'nameId' => $shows[0]->getEntityId(),
 				'showsNext'=> $showsNext[0]->getDatetime()->format('H:i'),
 				'nameNext' => $nNext,

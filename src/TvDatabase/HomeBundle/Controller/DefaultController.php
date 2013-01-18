@@ -142,7 +142,7 @@ class DefaultController extends Controller
 		else
 			$resName = 'Name not in database';
 		array_push($results,array('time' => $result->getDatetime()->format('H:i'),
-					'name' => $resName->getValue(),
+					'name' => $resName,
 					'id' => $result->getEntityId()));
 	}
 	return $this->render('TvDatabaseHomeBundle:Default:showTV.html.twig',
