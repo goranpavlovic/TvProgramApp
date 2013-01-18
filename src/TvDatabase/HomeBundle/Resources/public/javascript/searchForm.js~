@@ -1,0 +1,4 @@
+function formLoad()
+{
+	alert('javascript loaded!!!');
+}

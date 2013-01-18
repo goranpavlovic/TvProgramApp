@@ -4,11 +4,24 @@
 {% endblock %}
 
 {% block script %}
+	<script type='text/javascript' src='{{ asset('bundles/tvdatabasehome/javascript/jquery-1.9.0.min.js') }}'></script>
+	<script type='text/javascript' src='{{ asset('bundles/tvdatabasehome/javascript/jquery-ui-.10.0.custom.js') }}'></script>
+	<script type='text/javascript' src='{{ asset('bundles/tvdatabasehome/javascript/searchForm.js') }}'></script>
+{% endblock %}
+
+{% block bodyopen %}
+	<body onload='bodyLoad()'>
+{% endblock %}
+
+{% block mainmany %}
+	<li><a href="/">Home</a></li>
+	<li><a href="/tvstations">Tv Stations</a></li>
+	<li class="current_page_item" ><a href="/advancedsearch">Advanced Search</a></li>
 {% endblock %}
 
 {% block content %} 
 
-	<form action="">
+	<form action="/">
 		<label>Tip Emisije: </label>
 		<select id="broadcastType">
 			{% for type in types %}
@@ -25,6 +38,7 @@
 		<br />
 		<label>Datum i vreme od: </label><br />
 		<label>Datum i vreme do: </label>
+		<input type='submit' value='test' />
 	</form>
 
 {% endblock %}
