@@ -99,7 +99,7 @@ class DefaultController extends Controller
     }
     public function advancedSearchResponseAction(Request $request)
     {
-	return $this->render('TvDatabaseHomeBundle:Default:advsearchresponse.html.twig');
+		return $this->render('TvDatabaseHomeBundle:Default:advsearchresponse.html.twig');
     }
 
     public function showAction($id)
