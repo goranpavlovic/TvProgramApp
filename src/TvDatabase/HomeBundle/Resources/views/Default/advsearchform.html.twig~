@@ -36,8 +36,8 @@
 			{% endfor %}
 		</select>
 		<br />
-		<label>Datum i vreme od: </label><br />
-		<label>Datum i vreme do: </label>
+		<label>Datum i vreme od: </label><input type='text' id='startDate'><br />
+		<label>Datum i vreme do: </label><input type='text' id='endDate'>
 		<input type='submit' value='test' />
 	</form>
 

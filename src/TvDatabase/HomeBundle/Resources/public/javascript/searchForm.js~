@@ -1,4 +1,5 @@
-function formLoad()
+function bodyLoad()
 {
-	alert('javascript loaded!!!');
+	$( "#startDate" ).datepicker();
+	$( "#endDate" ).datepicker();
 }
