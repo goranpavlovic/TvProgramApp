@@ -12,12 +12,11 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-	//$today = date_create(date('Y-m-s H:i:s'));
-	
-	$today = date_create('2013-01-11 11:45:00');
+	$today = date_create(date('Y-m-d H:i:s'));//trenutni datum
+	//$today = date_create('2013-01-11 11:45:00');
 	$results = array();
 	
-	$displays = array('RTS1','Prva TV');
+	$displays = array('RTS1','Prva TV');//koje se prikazuju
 	foreach($displays as $display)
 	{
 		$em = $this->getDoctrine()->GetManager();
@@ -118,18 +117,21 @@ class DefaultController extends Controller
 
     public function showTVAction($id, $date)
     {
+    $today = null;
 	if($date === 'today')
-		$today = date_create('2013-01-11 11:45:00');
+		//$today = date_create('2013-01-11 11:45:00');
+	    $today = date('Y-m-d');
 	else
-		$today = date_create($date . '12:00:00');
+		//$today = date_create($date . '12:00:00');
+	    $today = $date;
 	$em = $this->getDoctrine()->getManager();
 	$tv = $em->getRepository('AcmeStoreBundle:TVStation')->find($id);
 	$query = $em->createQuery('SELECT ent from AcmeStoreBundle:EAVEntity as ent 
 				WHERE ent.Datetime < :preDate AND ent.Datetime > :postDate 
 				AND ent.TvStation = :tv ORDER BY ent.Datetime ASC')
 				->setParameters(array(
-						'postDate' => $today->format('Y-m-d') . ' 00:00:00',
-						'preDate' => $today->format('Y-m-d') . ' 24:00:00',
+						'postDate' => $today . ' 00:00:00',
+						'preDate' => $today . ' 24:00:00',
 						'tv' => $tv->getTvId()));
 	$results = array();
 	foreach($query->getResult() as $result)
@@ -149,7 +151,7 @@ class DefaultController extends Controller
 					'id' => $result->getEntityId()));
 	}
 	return $this->render('TvDatabaseHomeBundle:Default:showTV.html.twig',
-				array('results' => $results,'tv' => $tv->getTvName()));
+				array('results' => $results,'tv' => $tv->getTvName(), 'date' => $today));
     }
 }
 
