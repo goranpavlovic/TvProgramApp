@@ -1,20 +1,20 @@
 tv_database_home_homepage:
     pattern:  /
-    defaults: { _controller: TvDatabaseHomeBundle:Default:index }
+    defaults: { _controller:TvDatabaseHomeBundle:Default:index }
 
 tv_database_stations_page:
     pattern: /tvstations
-    defaults: { _controller:TvDatabaseHomeBundle:Default:tvStations }
+    defaults: { _controller:TvDatabaseHomeBundle:TV:tvStations }
 
 tv_database_program_page:
    pattern: /advancedsearch
-   defaults: { _controller:TvDatabaseHomeBundle:Default:advancedSearch }
+   defaults: { _controller:TvDatabaseHomeBundle:AdvancedSearch:advancedSearch }
 
 tv_database_show_broadcast:
     pattern: /show/{id}
-    defaults: { _controller:TvDatabaseHomeBundle:Default:show }
+    defaults: { _controller:TvDatabaseHomeBundle:Show:show }
 
 tv_database_show_tv:
     pattern: /tv/{id}/{date}
-    defaults: { _controller:TvDatabaseHomeBundle:Default:showTV, date: today }
+    defaults: { _controller:TvDatabaseHomeBundle:TV:showTV, date:today }
 
