@@ -5,6 +5,7 @@
 	<link href='{{ asset('bundles/tvdatabasehome/css/jqery.multiselect.css') }}' rel="stylesheet" type="text/css" />
 	<link href='{{ asset('bundles/tvdatabasehome/css/dropdownchecklist.css') }}' rel="stylesheet" type="text/css" />
 	<link href='{{ asset('bundles/tvdatabasehome/css/timepickeraddon.css') }}' rel="stylesheet" type="text/css" />
+	<link href='{{ asset('bundles/tvdatabasehome/css/showTV.css') }}' rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block script %}
@@ -29,8 +30,6 @@
 {% block content %} 
 	<div id="stations_table">
 	<div>{{ date.today }}</div>
-	<div id="date-next"><a href="/tv/{{ tv.TvId }}/{{ date.yesterday }}">Yesterday</a></div>
-	<div id="date-prev"><a href="/tv/{{ tv.TvId }}/{{ date.tomorrow }}">Tomorrow</a></div>
 	<form action="/tv/{{ tv.TvId }}" method="post">
 	<table>
     	<tr>
@@ -43,7 +42,9 @@
     	</tr>
 	</table>
 	</form>
-	<div>
+	<div id="date-prev"><a href="/tv/{{ tv.TvId }}/{{ date.yesterday }}">Yesterday</a></div>
+	<div id="date-next"><a href="/tv/{{ tv.TvId }}/{{ date.tomorrow }}">Tomorrow</a></div>
+	<div style='clear:both'>
 	</div>
 		<table>
 			<tr>
