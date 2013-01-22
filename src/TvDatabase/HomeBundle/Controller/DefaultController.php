@@ -10,8 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
-    public function indexAction()
-    {
+public function indexAction()
+{
 	$today = date_create(date('Y-m-d H:i:s'));//trenutni datum
 	//$today = date_create('2013-01-11 11:45:00');
 	$results = array();
@@ -29,8 +29,12 @@ class DefaultController extends Controller
 							));
 		$query->setMaxResults(1);
 		$shows = $query->getResult();
+		$name = null;
+		if($shows)
+		{
 		$name = $em->getRepository('AcmeStoreBundle:EAVAttributeValue')->
 						findOneBy(array('entity' => $shows[0]->getEntityId(), 'AttributeId' => 7));
+		}
 		$resName = '';
 		if($name)
 			$resName = $name->getValue();
@@ -45,14 +49,20 @@ class DefaultController extends Controller
 							));
 		$queryNext->setMaxResults(1);
 		$showsNext = $queryNext->getResult();
+		$nameNext = null;
+		if($showsNext)
+		{
 		$nameNext = $this->getDoctrine()->getRepository('AcmeStoreBundle:EAVAttributeValue')->
 						findOneBy(array('entity' => $showsNext[0]->getEntityId(), 'AttributeId' => 7));
+		}
 		$nNext = '';
 		if($nameNext)
 			$nNext=$nameNext->getValue();
 		else
 			$nNext = 'Name not in database';
 		//$shows = $em->getRepository('AcmeStoreBundle:EAVEntity')->findBy(array('TvStation' => $tv->GetTvId()));
+		if($shows && $showsNext)
+		{
 		array_push($results,array(
 				'tv'=> $tv,
 				'shows'=> $shows[0]->getDatetime()->format('H:i'),
@@ -62,6 +72,31 @@ class DefaultController extends Controller
 				'nameNext' => $nNext,
 				'nameNextId' => $showsNext[0]->getEntityId()
 				));
+		}
+		else if(!$shows)
+		{
+		    array_push($results,array(
+		            'tv'=> $tv,
+		            'shows'=> 'xx:xx',
+		            'name'=> $resName,
+		            'nameId' => null,
+		            'showsNext'=> $showsNext[0]->getDatetime()->format('H:i'),
+		            'nameNext' => $nNext,
+		            'nameNextId' => $showsNext[0]->getEntityId()
+		    ));
+		}
+		else
+		{
+		    array_push($results,array(
+		            'tv'=> $tv,
+		            'shows'=> $shows[0]->getDatetime()->format('H:i'),
+		            'name'=> $resName,
+		            'nameId' => $shows[0]->getEntityId(),
+		            'showsNext'=> 'xx:xx',
+		            'nameNext' => $nNext,
+		            'nameNextId' =>null
+		    ));
+		}
 	}
 	
         return $this->render('TvDatabaseHomeBundle:Default:index.html.twig',array( 'results' => $results));
