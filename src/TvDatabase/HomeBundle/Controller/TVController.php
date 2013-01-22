@@ -22,10 +22,14 @@ class TVController extends Controller
         return $this->render('TvDatabaseHomeBundle:Default:stations.html.twig', array( 'tvStations' => $tvStation));
     }
     
-    public function showTVAction($id, $date)
+    public function showTVAction($id, $date, Request $req)
     {
         $today = null;
-        if($date === 'today')
+        if($reqDate = $req->get('startDate'))
+        {
+            $today = date_create($reqDate)->format('Y-m-d');
+        }
+        else if($date === 'today')
             //$today = date_create('2013-01-11 11:45:00');
             $today = date('Y-m-d');
         else
