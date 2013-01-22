@@ -28,7 +28,7 @@
 
 {% block content %} 
 
-	<form action="/">
+	<form action="/advancedsearchresponse" method="post" >
 		<table>
 			<tr>
 				<td><label>Broadcast Types: </label></td>
@@ -51,14 +51,14 @@
 			</tr>
 			<tr>
 				<td><label>Start date and time: </label></td>
-				<td><input type='text' id='startDate'><br /></td>
+				<td><input type='text' id='startDate' name='startDate'><br /></td>
 			</tr>
 			<tr>
 				<td><label>End date and time: </label></td>
-				<td><input type='text' id='endDate' /></td>
+				<td><input type='text' id='endDate' name='endDate'/></td>
 			</tr>
 				<td></td>
-				<td><input id='submitButton' type='submit' value='Search' />
+				<td><input id='submitButton' type='submit' value='Search' /></td>
 			</tr>
 		</table>
 	</form>

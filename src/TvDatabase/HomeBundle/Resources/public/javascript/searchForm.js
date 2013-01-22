@@ -4,8 +4,6 @@ function bodyLoad()
 	$( "#endDate" ).datetimepicker();
 	$( "#broadcastType" ).dropdownchecklist({ emptyText: "Choose ...", width: 230 });
 	$( "#televisions").dropdownchecklist({ emptyText: "Choose ...", width: 230 });
-	$( "#submitButton").button().click(function(event){
-		event.preventDefault();
-	});
+	$( "#submitButton").button();
 	//$( "#televisions").dropdownchecklist( { emptyText: "Please select tv stations", width: 230 } );
 }

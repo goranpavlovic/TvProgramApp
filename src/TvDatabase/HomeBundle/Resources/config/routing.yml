@@ -10,6 +10,10 @@ tv_database_program_page:
    pattern: /advancedsearch
    defaults: { _controller:TvDatabaseHomeBundle:AdvancedSearch:advancedSearch }
 
+tv_database_advanced_search_response:
+   pattern: /advancedsearchresponse
+   defaults: { _controller:TvDatabaseHomeBundle:AdvancedSearch:advancedSearchResponse }
+
 tv_database_show_broadcast:
     pattern: /show/{id}
     defaults: { _controller:TvDatabaseHomeBundle:Show:show }
@@ -17,4 +21,3 @@ tv_database_show_broadcast:
 tv_database_show_tv:
     pattern: /tv/{id}/{date}
     defaults: { _controller:TvDatabaseHomeBundle:TV:showTV, date:today }
-
