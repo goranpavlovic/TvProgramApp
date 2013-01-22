@@ -10,10 +10,12 @@
 
 {% block content %} 
 	<div id="stations_table">
-	<div>{{ date }}</div>
+	<div>{{ date.today }}</div>
+	<div id="date-next"><a href="/tv/{{ tv.TvId }}/{{ date.yesterday }}">Yesterday</a></div>
+	<div id="date-next"><a href="/tv/{{ tv.TvId }}/{{ date.tomorrow }}">Tomorrow</a></div>
 		<table>
 			<tr>
-				<th>{{ tv }}</th>
+				<th>{{ tv.TvName }}</th>
 			</tr>
 			{% for attribute in results %}
 				<tr>

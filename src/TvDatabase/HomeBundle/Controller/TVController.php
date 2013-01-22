@@ -57,7 +57,10 @@ class TVController extends Controller
     				    'name' => $resName,
     				    'id' => $result->getEntityId()));
     				}
+    				$tomorrow = date_add(date_create($today), date_interval_create_from_date_string('1 day'))->format('Y-m-d');
+    				$yesterday = date_sub(date_create($today), date_interval_create_from_date_string('1 day'))->format('Y-m-d');
+    				$date = array('today' => $today, 'tomorrow' => $tomorrow, 'yesterday' => $yesterday);
     				return $this->render('TvDatabaseHomeBundle:Default:showTV.html.twig',
-    				        array('results' => $results,'tv' => $tv->getTvName(), 'date' => $today));
+    				        array('results' => $results,'tv' => $tv, 'date' => $date));
     }
 }
