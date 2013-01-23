@@ -17,13 +17,32 @@
 
 {% block content %} 
 
-	{% for entitity in pagerfanta.currentPageResults %}
+	<table>
+		<tr>
+			<th>Televison</th>
+			<th>Time</th>
+			<th>Program Name</th>
+		</tr>
+		{% for entity in pagerfanta.currentPageResults %}
 
-    <li>{{ entitity.Datetime|date("m/d/Y") }} {{ entitity.tv.TvName }}</li>
+			<tr>
+				<td>{{ entity.tv.TvName }}</td>
+				<td>{{ entity.Datetime|date("m/d/Y") }}</td>
+				{%  for attribute in entity.attributes %}
+				
+					{% if attribute.attributeMeta.AttributeName == "Name" %}
+						<td>{{ attribute.Value }}</td>
+					{% endif %}
+					
+				{% endfor %}
+			</tr>
+			
+    		<!--  li>{{ entity.Datetime|date("m/d/Y") }} </li-->
 
-	{% endfor %}
+		{% endfor %}
+	
+	</table>
 	<div class="pagerfanta">{{ pagerfanta(pagerfanta, 'default') }}</div>
-
 {% endblock %}
 
 

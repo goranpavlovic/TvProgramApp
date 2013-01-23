@@ -59,6 +59,8 @@ class AdvancedSearchController extends Controller
     		$query = "SELECT ent FROM AcmeStoreBundle:EAVEntity as ent ";
     		 
     		$whereQuery = "";
+    		//$orderQuery = " ORDER BY ent.Datetime DESC , ent.tv ASC";
+    		$orderQuery = " ORDER BY ent.Datetime DESC";
     		$queries = Array();
     		 
     		$result = "";
@@ -105,10 +107,14 @@ class AdvancedSearchController extends Controller
     		$query = $query . "WHERE ";
     		 
     		if($reqDate = $request->get('startDate'))
-    			array_push($queries, "ent.Datetime > " . date_create($reqDate)->format('Y-m-d'));
+    		{
+    			array_push($queries, "ent.Datetime > '" . date_create($reqDate)->format('Y-m-d H:i:s') . "'");
+    		}
     		 
-    		if($reqDate = $request->get('startDate'))
-    			array_push($queries, "ent.Datetime < " . date_create($reqDate)->format('Y-m-d'));
+    		if($reqDate = $request->get('endTime'))	
+    		{
+    			array_push($queries, "ent.Datetime < '" . date_create($reqDate)->format('Y-m-d H:i:s') . "'");
+    		}
 
     		$count = 0;
     		
@@ -126,6 +132,7 @@ class AdvancedSearchController extends Controller
     		}
     		 
     		$query = $query . $whereQuery;
+    		$query = $query . $orderQuery;
     	}
     	
     	
