@@ -10,18 +10,18 @@
 {% endblock %}
 
 {% block mainmany %}
-	<li><a href="/">Home</a></li>
-	<li><a href="/tvstations">Tv Stations</a></li>
-	<li class="current_page_item" ><a href="/advancedsearch">Advanced Search</a></li>
+	<li><a href="/{{ _locale }}">{% trans %}Home{% endtrans %}</a></li>
+	<li><a href="/{{ _locale }}/tvstations">{% trans %}Tv Stations{% endtrans %}</a></li>
+	<li class="current_page_item" ><a href="/{{ _locale }}/advancedsearch">{% trans %}Advanced Search{% endtrans %}</a></li>
 {% endblock %}
 
 {% block content %} 
 
 	<table>
 		<tr>
-			<th>Televison</th>
-			<th>Time</th>
-			<th>Program Name</th>
+			<th>{% trans %}Televison{% endtrans %}</th>
+			<th>{% trans %}Time{% endtrans %}</th>
+			<th>{% trans %}Program Name{% endtrans %}</th>
 		</tr>
 		{% for entity in pagerfanta.currentPageResults %}
 

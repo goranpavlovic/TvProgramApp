@@ -21,17 +21,17 @@
 {% endblock %}
 
 {% block mainmany %}
-	<li><a href="/">Home</a></li>
-	<li><a href="/tvstations">Tv Stations</a></li>
-	<li class="current_page_item" ><a href="/advancedsearch">Advanced Search</a></li>
+	<li><a href="/{{ _locale }}">{% trans %}Home{% endtrans %}</a></li>
+	<li><a href="/{{ _locale }}/tvstations">{% trans %}Tv Stations{% endtrans %}</a></li>
+	<li class="current_page_item" ><a href="/{{ _locale }}/advancedsearch">{% trans %}Advanced Search{% endtrans %}</a></li>
 {% endblock %}
 
 {% block content %} 
 
-	<form action="/advancedsearchresponse" method="post" >
+	<form action="/{{ _locale }}/advancedsearchresponse" method="post" >
 		<table>
 			<tr>
-				<td><label>Broadcast Types: </label></td>
+				<td><label>{% trans %}Broadcast Types{% endtrans %}: </label></td>
 				<td><select id="broadcastType" name="broadcastType" multiple="multiple">
 						{% for type in types %}
 							<option>{{type}}</option>
@@ -40,7 +40,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td><label>Televisions: </label></td>
+				<td><label>{% trans %}Televisions{% endtrans %}: </label></td>
 				<td>
 					<select id="televisions" name="televisions" multiple="multiple">
 						{% for name in televisions %}
@@ -50,15 +50,15 @@
 				</td>
 			</tr>
 			<tr>
-				<td><label>Start date and time: </label></td>
+				<td><label>{% trans %}Start date and time{% endtrans %}: </label></td>
 				<td><input type='text' id='startDate' name='startDate'><br /></td>
 			</tr>
 			<tr>
-				<td><label>End date and time: </label></td>
+				<td><label>{% trans %}End date and time{% endtrans %}: </label></td>
 				<td><input type='text' id='endDate' name='endDate'/></td>
 			</tr>
 				<td></td>
-				<td><input id='submitButton' type='submit' value='Search' /></td>
+				<td><input id='submitButton' type='submit' value='{% trans %}Search{% endtrans %}' /></td>
 			</tr>
 		</table>
 	</form>

@@ -18,6 +18,7 @@ class AdvancedSearchController extends Controller
 {
     public function advancedSearchAction()
     {
+    	$locale = $this->getRequest()->getLocale();
     	$session = new Session();
     	$session->clear();
     	
@@ -35,11 +36,14 @@ class AdvancedSearchController extends Controller
         }
         return $this->render('TvDatabaseHomeBundle:Default:advsearchform.html.twig', array(
                 'types' => $typeNameArray,
-                'televisions' => $tvNameArray
+                'televisions' => $tvNameArray,
+        		'_locale' => $locale
         ));
     }
     public function advancedSearchResponseAction(Request $request, $page=null)
     {
+    	$locale = $this->getRequest()->getLocale();
+    	
     	$session = new Session();
     	$query = "";
     	
@@ -166,7 +170,7 @@ class AdvancedSearchController extends Controller
     	}
     	
         return $this->render('TvDatabaseHomeBundle:Default:advsearchresponse.html.twig', 
-        		array('pagerfanta' => $pagerfanta));
+        		array('pagerfanta' => $pagerfanta, '_locale' => $locale));
         //return new Response($request->get('televisions') . $request->get('televisions'));
         
         //return new Response($whereQuery);
