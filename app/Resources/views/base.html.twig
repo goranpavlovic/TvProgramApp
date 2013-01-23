@@ -28,9 +28,9 @@
 		<div id="menu">
 			<ul>
 				{% block mainmany %}
-					<li class="current_page_item" ><a href="/">{% trans %}Home{% endtrans %}</a></li>
-					<li><a href="/tvstations">{% trans %}Tv Stations{% endtrans %}</a></li>
-					<li><a href="/advancedsearch">{% trans %}Advanced Search{% endtrans %}</a></li>
+					<li class="current_page_item" ><a href="/{{ _locale }}">{% trans %}Home{% endtrans %}</a></li>
+					<li><a href="/{{ _locale }}/tvstations">{% trans %}Tv Stations{% endtrans %}</a></li>
+					<li><a href="/{{ _locale }}/advancedsearch">{% trans %}Advanced Search{% endtrans %}</a></li>
 				{% endblock %}
 			</ul>
 		</div>
