@@ -31,6 +31,7 @@
 {% block content %} 
 	<div id="stations_table">
 	<div>{{ date.today }}</div>
+	<div>{{ text }}</div>
 	<form action="/{{ _locale }}/tv/{{ tv.TvId }}" method="post">
 	<table>
     	<tr>
@@ -39,7 +40,7 @@
     	    <td>
     	        <input type='text' id='startDate' name='startDate'></td>
     	    <td>
-    	        <input type='submit' value='Search'></td>
+    	        <input type='submit' value='View'></td>
     	</tr>
 	</table>
 	</form>
