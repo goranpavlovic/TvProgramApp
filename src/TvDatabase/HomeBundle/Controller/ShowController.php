@@ -20,7 +20,8 @@ class ShowController extends Controller
             $name = $em->getRepository('AcmeStoreBundle:MetaEAVAttribute')->find($attribute->getAttributeId());
             array_push($result, array('name' => $name->getAttributeName(),'value' => $attribute->getValue()));
         }
-        return $this->render('TvDatabaseHomeBundle:Default:show.html.twig', array('attributes' => $result));
+        $locale = $this->getRequest()->getLocale();
+        return $this->render('TvDatabaseHomeBundle:Default:show.html.twig', array('attributes' => $result, '_locale' => $locale));
     
     }
 }

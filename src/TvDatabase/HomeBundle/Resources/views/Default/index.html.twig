@@ -9,24 +9,24 @@
 {% endblock %}
 
 {% block mainmany %}
-	<li class="current_page_item" ><a href="/">Home</a></li>
-	<li><a href="/tvstations">Tv Stations</a></li>
-	<li><a href="/advancedsearch">Advanced Search</a></li>
+	<li class="current_page_item" ><a href="/{{ _locale }}">{% trans %}Home{% endtrans %}</a></li>
+	<li><a href="/{{ _locale }}/tvstations">{% trans %}Tv Stations{% endtrans %}</a></li>
+	<li><a href="/{{ _locale }}/advancedsearch">{% trans %}Advanced Search{% endtrans %}</a></li>
 {% endblock %}
 
 {% block content %} 
 	{% for result in results %}
 	<div id="TV">
-	<a href="/tv/{{result.tv.tvid}}">{{ result.tv.tvname }}</a>
+	<a href="/{{ _locale }}/tv/{{result.tv.tvid}}">{{ result.tv.tvname }}</a>
 	<div id="broadcast table">
 		<table>
 			<tr>
 				<td>{{ result.shows }}</td>
-				<td><a href="/show/{{ result.nameId }}">{{ result.name }}</td>
+				<td><a href="/{{ _locale }}/show/{{ result.nameId }}">{{ result.name }}</td>
 			</tr>
 			<tr>
 				<td>{{ result.showsNext }}</td>
-				<td><a href="/show/{{ result.nameNextId }}">{{ result.nameNext }}</td>
+				<td><a href="/{{ _locale }}/show/{{ result.nameNextId }}">{{ result.nameNext }}</td>
 			</tr>
 		</table>
 	</div>

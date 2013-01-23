@@ -98,8 +98,8 @@ public function indexAction()
 		    ));
 		}
 	}
-	
-        return $this->render('TvDatabaseHomeBundle:Default:index.html.twig',array( 'results' => $results));
+	$locale = $this->getRequest()->getLocale();
+        return $this->render('TvDatabaseHomeBundle:Default:index.html.twig',array( 'results' => $results, '_locale' => $locale));
     }
 }
 

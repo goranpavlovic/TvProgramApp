@@ -34,7 +34,7 @@
 	<table>
     	<tr>
     	    <td>
-    	        <label>Select date:</label></td>
+    	        <label>{% trans %}Select date{% endtrans %}:</label></td>
     	    <td>
     	        <input type='text' id='startDate' name='startDate'></td>
     	    <td>
@@ -42,8 +42,8 @@
     	</tr>
 	</table>
 	</form>
-	<div id="date-prev"><a href="/tv/{{ tv.TvId }}/{{ date.yesterday }}">Yesterday</a></div>
-	<div id="date-next"><a href="/tv/{{ tv.TvId }}/{{ date.tomorrow }}">Tomorrow</a></div>
+	<div id="date-prev"><a href="/{{ _locale }}/tv/{{ tv.TvId }}/{{ date.yesterday }}">{% trans %}Yesterday{% endtrans %}</a></div>
+	<div id="date-next"><a href="/{{ _locale }}/tv/{{ tv.TvId }}/{{ date.tomorrow }}">{% trans %}Tomorrow{% endtrans %}</a></div>
 	<div style='clear:both'>
 	</div>
 		<table>
@@ -53,7 +53,7 @@
 			{% for attribute in results %}
 				<tr>
 					<td>{{ attribute.time }}</td>
-					<td><a href="/show/{{attribute.id}}">{{ attribute.name }}</td>
+					<td><a href="/{{ _locale }}/show/{{attribute.id}}">{{ attribute.name }}</td>
 				</tr>			
 			{% endfor %}
 		</table>

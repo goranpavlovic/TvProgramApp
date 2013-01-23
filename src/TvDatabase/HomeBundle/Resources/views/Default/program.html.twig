@@ -1,9 +1,9 @@
 {% extends '::base.html.twig' %}
 
 {% block mainmany %}
-	<li class="current_page_item" ><a href="/">Home</a></li>
-	<li><a href="/tvstations">Tv Stations</a></li>
-	<li><a href="/advancedsearch">Advanced Search</a></li>
+	<li class="current_page_item" ><a href="/{{ _locale }}">Home</a></li>
+	<li><a href="/{{ _locale }}/tvstations">Tv Stations</a></li>
+	<li><a href="/{{ _locale }}/advancedsearch">Advanced Search</a></li>
 {% endblock %}
 
 {% block content %} 

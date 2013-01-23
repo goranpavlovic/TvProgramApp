@@ -21,7 +21,8 @@ class TVController extends Controller
         {
             array_push($nameArray, $tv->getTvName());
         }
-        return $this->render('TvDatabaseHomeBundle:Default:stations.html.twig', array( 'tvStations' => $tvStation));
+        $locale = $this->getRequest()->getLocale();
+        return $this->render('TvDatabaseHomeBundle:Default:stations.html.twig', array( 'tvStations' => $tvStation, '_locale' => $locale));
     }
     
     public function showTVAction($id, $date, Request $req)
@@ -63,10 +64,11 @@ class TVController extends Controller
     				    'name' => $resName,
     				    'id' => $result->getEntityId()));
     				}
+    				$locale = $this->getRequest()->getLocale();
     				$tomorrow = date_add(date_create($today), date_interval_create_from_date_string('1 day'))->format('Y-m-d');
     				$yesterday = date_sub(date_create($today), date_interval_create_from_date_string('1 day'))->format('Y-m-d');
     				$date = array('today' => $today, 'tomorrow' => $tomorrow, 'yesterday' => $yesterday);
     				return $this->render('TvDatabaseHomeBundle:Default:showTV.html.twig',
-    				        array('results' => $results,'tv' => $tv, 'date' => $date));
+    				        array('results' => $results,'tv' => $tv, 'date' => $date, '_locale' => $locale));
     }
 }

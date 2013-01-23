@@ -9,9 +9,9 @@
 {% endblock %}
 
 {% block mainmany %}
-	<li><a href="/">Home</a></li>
-	<li class="current_page_item" ><a href="/tvstations">Tv Stations</a></li>
-	<li><a href="/advancedsearch">Advanced Search</a></li>
+	<li><a href="/{{ _locale }}">Home</a></li>
+	<li class="current_page_item" ><a href="/{{ _locale }}/tvstations">Tv Stations</a></li>
+	<li><a href="/{{ _locale }}/advancedsearch">Advanced Search</a></li>
 {% endblock %}
 
 {% block content %} 
@@ -22,7 +22,7 @@
 			</tr>
 			{% for station in tvStations %}
 				<tr>
-					<td><a href="/tv/{{station.TvID}}">{{station.TvName}}</a></td>
+					<td><a href="/{{ _locale }}/tv/{{station.TvID}}">{{station.TvName}}</a></td>
 				</tr>			
 			{% endfor %}
 		</table>
@@ -32,7 +32,7 @@
 							<div class="entry">
 								<ul class='tvMenu'>
 									{% for station in tvStations %}
-										<li class='tvmenyItem'><a href="/tv/{{station.TvID}}"><span class='tventry'>{{station.TvName}}</span></a></li>
+										<li class='tvmenyItem'><a href="/{{ _locale }}/tv/{{station.TvID}}"><span class='tventry'>{{station.TvName}}</span></a></li>
 									{% endfor %}
 								<ul>
 							</div>
