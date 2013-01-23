@@ -17,7 +17,12 @@
 
 {% block content %} 
 
-	response
+	{% for entitity in pagerfanta.currentPageResults %}
+
+    <li>{{ entitity.Datetime|date("m/d/Y") }} {{ entitity.tv.TvName }}</li>
+
+	{% endfor %}
+	<div class="pagerfanta">{{ pagerfanta(pagerfanta, 'default') }}</div>
 
 {% endblock %}
 

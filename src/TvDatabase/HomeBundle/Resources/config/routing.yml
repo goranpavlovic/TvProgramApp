@@ -11,8 +11,8 @@ tv_database_program_page:
    defaults: { _controller:TvDatabaseHomeBundle:AdvancedSearch:advancedSearch }
 
 tv_database_advanced_search_response:
-   pattern: /advancedsearchresponse
-   defaults: { _controller:TvDatabaseHomeBundle:AdvancedSearch:advancedSearchResponse }
+   pattern: /advancedsearchresponse/{page}
+   defaults: { _controller:TvDatabaseHomeBundle:AdvancedSearch:advancedSearchResponse, page:null }
 
 tv_database_show_broadcast:
     pattern: /show/{id}
