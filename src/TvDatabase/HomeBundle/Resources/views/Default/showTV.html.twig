@@ -1,3 +1,4 @@
+{% trans_default_domain "app" %}
 {% extends '::base.html.twig' %}
 
 {% block stylesheets %}
@@ -22,15 +23,15 @@
 {% endblock %}
 
 {% block mainmany %}
-	<li><a href="/">Home</a></li>
-	<li class="current_page_item" ><a href="/tvstations">Tv Stations</a></li>
-	<li><a href="/advancedsearch">Advanced Search</a></li>
+	<li><a href="/{{ _locale }}">Home</a></li>
+	<li class="current_page_item" ><a href="/{{ _locale }}/tvstations">Tv Stations</a></li>
+	<li><a href="/{{ _locale }}/advancedsearch">Advanced Search</a></li>
 {% endblock %}
 
 {% block content %} 
 	<div id="stations_table">
 	<div>{{ date.today }}</div>
-	<form action="/tv/{{ tv.TvId }}" method="post">
+	<form action="/{{ _locale }}/tv/{{ tv.TvId }}" method="post">
 	<table>
     	<tr>
     	    <td>
