@@ -20,4 +20,12 @@ tv_database_show_broadcast:
 
 tv_database_show_tv:
     pattern: /{_locale}/tv/{id}/{date}
-    defaults: { _controller: TvDatabaseHomeBundle:TV:showTV, date:today, _locale: en }
+    defaults: { _controller: TvDatabaseHomeBundle:TV:showTV, date: today, _locale: en }
+
+tv_database_search:
+    pattern: /{_locale}/search
+    defaults: { _controller: TvDatabaseHomeBundle:Search:search, _locale: en }
+    
+tv_database_searchResult:
+    pattern: /{_locale}/searchResult
+    defaults: { _controller: TvDatabaseHomeBundle:Search:searchResult, _locale: en }

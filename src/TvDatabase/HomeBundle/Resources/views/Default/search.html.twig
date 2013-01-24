@@ -1,0 +1,25 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('bundles/tvdatabasehome/css/stations.css') }}" />
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}
+
+{% block mainmany %}
+	<li><a href="/{{ _locale }}">{% trans %}Home{% endtrans %}</a></li>
+	<li><a href="/{{ _locale }}/tvstations">{% trans %}Tv Stations{% endtrans %}</a></li>
+	<li><a href="/{{ _locale }}/advancedsearch">{% trans %}Advanced Search{% endtrans %}</a></li>
+{% endblock %}
+
+{% block content %} 
+	<form action="/{{ _locale }}/searchResult" method="get">
+	    <label>{% trans %}Search{% endtrans %}:</label>
+	    <input type="text" name="searchText">
+	    <input type="submit" Value="{% trans %} Search {% endtrans %}">
+	    </form>
+{% endblock %}
+
+  
