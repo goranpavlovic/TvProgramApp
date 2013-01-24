@@ -63,4 +63,12 @@ swiftmailer:
 services:
     store:
          class: Acme\StoreBundle\Controller\DefaultController
+         
+#facebook configuration
+fos_facebook:
+    alias: facebook
+    app_id: 1060810547390883
+    secret: 58bfdc57e57ab87796ddb788bb4e0b67
+    cookie: true
+    permissions: [email, user_birtday, user_location]
 

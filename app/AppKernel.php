@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new Acme\StoreBundle\AcmeStoreBundle(),
             new TvDatabase\HomeBundle\TvDatabaseHomeBundle(),
         	new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+        	new FOS\FacebookBundle\FOSFacebookBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

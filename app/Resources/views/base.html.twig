@@ -15,6 +15,7 @@
 {% block bodyopen %}
 <body>
 {% endblock %}
+	{{ facebook_initialize({'xfbml': true, 'fbAsyncInit': 'onFbInit();'}) }}
 	<div id="wrapper">
 		<div id="header-wrapper">
 			<div id="header">
