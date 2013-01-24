@@ -19,8 +19,10 @@ class AdvancedSearchController extends Controller
     public function advancedSearchAction()
     {
     	$locale = $this->getRequest()->getLocale();
-    	$session = new Session();
-    	$session->clear();
+    	
+    	$session = $this->getRequest()->getSession();
+    	
+    	$session->remove("query");
     	
         $tvTypes = $this->getDoctrine()->getRepository('AcmeStoreBundle:MetaEAVEntityType')->findAll();
         $typeNameArray = array();
@@ -44,7 +46,8 @@ class AdvancedSearchController extends Controller
     {
     	$locale = $this->getRequest()->getLocale();
     	
-    	$session = new Session();
+    	$session = $this->getRequest()->getSession();
+    	
     	$query = "";
     	
     	if($page != null)
