@@ -48,6 +48,13 @@ class SearchController extends Controller
                             'results' => $return,
                             ));
     	}
+    	else
+    	{
+    		$locale = $this->getRequest()->getLocale();
+    		return $this->render('TvDatabaseHomeBundle:Default:search.html.twig',
+    				array('_locale' => $locale
+    				));
+    	}
 
         }
 }
