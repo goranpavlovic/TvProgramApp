@@ -1,0 +1,32 @@
+{% extends '::base.html.twig' %}
+
+
+{% block script %}
+
+{% endblock %}
+
+{% block mainmany %}
+	<li><a href="/{{ _locale }}">{% trans %}Home{% endtrans %}</a></li>
+	<li><a href="/{{ _locale }}/tvstations">{% trans %}Tv Stations{% endtrans %}</a></li>
+	<li><a href="/{{ _locale }}/advancedsearch">{% trans %}Advanced Search{% endtrans %}</a></li>
+{% endblock %}
+
+{% block content %} 
+	<div> <a href="/{{ _locale }}/search" >back</a></div>
+	<table>
+		<tr>
+			<th>{% trans %}Televison{% endtrans %}</th>
+			<th>{% trans %}Time{% endtrans %}</th>
+			<th>{% trans %}Description{% endtrans %}</th>
+		</tr>
+	{% for result in results %}
+	        <tr>
+	            <td><a href="/{{ _locale }}/tv/{{ result.TvStation }}/{{ result.DateTime }}">{{ result.TvName }}</a></td>
+	            <td><a href="/{{ _locale }}/show/{{ result.EntityId }}">{{ result.DateTime }}</a></td>
+	            <td>{{ result.Value }}</td>
+	        </tr>
+	{% endfor %}
+	</table>
+{% endblock %}
+
+  
