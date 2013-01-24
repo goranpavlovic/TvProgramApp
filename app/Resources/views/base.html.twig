@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
 	<meta name="keywords" content="" />
 	<meta name="description" content="" />
@@ -9,6 +9,23 @@
 	<link href="{{ asset('bundles/tvdatabasehome/css/style.css') }}" rel="stylesheet" type="text/css" media="screen" />
 	{% block stylesheets %}
 	{% endblock %}
+	<script type='text/javascript'>
+		function goLogIn()
+		{
+		        window.location = "/{{_locale}}";
+		}
+		function onFbInit() {
+	        if (typeof(FB) != 'undefined' && FB != null ) {              
+	            FB.Event.subscribe('auth.statusChange', function(response) {
+	                if (response.session || response.authResponse) {
+	                    setTimeout(goLogIn, 500);
+	                } else {
+	                    window.location.href = "/{{_locale}}";
+	                }
+	            });
+	        }
+	    }
+	</script>
 	{% block script %}
 	{% endblock %}
 </head>
@@ -16,6 +33,7 @@
 <body>
 {% endblock %}
 	{{ facebook_initialize({'xfbml': true, 'fbAsyncInit': 'onFbInit();'}) }}
+	{{ facebook_login_button({'autologoutlink': true}) }}
 	<div id="wrapper">
 		<div id="header-wrapper">
 			<div id="header">
