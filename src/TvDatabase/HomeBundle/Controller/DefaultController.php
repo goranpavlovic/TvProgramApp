@@ -100,14 +100,14 @@ public function indexAction()
 		else
 		{
 					array_push($results,array(
-		            'tv'=> $tv,
-		            'shows'=> $shows[0]->getDatetime()->format('H:i'),
-		            'name'=> $resName,
-		            'nameId' => $shows[0]->getEntityId(),
-					'showsNext'=> 'xx:xx',
-					'nameNext' => $nNext,
-					'nameNextId' =>null
-			));
+			            'tv'=> $tv,
+			            'shows'=> 'xx:xx',
+			            'name'=> $resName,
+			            'nameId' => null,
+						'showsNext'=> 'xx:xx',
+						'nameNext' => $nNext,
+						'nameNextId' =>null
+						));
 		}
 	}
 	$locale = $this->getRequest()->getLocale();
