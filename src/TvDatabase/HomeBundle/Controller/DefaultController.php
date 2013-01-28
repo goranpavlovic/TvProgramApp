@@ -73,19 +73,19 @@ public function indexAction()
 				'nameNextId' => $showsNext[0]->getEntityId()
 				));
 		}
-		else if(!$shows)
+		else if(!$shows && $showsNext)
 		{
-		    array_push($results,array(
-		            'tv'=> $tv,
-		            'shows'=> 'xx:xx',
-		            'name'=> $resName,
-		            'nameId' => null,
-		            'showsNext'=> $showsNext[0]->getDatetime()->format('H:i'),
-		            'nameNext' => $nNext,
-		            'nameNextId' => $showsNext[0]->getEntityId()
+			    array_push($results,array(
+			            'tv'=> $tv,
+			            'shows'=> 'xx:xx',
+			            'name'=> $resName,
+			            'nameId' => null,
+			            'showsNext'=> $showsNext[0]->getDatetime()->format('H:i'),
+			            'nameNext' => $nNext,
+			            'nameNextId' => $showsNext[0]->getEntityId()
 		    ));
 		}
-		else
+		else if($shows && !$showsNext)
 		{
 		    array_push($results,array(
 		            'tv'=> $tv,
@@ -96,6 +96,18 @@ public function indexAction()
 		            'nameNext' => $nNext,
 		            'nameNextId' =>null
 		    ));
+		}
+		else
+		{
+					array_push($results,array(
+		            'tv'=> $tv,
+		            'shows'=> $shows[0]->getDatetime()->format('H:i'),
+		            'name'=> $resName,
+		            'nameId' => $shows[0]->getEntityId(),
+					'showsNext'=> 'xx:xx',
+					'nameNext' => $nNext,
+					'nameNextId' =>null
+			));
 		}
 	}
 	$locale = $this->getRequest()->getLocale();

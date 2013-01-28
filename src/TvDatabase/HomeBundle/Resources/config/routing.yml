@@ -1,31 +1,47 @@
 tv_database_home_homepage:
     pattern:  /{_locale}
     defaults: { _controller: TvDatabaseHomeBundle:Default:index, _locale: en }
+    requirements:
+        _locale: en|sr|cyrl
 
 tv_database_stations_page:
     pattern: /{_locale}/tvstations
     defaults: { _controller: TvDatabaseHomeBundle:TV:tvStations, _locale: en }
+    requirements:
+        _locale: en|sr|cyrl
 
 tv_database_program_page:
    pattern: /{_locale}/advancedsearch
    defaults: { _controller: TvDatabaseHomeBundle:AdvancedSearch:advancedSearch, _locale: en }
+   requirements:
+        _locale: en|sr|cyrl
 
 tv_database_advanced_search_response:
    pattern: /{_locale}/advancedsearchresponse/{page}
    defaults: { _controller: TvDatabaseHomeBundle:AdvancedSearch:advancedSearchResponse, page:null, _locale: en }
+   requirements:
+        _locale: en|sr|cyrl
 
 tv_database_show_broadcast:
     pattern: /{_locale}/show/{id}
     defaults: { _controller: TvDatabaseHomeBundle:Show:show, _locale: en }
+    requirements:
+        _locale: en|sr|cyrl
 
 tv_database_show_tv:
     pattern: /{_locale}/tv/{id}/{date}
     defaults: { _controller: TvDatabaseHomeBundle:TV:showTV, date: today, _locale: en }
+    requirements:
+        _locale: en|sr|cyrl
 
 tv_database_search:
     pattern: /{_locale}/search
     defaults: { _controller: TvDatabaseHomeBundle:Search:search, _locale: en }
+    requirements:
+        _locale: en|sr|cyrl
     
 tv_database_searchResult:
     pattern: /{_locale}/searchResult
     defaults: { _controller: TvDatabaseHomeBundle:Search:searchResult, _locale: en }
+    requirements:
+        _locale: en|sr|cyrl
