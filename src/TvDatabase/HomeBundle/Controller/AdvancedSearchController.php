@@ -2,6 +2,10 @@
 
 namespace TvDatabase\HomeBundle\Controller;
 
+use Facebook\Facebook;
+
+use Symfony\Component\Security\Core\User\UserInterface;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
@@ -174,9 +178,5 @@ class AdvancedSearchController extends Controller
     	
         return $this->render('TvDatabaseHomeBundle:Default:advsearchresponse.html.twig', 
         		array('pagerfanta' => $pagerfanta, '_locale' => $locale));
-        //return new Response($request->get('televisions') . $request->get('televisions'));
-        
-        //return new Response($whereQuery);
-        //return new Response($count);
     }
 }
