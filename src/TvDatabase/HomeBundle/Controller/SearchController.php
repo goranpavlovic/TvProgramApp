@@ -46,6 +46,7 @@ class SearchController extends Controller
             return $this->render('TvDatabaseHomeBundle:Default:searchResult.html.twig', 
                     array('_locale' => $locale,
                             'results' => $return,
+                    		'search' => $text
                             ));
     	}
     	else

@@ -13,7 +13,11 @@
 {% endblock %}
 
 {% block content %} 
-	<div> <a href="/{{ _locale }}/search" >{% trans %}Back{% endtrans %}</a></div>
+		<form action="/{{ _locale }}/searchResult" method="get">
+	    <label>{% trans %}Search{% endtrans %}:</label>
+	    <input type="text" name="searchText" value="{{ search }}">
+	    <input type="submit" Value="{% trans %} Search {% endtrans %}">
+	    </form>
 	<table>
 		<tr>
 			<th>{% trans %}Televison{% endtrans %}</th>

@@ -43,8 +43,9 @@
     	</tr>
 	</table>
 	</form>
-	<div id="date-prev"><a href="/{{ _locale }}/tv/{{ tv.TvId }}/{{ date.yesterday }}">{% trans %}Yesterday{% endtrans %}</a></div>
-	<div id="date-next"><a href="/{{ _locale }}/tv/{{ tv.TvId }}/{{ date.tomorrow }}">{% trans %}Tomorrow{% endtrans %}</a></div>
+	<div id="date-prev"><a href="/{{ _locale }}/tv/{{ tv.TvId }}/{{ date.yesterday }}">{% trans %}Day before{% endtrans %}</a></div>
+	<div id="date-today"><a href="/{{ _locale }}/tv/{{ tv.TvId }}">{% trans %}Today{% endtrans %}</a></div>
+	<div id="date-next"><a href="/{{ _locale }}/tv/{{ tv.TvId }}/{{ date.tomorrow }}">{% trans %}Day after{% endtrans %}</a></div>
 	<div style='clear:both'>
 	</div>
 		<table>
