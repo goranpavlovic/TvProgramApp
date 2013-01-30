@@ -45,3 +45,7 @@ tv_database_searchResult:
     defaults: { _controller: TvDatabaseHomeBundle:Search:searchResult, _locale: en }
     requirements:
         _locale: en|sr|cyrl
+        
+tv_database_catalogue:
+    pattern: /{_locale}/catalogue
+    defaults: { _controller: TvDatabaseHomeBundle:Catalogue:catalogue, _locale: en}

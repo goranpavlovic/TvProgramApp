@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+
+#entity-type
+{
+	font-weight:bold;
+}
+
+#attribute-set
+{
+	padding-left:50px;
+}
+
+#attribute
+{
+	padding-left:100px;
+}
