@@ -27,7 +27,7 @@ class SearchController extends Controller
 
             $con = mysql_connect('localhost','root','Praksa2012');
             mysql_select_db('Praksa2012');
-            mysql_set_charset('utf-8',$con);
+            mysql_set_charset('utf8',$con);
             
             $query = 'SELECT t.TvName, e.DateTime, a.Value, e.TvStation, e.EntityId
                             FROM EAVEntity e,EAVAttributeValue a, TVStation t
