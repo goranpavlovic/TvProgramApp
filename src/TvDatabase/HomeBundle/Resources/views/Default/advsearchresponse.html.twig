@@ -21,14 +21,16 @@
 	<table>
 		<tr>
 			<th>{% trans %}Televison{% endtrans %}</th>
+			<th>{% trans %}Date{% endtrans %}</th>
 			<th>{% trans %}Time{% endtrans %}</th>
 			<th>{% trans %}Program Name{% endtrans %}</th>
 		</tr>
 		{% for entity in pagerfanta.currentPageResults %}
 
 			<tr>
-				<td>{{ entity.tv.TvName }}</td>
-				<td>{{ entity.Datetime|date("m/d/Y") }}</td>
+				<td><a href="/{{ _locale }}/tv/{{ entity.tv.TvId }}" >{{ entity.tv.TvName }}</a></td>
+				<td>{{ entity.Datetime|date("d.m.Y") }}</td>
+				<td><a href="/{{ _locale }}/show/{{ entity.EntityId }}">{{ entity.Datetime|date("H:i") }}</a></td>
 				{%  for attribute in entity.attributes %}
 				
 					{% if attribute.attributeMeta.AttributeName == "Name" %}
