@@ -67,11 +67,17 @@ class AdvancedSearchController extends Controller
     		$request_string = str_replace("HTTP/1.1", "", $request_string);
     		$request_string = str_replace("\r\n","",$request_string);
     		 
-    		$query = "SELECT ent FROM AcmeStoreBundle:EAVEntity as ent ";
+    		$query = "SELECT DISTINCT ent FROM AcmeStoreBundle:EAVEntity as ent ";
     		 
     		$whereQuery = "";
+    		
+    		$groupQuery = "";
+    		//$groupQuery = " GROUP BY ent.tv ";
+    		
+    		//$orderQuery = "";
     		//$orderQuery = " ORDER BY ent.Datetime DESC , ent.tv ASC";
-    		$orderQuery = " ORDER BY ent.Datetime DESC";
+    		$orderQuery = " ORDER BY ent.tv ASC , ent.Datetime DESC";
+    		//$orderQuery = " ORDER BY ent.Datetime DESC ";
     		$queries = Array();
     		 
     		$result = "";
@@ -122,7 +128,7 @@ class AdvancedSearchController extends Controller
     			array_push($queries, "ent.Datetime > '" . date_create($reqDate)->format('Y-m-d H:i:s') . "'");
     		}
     		 
-    		if($reqDate = $request->get('endTime'))	
+    		if($reqDate = $request->get('endDate'))	
     		{
     			array_push($queries, "ent.Datetime < '" . date_create($reqDate)->format('Y-m-d H:i:s') . "'");
     		}
@@ -143,6 +149,7 @@ class AdvancedSearchController extends Controller
     		}
     		 
     		$query = $query . $whereQuery;
+    		$query = $query . $groupQuery;
     		$query = $query . $orderQuery;
     	}
     	
@@ -152,7 +159,9 @@ class AdvancedSearchController extends Controller
     	
     	$entities = $this->getDoctrine()->getManager();
     	
-    	$objectQuery = $entities->createQuery($query);
+    	$objectQuery = $entities->createQuery($query);//->orderBy('ent.tv ASC, ent.Datetime DESC');
+    	
+    	//$objectQuery;
     	
     	$results = $objectQuery->getResult();
     	
@@ -177,6 +186,9 @@ class AdvancedSearchController extends Controller
     	}
     	
         return $this->render('TvDatabaseHomeBundle:Default:advsearchresponse.html.twig', 
-        		array('pagerfanta' => $pagerfanta, '_locale' => $locale));
+        		array(
+        				'pagerfanta' => $pagerfanta, 
+        				'_locale' => $locale
+        				));
     }
 }
