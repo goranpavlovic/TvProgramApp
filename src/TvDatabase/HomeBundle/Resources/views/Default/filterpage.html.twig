@@ -1,0 +1,121 @@
+{% extends 'TvDatabaseHomeBundle:Default:advsearchform.html.twig' %}
+
+{% block mainmany %}
+	<li><a href="/{{ _locale }}">{% trans %}Home{% endtrans %}</a></li>
+	<li><a href="/{{ _locale }}/tvstations">{% trans %}Tv Stations{% endtrans %}</a></li>
+	<li><a href="/{{ _locale }}/advancedsearch">{% trans %}Detailed View{% endtrans %}</a></li>
+	<li class="current_page_item"><a href="/{{ _locale }}/search">{% trans %}Search{% endtrans %}</a></li>
+{% endblock %}
+
+{% block content %} 
+{% if filter == false %}
+filter is false
+{{ query }}
+		<form action="/{{ _locale }}/searchResult/filter/{{ search }}" method="get">
+	    <label>{% trans %}Search{% endtrans %}:</label>
+	    <input type="text" name="searchText" value="{{ search }}">
+	    
+	    <table>
+			<tr>
+				<td><label>{% trans %}Broadcast Types{% endtrans %}: </label></td>
+				<td><select id="broadcastType" name="broadcastType" multiple="multiple">
+						{% for type in types %}
+							<option>{{type.EntityTypeName}}</option>
+						{% endfor %}
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td><label>{% trans %}Televisions{% endtrans %}: </label></td>
+				<td>
+					<select id="televisions" name="televisions" multiple="multiple">
+						{% for television in televisions %}
+							<option>{{television.TvName}}</option>
+						{% endfor %}
+					</select>
+				</td>
+			</tr>
+		</table>
+		<input type="submit" Value="{% trans %} Filter {% endtrans %}">
+	    </form>
+	    	<table>
+		<tr>
+			<th>{% trans %}Televison{% endtrans %}</th>
+			<th>{% trans %}Time{% endtrans %}</th>
+			<th>{% trans %}Description{% endtrans %}</th>
+		</tr>
+	    {% for result in results %}
+	        <tr>
+	            <td><a href="/{{ _locale }}/tv/{{ result.TvStation }}/{{ result.DateTime }}">{{ result.TvName }}</a></td>
+	            <td><a href="/{{ _locale }}/show/{{ result.EntityId }}">{{ result.DateTime }}</a></td>
+	            <td>{{ result.Value }}</td>
+	        </tr>
+	{% endfor %}
+	</table>
+	
+{% else %}
+-u else-
+<form action="/{{ _locale }}/searchResult/filter/{{ search }}" method="get">
+	    <label>{% trans %}Search{% endtrans %}:</label>
+	    <input type="text" name="searchText" value="{{ search }}">
+	    
+	    <table>
+			<tr>
+				<td><label>{% trans %}Broadcast Types{% endtrans %}: </label></td>
+				<td><select id="broadcastType" name="broadcastType" multiple="multiple">
+						{% for type in types %}
+							<option>{{type.EntityTypeName}}</option>
+						{% endfor %}
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td><label>{% trans %}Televisions{% endtrans %}: </label></td>
+				<td>
+					<select id="televisions" name="televisions" multiple="multiple">
+						{% for television in televisions %}
+							<option>{{television.TvName}}</option>
+						{% endfor %}
+					</select>
+				</td>
+			</tr>
+		</table>
+		<input type="submit" Value="{% trans %} Filter {% endtrans %}">
+	    </form>
+	<table>
+		<tr>
+			<th>{% trans %}Televison{% endtrans %}</th>
+			<th>{% trans %}Time{% endtrans %}</th>
+			<th>{% trans %}Description{% endtrans %}</th>
+		</tr>
+	    {% for t in tvs %}
+	    		{% for result in results %}
+	    			{% if result.TvName == t %}
+					    {% for b in bTypes %}
+					    	{% for result in results %}
+					    		{% if result.EntityTypeName == b %}
+						    			<tr>
+								            <td><a href="/{{ _locale }}/tv/{{ result.TvStation }}/{{ result.DateTime }}">{{ result.TvName }}</a></td>
+								            <td><a href="/{{ _locale }}/show/{{ result.EntityId }}">{{ result.DateTime }}</a></td>
+								            <td>{{ result.Value }}</td>
+								        </tr>
+					    		{% endif %}
+					    	{% endfor %}
+					    {% endfor %}
+	    			{% endif %}
+	    		{% endfor %}
+	    {% endfor %}
+{% endif %}
+</table>
+
+						{# {% for result in results %}
+	        <tr>
+	            <td><a href="/{{ _locale }}/tv/{{ result.TvStation }}/{{ result.DateTime }}">{{ result.TvName }}</a></td>
+	            <td><a href="/{{ _locale }}/show/{{ result.EntityId }}">{{ result.DateTime }}</a></td>
+	            <td>{{ result.Value }}</td>
+	        </tr>
+	{% endfor %} #}
+
+{% endblock %}
+
+  

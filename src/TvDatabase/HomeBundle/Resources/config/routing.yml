@@ -49,3 +49,11 @@ tv_database_searchResult:
 tv_database_catalogue:
     pattern: /{_locale}/catalogue
     defaults: { _controller: TvDatabaseHomeBundle:Catalogue:catalogue, _locale: en}
+    requirements:
+        _locale: en|sr|cyrl
+    
+tv_database_search_filter:
+    pattern: /{_locale}/searchResult/filter/{req}
+    defaults: { _controller: TvDatabaseHomeBundle:Search:filter, _locale: en }
+    requirements:
+        _locale: en|sr|cyrl
