@@ -9,8 +9,8 @@
 
 {% block content %} 
 {% if filter == false %}
-filter is false
-{{ query }}
+{#filter is false
+{{ query }} #}
 		<form action="/{{ _locale }}/searchResult/filter/{{ search }}" method="get">
 	    <label>{% trans %}Search{% endtrans %}:</label>
 	    <input type="text" name="searchText" value="{{ search }}">
