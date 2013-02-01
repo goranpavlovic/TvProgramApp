@@ -135,7 +135,7 @@ class SearchController extends Controller
         			//$filterString = 't.TvName IN (';
         			foreach ($tvs as $tv)
         			{
-        				$filterString =  ',' . $filterString . "'" . $tv . "'";
+        				$filterString = $filterString . ",'" . $tv . "'";
         			}
         			//$filterString = strstr($filterString,',');
         			$pos = strpos( $filterString, ',' );
