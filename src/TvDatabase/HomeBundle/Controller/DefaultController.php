@@ -16,7 +16,7 @@ public function indexAction()
 	//$today = date_create('2013-01-11 11:45:00');
 	$results = array();
 	
-	$displays = array('RTS1','Prva TV', 'RTS2');//koje se prikazuju
+	$displays = array('RTS1','Prva TV', 'RTS2','B92','TV Zona');//koje se prikazuju
 	foreach($displays as $display)
 	{
 		$em = $this->getDoctrine()->GetManager();

@@ -19,18 +19,20 @@
 	<div id="show">
 
 		{% for attribute in attributes %}
-			<div id="{{ attribute.name }}">
-			{% if attribute.name == "Link" %}
-				<a href={{ attribute.value }}> link </a>
-			{% elseif attribute.name == "Picture" %}
-				<img src={{ attribute.value }}>
+			<div id="{{ attribute.attributeMeta.AttributeName }}">
+			{% if attribute.attributeMeta.AttributeName == "Link" %}
+				<a href={{ attribute.Value }}> link </a>
+			{% elseif attribute.attributeMeta.AttributeName == "Picture" %}
+				<img src={{ attribute.Value }}>
 			{% else %}
-				{{ attribute.name }}: {{ attribute.value }}
+				{{ attribute.AttributeMeta.AttributeName }}: {{ attribute.Value }} 
+				<a href="/{{ _locale }}/edit/{{ attribute.ValueId }}">edit</a>
 			{% endif %}
 			</div>
 		{% endfor %}
 
 	</div>
+	<div><a href="/{{ _locale }}/add/{{ entity.EntityId }}">{% trans %} add new {% endtrans %}</a></div>
 {% endblock %}
 
   

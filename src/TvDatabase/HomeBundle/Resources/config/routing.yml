@@ -57,3 +57,23 @@ tv_database_search_filter:
     defaults: { _controller: TvDatabaseHomeBundle:Search:filter, _locale: en }
     requirements:
         _locale: en|sr|cyrl
+        
+tv_database_edit_attribute:
+    pattern: /{_locale}/edit/{attribute}
+    defaults: {_controller: TvDatabaseHomeBundle:Show:edit, _locale: en}
+    requirements: 
+        _locale: en|sr|cyrl
+
+tv_database_add_new_attribute:
+    pattern: /{_locale}/addNew/{entity}/{set}/{attribute}
+    defaults: {_controller: TvDatabaseHomeBundle:Show:addNew, _locale: en}
+    requirements: 
+        _locale: en|sr|cyrl 
+        
+tv_database_add_attribute: 
+    pattern: /{_locale}/add/{entity}
+    defaults: {_controller: TvDatabaseHomeBundle:Show:add, _locale: en}
+    requirements: 
+        _locale: en|sr|cyrl
+       
+        

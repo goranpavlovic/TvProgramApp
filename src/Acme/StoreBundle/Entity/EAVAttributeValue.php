@@ -17,6 +17,7 @@ class EAVAttributeValue
      *
      * @ORM\Id
      * @ORM\Column(name="ValueId", type="string", length=32)
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $ValueId;
 
@@ -26,6 +27,13 @@ class EAVAttributeValue
      * @ORM\Column(name="AttributeId", type="integer", length=11)
      */
     private $AttributeId;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="AttributeSetId", type="integer", length=11)
+     */
+    private $AttributeSetId;
 
     /**
      * @var string
@@ -45,6 +53,12 @@ class EAVAttributeValue
     * @ORM\JoinColumn(name="AttributeId", referencedColumnName="AttributeId")
     */
     private $attributeMeta;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="MetaEAVAttributeSet", inversedBy="values")
+     * @ORM\JoinColumn(name="AttributeSetId", referencedColumnName="AttributeSetId")
+     */
+    private $attributeSetMeta;
 
     /**
      * Get id
@@ -62,7 +76,7 @@ class EAVAttributeValue
      * @param \char $valueId
      * @return EAVAttributeValue
      */
-    public function setValueId(\char $valueId)
+    public function setValueId($valueId)
     {
         $this->ValueId = $valueId;
     
@@ -85,7 +99,7 @@ class EAVAttributeValue
      * @param \int $attributeId
      * @return EAVAttributeValue
      */
-    public function setAttributeId(\int $attributeId)
+    public function setAttributeId($attributeId)
     {
         $this->AttributeId = $attributeId;
     
@@ -108,7 +122,7 @@ class EAVAttributeValue
      * @param \varchar $value
      * @return EAVAttributeValue
      */
-    public function setValue(\varchar $value)
+    public function setValue($value)
     {
         $this->Value = $value;
     
@@ -169,5 +183,51 @@ class EAVAttributeValue
     public function getAttributeMeta()
     {
         return $this->attributeMeta;
+    }
+
+    /**
+     * Set attributeSetMeta
+     *
+     * @param \Acme\StoreBundle\Entity\MetaEAVAttributeSet $attributeSetMeta
+     * @return EAVAttributeValue
+     */
+    public function setAttributeSetMeta(\Acme\StoreBundle\Entity\MetaEAVAttributeSet $attributeSetMeta = null)
+    {
+        $this->attributeSetMeta = $attributeSetMeta;
+    
+        return $this;
+    }
+
+    /**
+     * Get attributeSetMeta
+     *
+     * @return \Acme\StoreBundle\Entity\MetaEAVAttributeSet 
+     */
+    public function getAttributeSetMeta()
+    {
+        return $this->attributeSetMeta;
+    }
+
+    /**
+     * Set AttributeSetId
+     *
+     * @param integer $attributeSetId
+     * @return EAVAttributeValue
+     */
+    public function setAttributeSetId($attributeSetId)
+    {
+        $this->AttributeSetId = $attributeSetId;
+    
+        return $this;
+    }
+
+    /**
+     * Get AttributeSetId
+     *
+     * @return integer 
+     */
+    public function getAttributeSetId()
+    {
+        return $this->AttributeSetId;
     }
 }
