@@ -2,6 +2,8 @@
 
 namespace TvDatabase\HomeBundle\Controller;
 
+use Doctrine\ORM\Query\ResultSetMapping;
+
 use Facebook\Facebook;
 
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -48,6 +50,7 @@ class AdvancedSearchController extends Controller
     }
     public function advancedSearchResponseAction(Request $request, $page=null)
     {
+    	
     	$locale = $this->getRequest()->getLocale();
     	
     	$session = $this->getRequest()->getSession();
@@ -67,17 +70,15 @@ class AdvancedSearchController extends Controller
     		$request_string = str_replace("HTTP/1.1", "", $request_string);
     		$request_string = str_replace("\r\n","",$request_string);
     		 
-    		$query = "SELECT DISTINCT ent FROM AcmeStoreBundle:EAVEntity as ent ";
-    		 
+    		$query = "SELECT ent FROM AcmeStoreBundle:EAVEntity as ent ";
+    		
     		$whereQuery = "";
     		
     		$groupQuery = "";
     		//$groupQuery = " GROUP BY ent.tv ";
     		
     		//$orderQuery = "";
-    		//$orderQuery = " ORDER BY ent.Datetime DESC , ent.tv ASC";
     		$orderQuery = " ORDER BY ent.tv ASC , ent.Datetime DESC";
-    		//$orderQuery = " ORDER BY ent.Datetime DESC ";
     		$queries = Array();
     		 
     		$result = "";
@@ -190,5 +191,116 @@ class AdvancedSearchController extends Controller
         				'pagerfanta' => $pagerfanta, 
         				'_locale' => $locale
         				));
+        /*
+    	$locale = $this->getRequest()->getLocale();
+    	 
+    	$session = $this->getRequest()->getSession();
+    	
+    	$query = "";
+    	
+    	if($page != null)
+    	{
+    		$query = $session->get("query");
+    	}
+    	else
+    	{
+    		$request_string = $request->__toString();
+    		$header_string = $request->headers->__toString();
+    		$request_string = str_replace($header_string, "", $request_string);
+    		$request_string = strstr($request_string, "HTTP");
+    		$request_string = str_replace("HTTP/1.1", "", $request_string);
+    		$request_string = str_replace("\r\n","",$request_string);
+    		
+    		$request_params = explode("&", $request_string);
+    		
+    		$queries = Array();
+    		
+    		$query = "SELECT ent FROM AcmeStoreBundle:EAVEntity as ent ";
+    		
+    		$query = "SELECT ent FROM EAVEntity ent, TVStation tv, EAVAttributeValue atr"
+    				. "WHERE ent.TvStation = tv.TvID AND atr.EntityId = ent.EntityId"
+    				;
+    		
+    		$whereQuery = "";
+    		$groupQuery = "";
+    		$orderQuery = "";
+    		 
+    		$broadcastTypes = Array();
+    		$televisions = Array();
+    		 
+    		foreach($request_params as $param)
+    		{
+    			$key = strstr($param, '=', true);
+    			$key = str_replace("=", "", $key);
+    		
+    			$value = strstr($param, '=');
+    			$value = str_replace("=", "", $value);
+    			$value = str_replace("+", " ", $value);
+    		
+    			if($key === "broadcastType" )
+    			{
+    				array_push($broadcastTypes, $value);	
+    			}
+    			else if($key === "televisions" )
+    			{
+    				array_push($televisions, $value);
+    			}
+    		}
+    		
+    		if(count($broadcastTypes) > 0)
+    		{
+    			array_push( $queries, " tp.EntityTypeName IN ('" . implode($broadcastTypes, "','") . "')");
+    			$query = $query . "JOIN ent.entityType as tp ";
+    		}
+    		 
+    		if(count($televisions) > 0)
+    		{
+    			array_push($queries, "tv.TvName IN ('" . implode($televisions, "','") . "')");
+    			$query = $query . "JOIN ent.tv as tv ";
+    		}
+    		
+    		if($reqDate = $request->get('startDate'))
+    		{
+    			array_push($queries, "ent.Datetime > '" . date_create($reqDate)->format('Y-m-d H:i:s') . "'");
+    		}
+    		
+    		if($reqDate = $request->get('endDate'))
+    		{
+    			array_push($queries, "ent.Datetime < '" . date_create($reqDate)->format('Y-m-d H:i:s') . "'");
+    		}
+    		
+    		$count = 0;
+    		
+    		foreach($queries as $query_row)
+    		{
+    			if($count < count($queries) - 1)
+    			{
+    				$whereQuery = $whereQuery . $query_row . " AND ";
+    			}
+    			else
+    			{
+    				$whereQuery = $whereQuery . $query_row;
+    			}
+    			$count++;
+    		}
+    		
+    		//$query = $query . $whereQuery;
+    		//$query = $query . $groupQuery;
+    		//$query = $query . $orderQuery;
+    	}
+    	
+    	$session->set("query", $query);
+    	
+    	//$resSetMapping = new ResultSetMapping();
+    	//$resSetMapping->addEntityResult("EAVEntity", "ent");
+    	//$resSetMapping->addFieldResult("", "", "");
+    	
+    	//$entities = $this->getDoctrine()->getManager();
+    	
+    	//$entities->createNativeQuery( $query, $resSetMapping);
+    	
+    	
+    	return new Response($query);
+    	*/
     }
 }
