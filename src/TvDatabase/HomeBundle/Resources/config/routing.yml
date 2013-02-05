@@ -75,5 +75,11 @@ tv_database_add_attribute:
     defaults: {_controller: TvDatabaseHomeBundle:Show:add, _locale: en}
     requirements: 
         _locale: en|sr|cyrl
-       
+         
+tv_database_add_attribute: 
+    pattern: /{_locale}/mail
+    defaults: {_controller: TvDatabaseHomeBundle:Mail:mail, _locale: en}
+    requirements: 
+        _locale: en|sr|cyrl
+        
         
