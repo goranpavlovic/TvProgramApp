@@ -54,8 +54,8 @@ doctrine:
 # Swiftmailer Configuration
 swiftmailer:
     transport: gmail
-    username:  jtfcup@gmail.com
-    password:  Neskafa123
+    username:  dummyPraksa@gmail.com
+    password:  Praksa2012
 
 # Service Configuration
 services:
