@@ -52,6 +52,14 @@ class ShowController extends Controller
 	    						'new' => $new
 	    				));
 	    	}
+	    	else
+	    	{
+	    		$locale = $this->getRequest()->getLocale();
+	    		return $this->render('TvDatabaseHomeBundle:Default:editshow.html.twig',
+	    				array('attribute' => $attribute,
+	    						'_locale' => $locale
+	    				));
+	    	}
     	}
     	else
     	{
