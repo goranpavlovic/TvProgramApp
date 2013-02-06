@@ -71,10 +71,21 @@ fos_facebook:
     secret: 58bfdc57e57ab87796ddb788bb4e0b67
     cookie: true
     permissions: [email, user_location]
+    
+#google configuration
+#fos_google: 
+#   app_name: tvprogramapp
+#   client_id: 162415653387.apps.googleusercontent.com
+#   client_secret: F5tsHyQncCIAmkwxTqyaDsev
+#   state: auth
+#   access_type: online
+#   scopes: [userinfo.email, userinfo.profile]
+#   approval_prompt: auto
+#   callback_url: http://www.symfony1server.com/login_check
 
 #facebook user configuration
-fos_user:
-    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
-    firewall_name: main
-    user_class: TvDatabase\HomeBundle\Entity\User
+#fos_user:
+#    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+#    firewall_name: main
+#    user_class: TvDatabase\HomeBundle\Entity\User
 

@@ -1,0 +1,297 @@
+<?php
+
+namespace TvDatabase\LoginBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+
+use JMS\SecurityExtraBundle\Security\Util\String;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\component\Security\Core\User\UserInterface;
+use Symfony\component\Security\Core\User\AdvancedUserInterface;
+
+/**
+ * User
+ *
+ * @ORM\Table()
+ * @ORM\Entity
+ */
+class User implements AdvancedUserInterface, \Serializable
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="username", type="string", length=25)
+     */
+    private $username;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="salt", type="string", length=32)
+     */
+    private $salt;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=40)
+     */
+    private $password;
+    
+    /**
+     * @var string
+     * 
+     * @ORM\Column(name="email", type="string", length=60, unique=true)
+     */
+    private $email;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="isactive", type="boolean")
+     */
+    private $isActive;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="UserGroup")
+     * @ORM\JoinTable(name="Users_Groups",
+     *      joinColumns={@ORM\JoinColumn(name="userid", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="groupid", referencedColumnName="id")}
+     *      )
+     **/
+    private $groups;
+
+    public function __construct()
+    {
+    	$this->groups = new ArrayCollection();
+    }
+    
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set username
+     *
+     * @param string $username
+     * @return User
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+    
+        return $this;
+    }
+
+    /**
+     * Set salt
+     *
+     * @param string $salt
+     * @return User
+     */
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+    
+        return $this;
+    }
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     * @return User
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    
+        return $this;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return User
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set isActive
+     *
+     * @param boolean $isActive
+     * @return User
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+    
+        return $this;
+    }
+
+    /**
+     * Get isActive
+     *
+     * @return boolean 
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+    
+    /**
+     * Get username
+     * 
+     * @InheritDoc
+     * @return string
+     */
+    public function getUsername()
+    {
+    	return $this->username;
+    }
+    
+    /**
+     * Get salt
+     * 
+     * @InheritDoc
+     * @return string
+     */
+    public function getSalt()
+    {
+    	return $this->salt;
+    }
+    
+    
+    /**
+     * @InheritDoc
+     */
+    public function getPassword()
+    {
+    	return $this->password;
+    }
+    
+    /**
+     * @InheritDoc
+     */
+    public function getRoles()
+    {
+    	return $this->groups->toArray();
+    }
+    
+    /**
+     * @InheritDoc
+     */
+    public function eraseCredentials()
+    {
+    }
+    
+    /**
+     * @see \Serializable::serialize()
+     */
+    public function serialize()
+    {
+    	return serialize(array(
+    			$this->id,
+    			));
+    }
+    
+    /**
+     * @see \Serializable::unserialize()
+     */
+    public function unserialize($serialized)
+    {
+    	list(
+    			$this->id,
+    	) = unserialize($serialized);
+    }
+    
+    public function isEqualTo(UserInterface $user)
+    {
+    	return $this->id === $user->getId();
+    }
+    
+    public function isAccountNonExpired()
+    {
+    	return true;
+    }
+    
+    public function isAccountNonLocked()
+    {
+    	return true;
+    }
+    
+    public function isCredentialsNonExpired()
+    {
+    	return true;
+    }
+    
+    public function isEnabled()
+    {
+    	return $this->isActive;
+    }
+
+    /**
+     * Add groups
+     *
+     * @param \TvDatabase\LoginBundle\Entity\UserGroup $groups
+     * @return User
+     */
+    public function addGroup(\TvDatabase\LoginBundle\Entity\UserGroup $groups)
+    {
+        $this->groups[] = $groups;
+    
+        return $this;
+    }
+
+    /**
+     * Remove groups
+     *
+     * @param \TvDatabase\LoginBundle\Entity\UserGroup $groups
+     */
+    public function removeGroup(\TvDatabase\LoginBundle\Entity\UserGroup $groups)
+    {
+        $this->groups->removeElement($groups);
+    }
+
+    /**
+     * Get groups
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getGroups()
+    {
+        return $this->groups;
+    }
+}

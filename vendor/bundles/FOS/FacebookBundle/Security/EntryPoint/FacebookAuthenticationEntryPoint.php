@@ -18,6 +18,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
+use Facebook\BaseFacebook;
+
 /**
  * FacebookAuthenticationEntryPoint starts an authentication via Facebook.
  *
@@ -35,7 +37,7 @@ class FacebookAuthenticationEntryPoint implements AuthenticationEntryPointInterf
      * @param BaseFacebook $facebook
      * @param array    $options
      */
-    public function __construct(\BaseFacebook $facebook, array $options = array(), array $permissions = array())
+    public function __construct(BaseFacebook $facebook, array $options = array(), array $permissions = array())
     {
         $this->facebook = $facebook;
         $this->permissions = $permissions;

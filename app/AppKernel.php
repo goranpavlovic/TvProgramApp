@@ -23,7 +23,9 @@ class AppKernel extends Kernel
             new TvDatabase\HomeBundle\TvDatabaseHomeBundle(),
         	new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
         	new FOS\FacebookBundle\FOSFacebookBundle(),
-        	new FOS\UserBundle\FOSUserBundle(),
+        	//new FOS\UserBundle\FOSUserBundle(),
+        	//new FOS\GoogleBundle\FOSGoogleBundle(),
+            //new TvDatabase\LoginBundle\TvDatabaseLoginBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

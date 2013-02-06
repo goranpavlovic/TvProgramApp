@@ -4,8 +4,13 @@ jms_security_extra:
 
 security:
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
-        FOS\UserBundle\Model\UserInterface: sha512
+        Symfony\Component\Security\Core\User\User: 
+            algorithm: sha1
+            iterations: 1
+            encode_as_base64: false
+#        TvDatabase\LoginBundle\Entity\User: sha512
+#        FOS\UserBundle\Model\UserInterface: sha512
+        
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
@@ -17,33 +22,56 @@ security:
                 users:
                     user:  { password: userpass, roles: [ 'ROLE_USER' ] }
                     admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
-        fos_userbundle:
-            id: fos_user.user_provider.username
+#        administrators: 
+#            entity: { class: TvDatabaseLoginBundle:User }
+#        fos_userbundle:
+#            id: fos_user.user_provider.username
 
     firewalls:
-        main:
-            pattern: ^/
-            form_login:
-                provider: fos_userbundle
-                csrf_provider: form.csrf_provider
-            logout:       true
-            anonymous:    true
+#        main:
+#            pattern: ^/
+#            form_login:
+#                provider: fos_userbundle
+#                csrf_provider: form.csrf_provider
+#            logout:       true
+#            anonymous:    true
+    firewalls:
+#        tvdatabase_secured:
+#            pattern:   /api/.*
+#            security:      true
+        public: 
+            pattern:   ^/.*
+            fos_facebook:
+                app_url: "http://apps.facebook.com/tvprogramschedule/"
+                server_url: "http://www.symfony1server.com/"
+                login_path: /login
+                check_path: /login_check
+                default_target_path: /
+            anonymous: true
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        login:
-            pattern:  ^/demo/secured/login$
-            security: false
+#        login:
+#            pattern:  ^/demo/secured/login$
+#            security: false
 
         secured_area:
-            pattern:    ^/demo/secured/
-            form_login:
-                check_path: /demo/secured/login_check
-                login_path: /demo/secured/login
-            logout:
-                path:   /demo/secured/logout
-                target: /demo/
+            pattern: ^/
+            anonymous: ~
+            form_login: 
+                 login_path: /login
+                 check_path: /login_check
+            #pattern:    ^/demo/secured/
+            #form_login:
+            #    check_path: /demo/secured/login_check
+            #    login_path: /demo/secured/login
+            #logout:
+            #    path:   /demo/secured/logout
+            #    target: /demo/
+        admin_area: 
+            pattern: ^/admin
+            http_basic: ~
             #anonymous: ~
             #http_basic:
             #    realm: "Secured Demo Area"
@@ -51,7 +79,9 @@ security:
     access_control:
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
         #- { path: ^/_internal/secure, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/secured/.*, role: [IS_AUTHENTICATED_FULLY] } # This is the route secured with fos_facebook
+        - { path: ^/.*, role: [IS_AUTHENTICATED_ANONYMOUSLY] }
+        #- { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        #- { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        #- { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        #- { path: ^/admin, role: ROLE_ADMIN }

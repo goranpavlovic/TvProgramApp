@@ -9,6 +9,7 @@ $loader->add('Pagerfanta', __DIR__.'/../vendor/pagerfanta/src');
 
 $loader->add('FOS', __DIR__.'/../vendor/bundles');
 $loader->add('Facebook', __DIR__.'/../vendor/facebook/src');
+$loader->add('GoogleApi', __DIR__.'/../vendor/google/src');
 
 // intl
 if (!function_exists('intl_get_error_code')) {

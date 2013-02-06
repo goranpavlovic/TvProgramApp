@@ -24,6 +24,8 @@ use Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProvid
 
 use FOS\FacebookBundle\Security\Authentication\Token\FacebookUserToken;
 
+use Facebook\BaseFacebook;
+
 class FacebookProvider implements AuthenticationProviderInterface
 {
     /**
@@ -35,7 +37,7 @@ class FacebookProvider implements AuthenticationProviderInterface
     protected $userChecker;
     protected $createIfNotExists;
 
-    public function __construct($providerKey, \BaseFacebook $facebook, UserProviderInterface $userProvider = null, UserCheckerInterface $userChecker = null, $createIfNotExists = false)
+    public function __construct($providerKey, BaseFacebook $facebook, UserProviderInterface $userProvider = null, UserCheckerInterface $userChecker = null, $createIfNotExists = false)
     {
         if (null !== $userProvider && null === $userChecker) {
             throw new \InvalidArgumentException('$userChecker cannot be null, if $userProvider is not null.');

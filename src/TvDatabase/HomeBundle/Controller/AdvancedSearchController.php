@@ -2,6 +2,8 @@
 
 namespace TvDatabase\HomeBundle\Controller;
 
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
 use Doctrine\ORM\Query\ResultSetMapping;
 
 use Facebook\Facebook;
@@ -24,6 +26,7 @@ class AdvancedSearchController extends Controller
 {
     public function advancedSearchAction()
     {
+    	/*
     	$locale = $this->getRequest()->getLocale();
     	
     	$session = $this->getRequest()->getSession();
@@ -47,10 +50,49 @@ class AdvancedSearchController extends Controller
                 'televisions' => $tvNameArray,
         		'_locale' => $locale
         ));
+        */
+    	$token = $this->get('security.context')->getToken();
+    	if($token != null)
+    	{
+    		$user = $token->getUser();
+    		//var_dump($token);
+    		if($user != null)
+    		{
+    			return new Response($user);
+    		}
+    		else
+    		{
+    			return new Response("User not null");
+    		}
+    	}
+    	else 
+    	{
+    		return new Response("Token null");
+    	}
+    	//$config = Array();
+    	//$config['appId'] = '1060810547390883';
+  		//$config['secret'] = '58bfdc57e57ab87796ddb788bb4e0b67';
+  		//$config['fileUpload'] = false; // optional
+    	
+    	//$facebook = new Facebook($config);
+    	
+    	//$params = array(
+    	//		'scope' => 'read_stream, friends_likes',
+    	//		'redirect_uri' => 'http://www.symfony1server.com/login_check'
+    	//);
+    	
+    	//$loginUrl = $facebook->getLoginUrl($params);
+    	
+    	//$this->redirect($loginUrl);
+    	
+    	//return new RedirectResponse($loginUrl);
+    	
+    	//if($facebook->getUser() != null)
+    	//	return new Response($facebook->getUser()->getUsername());
+    	//else return new Response("User Null!!!");
     }
     public function advancedSearchResponseAction(Request $request, $page=null)
     {
-    	
     	$locale = $this->getRequest()->getLocale();
     	
     	$session = $this->getRequest()->getSession();

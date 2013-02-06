@@ -1,0 +1,8 @@
+services:
+  tvdatabase.security.authentication.provider:
+    class:  TvDatabase\LoginBundle\Security\Authentication\Provider\TvDatabaseProvider
+    arguments: ['', %kernel.cache_dir%/security/nonces]
+
+  tvdatabase.security.authentication.listener:
+    class:  TvDatabase\LoginBundle\Security\Firewall\TvDatabaseListener
+    arguments: [@security.context, @security.authentication.manager]

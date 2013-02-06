@@ -1,0 +1,5 @@
+services:
+    security.authentication.factory.tvdatabase:
+        class:  TvDatabase\LoginBundle\DependencyInjection\Security\Factory\TvDatabaseFactory
+        tags:
+            - { name: security.listener.factory }
