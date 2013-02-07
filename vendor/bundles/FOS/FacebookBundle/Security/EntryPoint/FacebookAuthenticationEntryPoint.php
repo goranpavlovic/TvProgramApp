@@ -49,11 +49,13 @@ class FacebookAuthenticationEntryPoint implements AuthenticationEntryPointInterf
      */
     public function start(Request $request, AuthenticationException $authException = null)
     {	
+    	/*
     	$file = fopen("/var/www/logs/log.txt", "a+");
     	fwrite($file,"Entry Point\n");
     	if($authException != null)
     		fwrite($file, $authException->__toString());
     	fclose($file);
+    	*/
     	
         $redirect_to_facebook = $this->options->get('redirect_to_facebook_login');
         if ($redirect_to_facebook == false) {
