@@ -29,7 +29,7 @@ use Facebook\BaseFacebook;
 class FacebookProvider implements AuthenticationProviderInterface
 {
     /**
-     * @var \BaseFacebook
+     * @var Facebook\BaseFacebook
      */
     protected $facebook;
     protected $providerKey;
@@ -47,7 +47,7 @@ class FacebookProvider implements AuthenticationProviderInterface
             throw new \InvalidArgumentException('The $userProvider must implement UserManagerInterface if $createIfNotExists is true.');
         }
 
-        $this->providerKey = $providerKey;
+        //$this->providerKey = $providerKey;
         $this->facebook = $facebook;
         $this->userProvider = $userProvider;
         $this->userChecker = $userChecker;
@@ -57,6 +57,7 @@ class FacebookProvider implements AuthenticationProviderInterface
     public function authenticate(TokenInterface $token)
     {
         if (!$this->supports($token)) {
+        	
             return null;
         }
 
@@ -64,9 +65,12 @@ class FacebookProvider implements AuthenticationProviderInterface
         if ($user instanceof UserInterface) {
             $this->userChecker->checkPostAuth($user);
 
-            $newToken = new FacebookUserToken($this->providerKey, $user, $user->getRoles());
+            $newToken = new FacebookUserToken($this->getKey(), $user, $user->getRoles());
             $newToken->setAttributes($token->getAttributes());
 
+            $file = fopen("/var/www/logs/log.txt","a+");
+            fwrite($file, "created new token \n");
+            fclose($file);
             return $newToken;
         }
 
@@ -74,7 +78,12 @@ class FacebookProvider implements AuthenticationProviderInterface
             if ($uid = $this->facebook->getUser()) {
                 $newToken = $this->createAuthenticatedToken($uid);
                 $newToken->setAttributes($token->getAttributes());
-
+                
+                $file = fopen("/var/www/logs/log.txt","a+");
+                fwrite($file, "Authentification token for: " . $uid . "\n");
+                fwrite($file, var_export($newToken, true));
+                fclose($file);
+                
                 return $newToken;
             }
         } catch (AuthenticationException $failed) {
@@ -88,13 +97,14 @@ class FacebookProvider implements AuthenticationProviderInterface
 
     public function supports(TokenInterface $token)
     {
-        return $token instanceof FacebookUserToken && $this->providerKey === $token->getProviderKey();
+        return $token instanceof FacebookUserToken && $this->getKey() === $token->getProviderKey();
     }
 
     protected function createAuthenticatedToken($uid)
     {
         if (null === $this->userProvider) {
-            return new FacebookUserToken($this->providerKey, $uid);
+        	
+            return new FacebookUserToken($this->getKey(), $uid);
         }
 
         try {
@@ -111,7 +121,11 @@ class FacebookProvider implements AuthenticationProviderInterface
         if (!$user instanceof UserInterface) {
             throw new \RuntimeException('User provider did not return an implementation of user interface.');
         }
-
-        return new FacebookUserToken($this->providerKey, $user, $user->getRoles());
+        return new FacebookUserToken($this->getKey() , $user, $user->getRoles());
+    }
+    
+    public function getKey() 
+    {
+    	return 'fos_facebook';
     }
 }

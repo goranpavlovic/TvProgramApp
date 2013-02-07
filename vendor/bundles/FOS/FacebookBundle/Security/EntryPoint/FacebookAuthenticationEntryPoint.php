@@ -48,8 +48,7 @@ class FacebookAuthenticationEntryPoint implements AuthenticationEntryPointInterf
      * {@inheritdoc}
      */
     public function start(Request $request, AuthenticationException $authException = null)
-    {
-
+    {	
         $redirect_to_facebook = $this->options->get('redirect_to_facebook_login');
         if ($redirect_to_facebook == false) {
             $loginPath = $this->options->get('login_path');

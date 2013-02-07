@@ -51,18 +51,21 @@ class AdvancedSearchController extends Controller
         		'_locale' => $locale
         ));
         */
+    	$user = $this->getUser();
+    	
     	$token = $this->get('security.context')->getToken();
     	if($token != null)
     	{
     		$user = $token->getUser();
-    		//var_dump($token);
+    		//$roles = $token->getRoles();
+    		//var_dump($user);
     		if($user != null)
     		{
     			return new Response($user);
     		}
     		else
     		{
-    			return new Response("User not null");
+    			return new Response("User null");
     		}
     	}
     	else 

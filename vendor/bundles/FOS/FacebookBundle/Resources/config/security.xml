@@ -11,9 +11,9 @@
         </service>
 
         <service id="fos_facebook.security.authentication.listener"
-                 class="FOS\FacebookBundle\Security\Firewall\FacebookListener"
-                 parent="security.authentication.listener.abstract"
-                 abstract="true">
+                 class="FOS\FacebookBundle\Security\Firewall\FacebookListener">
+                 <argument type="service" id="security.context"></argument>
+                 <argument type="service" id="fos_facebook.auth"></argument>
         </service>
 
         <service id="fos_facebook.security.authentication.entry_point" class="FOS\FacebookBundle\Security\EntryPoint\FacebookAuthenticationEntryPoint" public="false" abstract="true">

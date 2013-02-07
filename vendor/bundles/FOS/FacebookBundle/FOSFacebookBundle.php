@@ -19,6 +19,9 @@ class FOSFacebookBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {
+    	$file = fopen("/var/www/logs/log.txt","a+");
+    	fwrite($file, "FOS Bundle built \n");
+    	fclose($file);
         parent::build($container);
 
         $extension = $container->getExtension('security');

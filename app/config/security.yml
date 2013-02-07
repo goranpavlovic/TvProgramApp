@@ -27,7 +27,7 @@ security:
 #        fos_userbundle:
 #            id: fos_user.user_provider.username
 
-    firewalls:
+#    firewalls:
 #        main:
 #            pattern: ^/
 #            form_login:
