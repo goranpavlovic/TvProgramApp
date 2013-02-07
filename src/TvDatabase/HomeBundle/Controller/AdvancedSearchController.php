@@ -53,25 +53,26 @@ class AdvancedSearchController extends Controller
         */
     	$user = $this->getUser();
     	
+    	$report = "User: " . $user . "\n";
+    	
     	$token = $this->get('security.context')->getToken();
     	if($token != null)
     	{
     		$user = $token->getUser();
-    		//$roles = $token->getRoles();
-    		//var_dump($user);
     		if($user != null)
     		{
-    			return new Response($user);
+    			$report =  $report . "Security user : " . $user . "\n";
     		}
     		else
     		{
-    			return new Response("User null");
+    			$report = $report . "Security user null!!!\n";
     		}
     	}
     	else 
     	{
-    		return new Response("Token null");
+    		$report = $report . "Token null!!!\n";
     	}
+    	return new Response($report);
     	//$config = Array();
     	//$config['appId'] = '1060810547390883';
   		//$config['secret'] = '58bfdc57e57ab87796ddb788bb4e0b67';

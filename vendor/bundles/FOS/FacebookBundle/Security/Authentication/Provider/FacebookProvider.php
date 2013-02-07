@@ -21,7 +21,6 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface;
-
 use FOS\FacebookBundle\Security\Authentication\Token\FacebookUserToken;
 
 use Facebook\BaseFacebook;
@@ -84,7 +83,7 @@ class FacebookProvider implements AuthenticationProviderInterface
             throw new AuthenticationException($failed->getMessage(), null, (int)$failed->getCode(), $failed);
         }
 
-        throw new AuthenticationException('The Facebook user could not be retrieved from the session.');
+        //throw new AuthenticationException('The Facebook user could not be retrieved from the session.');
     }
 
     public function supports(TokenInterface $token)

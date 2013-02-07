@@ -19,7 +19,8 @@ class FacebookUserToken extends AbstractToken
 
     public function __construct($providerKey, $uid = '', array $roles = array())
     {
-        parent::__construct($roles);
+    	$newRoles = Array("IS_AUTHENTICATED_ANONYMOUSLY");
+        parent::__construct($newRoles);
 
         $this->setUser($uid);
 
