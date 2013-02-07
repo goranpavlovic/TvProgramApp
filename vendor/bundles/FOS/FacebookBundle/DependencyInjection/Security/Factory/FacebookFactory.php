@@ -22,10 +22,7 @@ use Symfony\Component\Config\Definition\Builder\NodeDefinition;
 //class FacebookFactory extends AbstractFactory
 class FacebookFactory implements SecurityFactoryInterface {
 	public function __construct() {
-		$file = fopen("/var/www/logs/log.txt", "a+");
-		fwrite($file, "Factory constructed \n");
-		fclose($file);
-
+		
 		/*
 		$this->addOption('display', 'page');
 		$this->addOption('app_url');

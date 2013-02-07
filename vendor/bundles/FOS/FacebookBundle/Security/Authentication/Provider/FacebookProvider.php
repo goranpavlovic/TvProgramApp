@@ -67,10 +67,7 @@ class FacebookProvider implements AuthenticationProviderInterface
 
             $newToken = new FacebookUserToken($this->getKey(), $user, $user->getRoles());
             $newToken->setAttributes($token->getAttributes());
-
-            $file = fopen("/var/www/logs/log.txt","a+");
-            fwrite($file, "created new token \n");
-            fclose($file);
+            
             return $newToken;
         }
 
@@ -78,11 +75,6 @@ class FacebookProvider implements AuthenticationProviderInterface
             if ($uid = $this->facebook->getUser()) {
                 $newToken = $this->createAuthenticatedToken($uid);
                 $newToken->setAttributes($token->getAttributes());
-                
-                $file = fopen("/var/www/logs/log.txt","a+");
-                fwrite($file, "Authentification token for: " . $uid . "\n");
-                fwrite($file, var_export($newToken, true));
-                fclose($file);
                 
                 return $newToken;
             }
