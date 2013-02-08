@@ -1,0 +1,22 @@
+Greetings!
+
+Here is todays program schedule as you requested:
+<table>
+	<tr>
+		<th>{% trans %}TV Name{% endtrans %}</th>
+		<th>{% trans %}Time{% endtrans %}</th>
+		<th>{% trans %}Name{% endtrans %}</th>
+	</tr>
+{% for program in programs %}
+<tr>
+	<td>{{ program.tv.TvName }}</td>
+	<td>{{ program.datetime.format('H:i') }}</td>
+	<td>{% for attribute in program.attributes %}
+			{% if attribute.AttributeId == 7 and attribute.AttributeSetId == 1 %} 
+				{{ attribute.Value }} 
+			{% endif %}
+		{% endfor %}
+	</td>
+</tr>
+{% endfor %}
+</table>

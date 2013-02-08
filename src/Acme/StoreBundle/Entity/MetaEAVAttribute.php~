@@ -204,4 +204,37 @@ class MetaEAVAttribute
     {
         return $this->entitySets;
     }
+
+    /**
+     * Add values
+     *
+     * @param \Acme\StoreBundle\Entity\EAVAttributeValue $values
+     * @return MetaEAVAttribute
+     */
+    public function addValue(\Acme\StoreBundle\Entity\EAVAttributeValue $values)
+    {
+        $this->values[] = $values;
+    
+        return $this;
+    }
+
+    /**
+     * Remove values
+     *
+     * @param \Acme\StoreBundle\Entity\EAVAttributeValue $values
+     */
+    public function removeValue(\Acme\StoreBundle\Entity\EAVAttributeValue $values)
+    {
+        $this->values->removeElement($values);
+    }
+
+    /**
+     * Get values
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getValues()
+    {
+        return $this->values;
+    }
 }
