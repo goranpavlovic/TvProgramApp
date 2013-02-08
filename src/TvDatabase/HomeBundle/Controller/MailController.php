@@ -16,13 +16,6 @@ class MailController extends Controller
 {
 	public function mailAction()
 	{
-		$em = $this->getDoctrine()->getManager();
-		$catalogue = $em->getRepository('AcmeStoreBundle:MetaEAVEntityType');
-		$query = $em->createQuery('SELECT e FROM AcmeStoreBundle:MetaEAVEntityType as e');
-		
-		$results = $query->getResult();
-		
-		$locale = $this->getRequest()->getLocale();
 		$message = \Swift_Message::newInstance()
 				->setSubject("Greetings!")
 				->setFrom("admin@symfonyserver.com")
