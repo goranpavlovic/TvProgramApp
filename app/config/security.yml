@@ -46,7 +46,12 @@ security:
             fos_facebook:
                 app_url: "http://apps.facebook.com/tvprogramschedule/"
                 server_url: "http://www.symfony1server.com/"
-                
+                login_path: /login
+                check_path: /login_check
+                default_target_path: /
+            logout: 
+                path: /logout
+                target: /
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false

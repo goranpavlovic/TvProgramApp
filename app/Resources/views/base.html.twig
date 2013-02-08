@@ -10,20 +10,58 @@
 	{% block stylesheets %}
 	{% endblock %}
 	<script type='text/javascript'>
-		function goLogIn()
-		{
-		        window.location = "/{{_locale}}";
-		}
-		function onFbInit() {
-	        if (typeof(FB) != 'undefined' && FB != null ) {              
+		function goLogIn(){
+	        window.location.href = "{{ path("_security_check") }}";
+	    }
+
+	    function onFbInit() {
+		    
+	        if (typeof(FB) != 'undefined' && FB != null ) {
+
+	        	FB.Event.subscribe('auth.login', function(response){
+		            
+		            if (response.session || response.authResponse) {
+		                //alert("auth status change login");
+	                    //setTimeout(goLogIn, 500);
+	                } else {
+		                //alert("auth status change logout");
+	                    window.location.href = "{{ path("_security_logout") }}";
+	                }
+	            });
+				
+	        	//FB.Event.subscribe('auth.logout', function(response){
+		            //alert("auth.logout");
+	            //});
+	        	
+	        	//FB.Event.subscribe('auth.authResponseChange', function(response){
+		            //alert("auth response");
+	            //});
+	        	
 	            FB.Event.subscribe('auth.statusChange', function(response) {
+
+		                
 	                if (response.session || response.authResponse) {
+		                //alert("auth status change login");
 	                    setTimeout(goLogIn, 500);
 	                } else {
-	                    window.location.href = "/{{_locale}}";
+		                //alert("auth status change logout");
+	                    window.location.href = "{{ path("_security_logout") }}";
 	                }
 	            });
 	        }
+	        else
+	        {
+		        alert("FB not initialized");
+		    }
+	    }
+	    function objToString (obj) {
+	        var str = '';
+	        for (var p in obj) {
+	            if (obj.hasOwnProperty(p)) {
+	                str += p + '::' + obj[p] + '\n';
+	            }
+	        }
+	        return str;
 	    }
 	</script>
 	{% block script %}

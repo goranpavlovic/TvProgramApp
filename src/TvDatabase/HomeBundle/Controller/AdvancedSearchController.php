@@ -26,7 +26,29 @@ class AdvancedSearchController extends Controller
 {
     public function advancedSearchAction()
     {
-    	/*
+    	$user = $this->getUser();
+    	 
+    	$report = "User: " . $user . "\n";
+    	 
+    	$token = $this->get('security.context')->getToken();
+    	if($token != null)
+    	{
+    		$user = $token->getUser();
+    		if($user != null)
+    		{
+    			$report =  $report . "Security user : " . $user . "\n";
+    		}
+    		else
+    		{
+    			$report = $report . "Security user null!!!\n";
+    		}
+    	}
+    	else
+    	{
+    		$report = $report . "Token null!!!\n";
+    	}
+    	
+    	
     	$locale = $this->getRequest()->getLocale();
     	
     	$session = $this->getRequest()->getSession();
@@ -48,32 +70,15 @@ class AdvancedSearchController extends Controller
         return $this->render('TvDatabaseHomeBundle:Default:advsearchform.html.twig', array(
                 'types' => $typeNameArray,
                 'televisions' => $tvNameArray,
-        		'_locale' => $locale
+        		'_locale' => $locale,
+        		'report' => $report
         ));
-        */
-    	$user = $this->getUser();
+        /*
     	
-    	$report = "User: " . $user . "\n";
     	
-    	$token = $this->get('security.context')->getToken();
-    	if($token != null)
-    	{
-    		$user = $token->getUser();
-    		if($user != null)
-    		{
-    			$report =  $report . "Security user : " . $user . "\n";
-    		}
-    		else
-    		{
-    			$report = $report . "Security user null!!!\n";
-    		}
-    	}
-    	else 
-    	{
-    		$report = $report . "Token null!!!\n";
-    	}
     	return new Response($report);
-    	//$config = Array();
+    	*/
+        //$config = Array();
     	//$config['appId'] = '1060810547390883';
   		//$config['secret'] = '58bfdc57e57ab87796ddb788bb4e0b67';
   		//$config['fileUpload'] = false; // optional

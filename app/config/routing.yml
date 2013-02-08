@@ -49,9 +49,11 @@ acme_store:
     
 _security_check: 
     pattern: /login_check
+    defaults: { _controller: TvDatabaseHomeBundle:Login:login }
 
 _security_logout:
     pattern: /logout
+    defaults: { _controller: TvDatabaseHomeBundle:Login:logout}
 
 # Internal routing configuration to handle ESI
 # ****** WARNING ******

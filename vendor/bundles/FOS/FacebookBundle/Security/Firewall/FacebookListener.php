@@ -49,35 +49,21 @@ class FacebookListener implements ListenerInterface {
 	public function handle(GetResponseEvent $event) {
 		// TODO: Auto-generated method stub
 		try
-		{
-			/*
-			$file = fopen("/var/www/logs/log.txt", "a+");
-			fwrite($file,"Try to authenticate!!!\n");
-			fclose($file);
-			*/
+		{	
 			$authToken =  $this->authenticationManager
-				->authenticate(new FacebookUserToken($this->getKey()), Array("IS_AUTHENTICATED_ANONYMOUSLY"));
+				->authenticate(new FacebookUserToken($this->getKey()));
 			$this->securityContext->setToken($authToken);
+			
 		}
 		catch (AuthenticationException $failed) 
 		{
 			// ... you might log something here
-			/*
-			$file = fopen("/var/www/logs/log.txt", "a+");
-			fwrite($file,"Authentication Exception in Listener!!!\n");
-			fclose($file);
-			*/
 			$response = new Response();
 			$response->setStatusCode(403);
 			$event->setResponse($response);
 		}
 		catch (Exception $failed)
 		{
-			/*
-			$file = fopen("/var/www/logs/log.txt", "a+");
-			fwrite($file,"Exception in Listener!!!\n");
-			fclose($file);
-			*/
 		}
 	}
 
