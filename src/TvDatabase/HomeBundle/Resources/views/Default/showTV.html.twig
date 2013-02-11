@@ -52,10 +52,16 @@
 			<tr>
 				<th>{{ tv.TvName }}</th>
 			</tr>
-			{% for attribute in results %}
+			{% for program in results %}
 				<tr>
-					<td>{{ attribute.time }}</td>
-					<td><a href="/{{ _locale }}/show/{{attribute.id}}">{{ attribute.name }}</td>
+					<td>{{ program.datetime.format('H:i')}}</td>
+					<td><a href="/{{ _locale }}/show/{{program.EntityId}}">
+					{% for attribute in program.attributes %}
+						{% if attribute.AttributeId == 7 and attribute.AttributeSetId == 1 %} 
+							{{ attribute.Value }} 
+						{% endif %}
+					{% endfor %}
+					</td>
 				</tr>			
 			{% endfor %}
 		</table>

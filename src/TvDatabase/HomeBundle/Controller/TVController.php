@@ -40,30 +40,16 @@ class TVController extends Controller
             $today = $date;
         $em = $this->getDoctrine()->getManager();
         $tv = $em->getRepository('AcmeStoreBundle:TVStation')->find($id);
-        $query = $em->createQuery('SELECT ent from AcmeStoreBundle:EAVEntity as ent
+        $query = $em->createQuery('SELECT ent,a from AcmeStoreBundle:EAVEntity as ent JOIN ent.attributes a
 				WHERE ent.Datetime < :preDate AND ent.Datetime > :postDate
 				AND ent.TvStation = :tv ORDER BY ent.Datetime ASC')
     				->setParameters(array(
     				        'postDate' => $today . ' 00:00:00',
     				        'preDate' => $today . ' 24:00:00',
     				        'tv' => $tv->getTvId()));
-    				$results = array();
-    				foreach($query->getResult() as $result)
-    				{
-    				    $nameId = $em->getRepository('AcmeStoreBundle:MetaEAVAttribute')
-    				    ->findOneBy(array('AttributeName' => 'Name'));
-    				    $name = $em->getRepository('AcmeStoreBundle:EAVAttributeValue')
-    				    ->findOneBy(array('AttributeId' => $nameId->getAttributeId(),
-    				            'entity' => $result->getEntityId()));
-    				    $resName = '';
-    				    if($name)
-    				        $resName = $name->getValue();
-    				    else
-    				        $resName = 'Name not in database';
-    				    array_push($results,array('time' => $result->getDatetime()->format('H:i'),
-    				    'name' => $resName,
-    				    'id' => $result->getEntityId()));
-    				}
+    				
+    				$results = $query->getResult();
+    				
     				$locale = $this->getRequest()->getLocale();
     				$text = $this->get('translator')->trans('Translate') . ' ' . $locale;
     				$tomorrow = date_add(date_create($today), date_interval_create_from_date_string('1 day'))->format('Y-m-d');
