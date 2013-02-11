@@ -20,17 +20,18 @@ class SidebarController extends Controller
 		
 		$today = date_create(date('Y-m-d H:i:s'));
 		
-		$query = $em->createQuery('SELECT e FROM AcmeStoreBundle:EAVEntity e JOIN e.entityType et WHERE
+		$query = $em->createQuery('SELECT e, et, a FROM AcmeStoreBundle:EAVEntity e JOIN e.entityType et JOIN e.attributes a WHERE
 									e.Datetime > :pre AND e.Datetime < :post 
-									AND et.EntityTypeName = :type ORDER BY e.TvStation ASC, e.Datetime DESC')
+									AND et.EntityTypeName = :type ORDER BY e.TvStation ASC, e.Datetime ASC')
 							->setParameters(array(   'pre' => $today->format('Y-m-d') . ' 00-00-00',  
 													'post' => $today->format('Y-m-d') . ' 23-59-59',
 													'type' => $EntityType));
 							
-		$locale = $this->getRequest()->getLocale();
+		$results = $query->getResult();
 		
+		$locale = $this->getRequest()->getLocale();
 		return $this->render('TvDatabaseHomeBundle:Default:sidebar.html.twig', array(
 									'_locale' => $locale,
-									'results' => $query->getResult()));
+									'results' => $results));
 	}
 }

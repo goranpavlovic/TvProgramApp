@@ -1,14 +1,16 @@
-<table>
-	<tr>
-		<th>{% trans %} TV {% endtrans %}</th>
-		<th>{% trans %} Time {% endtrans %}</th>
-		<th>{% trans %} Broadcast {% endtrans %}</th>
+
+
+<table id=sidebarTable class='sidebarTable'>
+	<tr class='sidebarTr'>
+		<th class='sidebarTd'>{% trans %} TV {% endtrans %}</th>
+		<th class='sidebarTd'>{% trans %} Time {% endtrans %}</th>
+		<th class='sidebarTd'>{% trans %} Broadcast {% endtrans %}</th>
 	</tr>
 {% for result in results %}
-	<tr> 
-		<td>{{ result.tv.TvName }}</td>
-		<td>{{ result.datetime.format('H:i') }}</td>
-		<td>{% for attribute in result.attributes %}
+	<tr class='sidebarTr'> 
+		<td class='sidebarTd'>{{ result.tv.TvName }}</td>
+		<td class='sidebarTd'>{{ result.datetime.format('H:i') }}</td>
+		<td class='sidebarTd'>{% for attribute in result.attributes %}
 					{% if attribute.AttributeId == 7 and attribute.AttributeSetId == 1 %} 
 						{{ attribute.Value }} 
 					{% endif %}
