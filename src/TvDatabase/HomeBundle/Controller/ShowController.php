@@ -17,17 +17,22 @@ class ShowController extends Controller
     public function showAction($id)
     {
         $em = $this->getDoctrine()->GetManager();
-        $show = $em->getRepository('AcmeStoreBundle:EAVEntity')->find($id);
-        $result = array();
-        foreach($show->getAttributes() as $attribute)
-        {
-            $name = $em->getRepository('AcmeStoreBundle:MetaEAVAttribute')->find($attribute->getAttributeId());
-            array_push($result, array('name' => $name->getAttributeName(),'value' => $attribute->getValue()));
-        }
+        //$show = $em->getRepository('AcmeStoreBundle:EAVEntity')->find($id);
+        
+        $query = $em->createQuery('SELECT e,a,am from AcmeStoreBundle:EAVEntity as e JOIN e.attributes as a
+									JOIN a.attributeMeta am
+        							WHERE e.EntityId = :id')->setParameter('id', $id);
+        
+        $result = $query->getResult();
+//         $result = array();
+//         foreach($show->getAttributes() as $attribute)
+//         {
+//             $name = $em->getRepository('AcmeStoreBundle:MetaEAVAttribute')->find($attribute->getAttributeId());
+//             array_push($result, array('name' => $name->getAttributeName(),'value' => $attribute->getValue()));
+//         }
         $locale = $this->getRequest()->getLocale();
         return $this->render('TvDatabaseHomeBundle:Default:show.html.twig', 
-        		array(	'attributes' => $show->getAttributes(),
-        				'entity' => $show,
+        		array(    'entity' => $result[0],
         				 '_locale' => $locale));
     
     }
@@ -49,7 +54,8 @@ class ShowController extends Controller
 	    		return $this->render('TvDatabaseHomeBundle:Default:editshow.html.twig',
 	    				array('attribute' => $attribute,
 	    						'_locale' => $locale,
-	    						'new' => $new
+	    						'new' => $new,
+	    						'entity' => $attribute->getEntity()
 	    				));
 	    	}
 	    	else
@@ -57,7 +63,8 @@ class ShowController extends Controller
 	    		$locale = $this->getRequest()->getLocale();
 	    		return $this->render('TvDatabaseHomeBundle:Default:editshow.html.twig',
 	    				array('attribute' => $attribute,
-	    						'_locale' => $locale
+	    						'_locale' => $locale,
+	    						'entity' => $attribute->getEntity()
 	    				));
 	    	}
     	}
@@ -104,7 +111,8 @@ class ShowController extends Controller
     			$locale = $this->getRequest()->getLocale();
     			return $this->render('TvDatabaseHomeBundle:Default:editshow.html.twig',
     					array(	'_locale' => $locale,
-    							'attribute' => $attr[0]
+    							'attribute' => $attr[0],
+    							'entity' => $attr[0]->getEntity()
     					));
     	}
     	else
@@ -132,7 +140,8 @@ class ShowController extends Controller
     		$locale = $this->getRequest()->getLocale();
     		return $this->render('TvDatabaseHomeBundle:Default:editshow.html.twig',
     				array(	'_locale' => $locale,
-    						'attribute' => $att->getValueId()
+    						'attribute' => $att->getValueId(),
+    						'entity' => $attr[0]->getEntity()
     				));
     	}
     }

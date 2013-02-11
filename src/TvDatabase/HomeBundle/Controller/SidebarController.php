@@ -20,7 +20,8 @@ class SidebarController extends Controller
 		
 		$today = date_create(date('Y-m-d H:i:s'));
 		
-		$query = $em->createQuery('SELECT e, et, a FROM AcmeStoreBundle:EAVEntity e JOIN e.entityType et JOIN e.attributes a WHERE
+		$query = $em->createQuery('SELECT e, et, a, t FROM AcmeStoreBundle:EAVEntity e JOIN e.entityType et JOIN e.attributes a 
+									JOIN e.tv t WHERE
 									e.Datetime > :pre AND e.Datetime < :post 
 									AND et.EntityTypeName = :type ORDER BY e.TvStation ASC, e.Datetime ASC')
 							->setParameters(array(   'pre' => $today->format('Y-m-d') . ' 00-00-00',  

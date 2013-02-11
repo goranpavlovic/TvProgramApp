@@ -83,7 +83,7 @@ class TVController extends Controller
     				->setParameters(array(
     				        'postDate' => $today . ' 00:00:00',
     				        'preDate' => $today . ' 24:00:00',
-    				        'tv' => $tv->getTvId()));
+    				        'tv' => $id));//$tv->getTvId()));
     				
     				$results = $query->getResult();
     				
