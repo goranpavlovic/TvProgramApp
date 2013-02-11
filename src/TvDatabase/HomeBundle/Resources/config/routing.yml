@@ -82,4 +82,8 @@ tv_database_add_attribute:
     requirements: 
         _locale: en|sr|cyrl
         
-        
+tv_database_sidebar:
+    pattern: /{_locale}/sidebar/{EntityType}
+    defaults: { _controller: TvDatabaseHomeBundle:Sidebar:show, _locale: en}
+
+    
