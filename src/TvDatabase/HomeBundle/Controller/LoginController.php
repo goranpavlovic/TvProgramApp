@@ -48,12 +48,14 @@ class LoginController extends Controller
 		}
 		catch(FacebookApiException $e)
 		{
+			return $this->forward('TvDatabaseHomeBundle:Default:index');
 		}
 		catch (Exception $e)
 		{
-			
+			return $this->forward('TvDatabaseHomeBundle:Default:index');
 		}
-		return new RedirectResponse("/");
+		//return new RedirectResponse("/");
+		return $this->forward('TvDatabaseHomeBundle:Default:index');
 	}
 	public function logoutAction()
 	{
