@@ -35,18 +35,27 @@
 	</div-->
 	<div class="post">
 							<!--h2 class="title"><a href="#">Tv Stations</a></h2-->
-							<div class="entry">
-								<ul class='tvMenu'>
-									{% for station in tvStations %}
-										<li class='tvmenyItem'><a href="/{{ _locale }}/tv/{{station.TvID}}">
-											<span class='tventry'>{{station.TvName}}</span></a>
-											{% if loggedin == true %}
-												<input style='float:right;' name='{{ station.TvID }}' type="checkbox" />
-											{% endif %}
-										</li>
-									{% endfor %}
-								<ul>
-							</div>
+							<form action='/{{ _locale }}/tvemailupdated' method='post'>
+								<div class="entry">
+									<ul class='tvMenu'>
+										{% for station in tvStations %}
+											<li class='tvmenyItem'><a href="/{{ _locale }}/tv/{{station.TvID}}">
+												<span class='tventry'>{{station.TvName}}</span></a>
+												{% if loggedin == true %}
+													<input style='float:right;' name='{{ station.TvID }}' type="checkbox" 
+													
+														{{ attribute(statusArray, station.TvID) }}
+													
+													/>
+												{% endif %}
+											</li>
+										{% endfor %}
+									<ul>
+								</div>
+								{% if loggedin == true %}
+									<input style='float:right;' type="submit" value='Submit changes' />
+								{% endif %}
+							</form>
 						</div>
 {% endblock %}
 

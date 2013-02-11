@@ -12,16 +12,21 @@ use Symfony\Component\HttpFoundation\Request;
 
 use Symfony\Component\HttpFoundation\Session\Session;
 
+use Acme\StoreBundle\Entity\User;
+use Acme\StoreBundle\Entity\TVStation;
+
 class TVController extends Controller
 {
     public function tvStationsAction()
     {
-    
         $tvStation = $this->getDoctrine()->getRepository('AcmeStoreBundle:TVStation')->findAll();
+        $users = $this->getDoctrine()->getRepository('AcmeStoreBundle:User');
         $nameArray = array();
+        $checkStatusArray = Array();
         foreach($tvStation as $tv)
         {
             array_push($nameArray, $tv->getTvName());
+            $checkStatusArray[$tv->getTvID()] = '';
         }
         $locale = $this->getRequest()->getLocale();
         $loggedIn = false;
@@ -32,12 +37,26 @@ class TVController extends Controller
         	if($user != null)
         	{
         		if($user !== 'anon.')
+        		{
         			$loggedIn = true;
-        		else $loggedIn = false;
+        			
+        			$databaseUser = $users->find($user);
+        			$counter = 0;
+        			$userTvStations = $databaseUser->getTvStations();
+        			foreach($userTvStations as $tv)
+        			{
+        				$checkStatusArray[$tv->getTvID()] = 'checked';
+        			}
+        		}
+        		else 
+        		{
+        			$loggedIn = false;
+        		}
         	}
         }
         return $this->render('TvDatabaseHomeBundle:Default:stations.html.twig',
         		 array( 'tvStations' => $tvStation, 
+        		 		'statusArray' => $checkStatusArray,
         		 		'_locale' => $locale,
         		 		'loggedin' => $loggedIn
         		 		));
@@ -75,5 +94,52 @@ class TVController extends Controller
     				$date = array('today' => $today, 'tomorrow' => $tomorrow, 'yesterday' => $yesterday);
     				return $this->render('TvDatabaseHomeBundle:Default:showTV.html.twig',
     				        array('results' => $results,'tv' => $tv, 'date' => $date, '_locale' => $locale));
+    }
+    public function submitEmailChangesAction(Request $rq)
+    {
+    	$request_string = $rq->__toString();
+    	$header_string = $rq->headers->__toString();
+    	$request_string = str_replace($header_string, "", $request_string);
+    	$request_string = strstr($request_string, "HTTP");
+    	$request_string = str_replace("HTTP/1.1", "", $request_string);
+    	$request_string = str_replace("\r\n","",$request_string);
+    	$request_params = explode("&", $request_string);
+    	
+    	$entityManager = $this->getDoctrine()->getManager();
+    	$repository = $this->getDoctrine()->getRepository('AcmeStoreBundle:TVStation');
+    	$userRepository = $this->getDoctrine()->getRepository('AcmeStoreBundle:User');
+    	$token = $this->get('security.context')->getToken();
+    	//$rq->getQueryString();
+    	
+    	if($token != null)
+    	{
+    		$user = $token->getUser();
+    		if($user != null)
+    		{
+    			if($user !== 'anon.')
+    			{
+    				$databaseUser = $userRepository->find($user);
+    				if($databaseUser != null)
+    				{
+    					$databaseUser->getTVStations()->clear();
+    					
+    					foreach($request_params as $param)
+    					{
+    						$reqParam = explode('=', $param);
+    						
+    						$tvStation = $repository->find($reqParam[0]);
+    						
+    						if($tvStation != null)
+    						{
+    							$databaseUser->addTVStation($tvStation);
+    						}
+    					}
+    				}
+    				$entityManager->persist($databaseUser);
+    				$entityManager->flush();
+    			}
+    		}
+    		return $this->forward('TvDatabaseHomeBundle:TV:tvStations');
+    	}
     }
 }

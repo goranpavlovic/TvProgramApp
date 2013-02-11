@@ -9,6 +9,12 @@ tv_database_stations_page:
     defaults: { _controller: TvDatabaseHomeBundle:TV:tvStations, _locale: en }
     requirements:
         _locale: en|sr|cyrl
+        
+tv_database_email_updated:
+   pattern: /{_locale}/tvemailupdated
+   defaults: { _controller: TvDatabaseHomeBundle:TV:submitEmailChanges, _locale: en }
+   requirements: 
+       _locale: en|sr|cyrl
 
 tv_database_program_page:
    pattern: /{_locale}/advancedsearch
