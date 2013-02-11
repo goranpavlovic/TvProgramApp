@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Doctrine\ORM\Query\ResultSetMapping;
 
 use Facebook\Facebook;
+use Facebook\FacebookApiException;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -50,22 +51,24 @@ class AdvancedSearchController extends Controller
     	
     	$appId = '1060810547390883';
     	$appSecret = '58bfdc57e57ab87796ddb788bb4e0b67';
-    	$fb = new Facebook(array('appId' => $appId, 'secret' => $appSecret));
-    	$user = $fb->getUser();
-    	if($user)
+    	try 
     	{
-    		try 
-    		{
-    			$user_profile = $fb->api('/me');
-    			$report = $report . var_export($user_profile, true);
-    		}
-    		catch(FacebookApiException $e)
-    		{
-    		}
+	    	$fb = new Facebook(array('appId' => $appId, 'secret' => $appSecret));
+	    	$user = $fb->getUser();
+	    	if($user)
+	    	{
+	    			$user_profile = $fb->api('/me');
+	    			$email = $user_profile['email'];
+	    			//$report = $report . var_export($user_profile, true);
+	    			$report = $report . ' Email: ' . $email;
+	    	}
+	    	else
+	    	{
+	    		$report = $report . "User null";
+	    	}
     	}
-    	else
+    	catch(FacebookApiException $e)
     	{
-    		$report = $report . "Email null";
     	}
     	
     	

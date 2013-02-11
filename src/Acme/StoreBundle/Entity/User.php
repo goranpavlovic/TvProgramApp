@@ -17,7 +17,7 @@ class User
 	 *
 	 * @ORM\Id
 	 * @ORM\Column(name="id", type="string", length=30)
-	 * @ORM\GeneratedValue(strategy="AUTO")
+	 * @ORM\GeneratedValue(strategy="NONE")
 	 */
 	private $ValueId;
 
@@ -58,10 +58,12 @@ class User
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct($userId = null)
     {
         $this->TVStations = new \Doctrine\Common\Collections\ArrayCollection();
         $this->shows = new \Doctrine\Common\Collections\ArrayCollection();
+        if($userId!= null)
+        	$this->ValueId = $userId;
     }
     
     /**

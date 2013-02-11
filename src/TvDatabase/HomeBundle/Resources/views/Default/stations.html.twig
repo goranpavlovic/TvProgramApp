@@ -33,7 +33,12 @@
 							<div class="entry">
 								<ul class='tvMenu'>
 									{% for station in tvStations %}
-										<li class='tvmenyItem'><a href="/{{ _locale }}/tv/{{station.TvID}}"><span class='tventry'>{{station.TvName}}</span></a></li>
+										<li class='tvmenyItem'><a href="/{{ _locale }}/tv/{{station.TvID}}">
+											<span class='tventry'>{{station.TvName}}</span></a>
+											{% if loggedin == true %}
+												<input style='float:right;' name='{{ station.TvID }}' type="checkbox" />
+											{% endif %}
+										</li>
 									{% endfor %}
 								<ul>
 							</div>

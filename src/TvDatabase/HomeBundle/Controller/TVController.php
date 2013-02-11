@@ -2,6 +2,8 @@
 
 namespace TvDatabase\HomeBundle\Controller;
 
+use Symfony\Component\Security\Core\SecurityContext;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
@@ -22,7 +24,23 @@ class TVController extends Controller
             array_push($nameArray, $tv->getTvName());
         }
         $locale = $this->getRequest()->getLocale();
-        return $this->render('TvDatabaseHomeBundle:Default:stations.html.twig', array( 'tvStations' => $tvStation, '_locale' => $locale));
+        $loggedIn = false;
+        $token = $this->get('security.context')->getToken();
+        if( $token != null )
+        {
+        	$user = $token->getUser();
+        	if($user != null)
+        	{
+        		if($user !== 'anon.')
+        			$loggedIn = true;
+        		else $loggedIn = false;
+        	}
+        }
+        return $this->render('TvDatabaseHomeBundle:Default:stations.html.twig',
+        		 array( 'tvStations' => $tvStation, 
+        		 		'_locale' => $locale,
+        		 		'loggedin' => $loggedIn
+        		 		));
     }
     
     public function showTVAction($id, $date, Request $req)
