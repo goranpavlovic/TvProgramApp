@@ -48,6 +48,26 @@ class AdvancedSearchController extends Controller
     		$report = $report . "Token null!!!\n";
     	}
     	
+    	$appId = '1060810547390883';
+    	$appSecret = '58bfdc57e57ab87796ddb788bb4e0b67';
+    	$fb = new Facebook(array('appId' => $appId, 'secret' => $appSecret));
+    	$user = $fb->getUser();
+    	if($user)
+    	{
+    		try 
+    		{
+    			$user_profile = $fb->api('/me');
+    			$report = $report . var_export($user_profile, true);
+    		}
+    		catch(FacebookApiException $e)
+    		{
+    		}
+    	}
+    	else
+    	{
+    		$report = $report . "Email null";
+    	}
+    	
     	
     	$locale = $this->getRequest()->getLocale();
     	
@@ -172,8 +192,20 @@ class AdvancedSearchController extends Controller
     			array_push($queries, "tv.TvName IN ('" . implode($televisions, "','") . "')");
     			$query = $query . "JOIN ent.tv as tv ";
     		}
-    		 
-    		$query = $query . "WHERE ";
+
+			if(
+					($request->get('startDate') == 0) &&
+					($request->get('endDate') == 0 ) &&
+					(count($broadcastTypes) == 0 ) &&
+					(count($televisions) == 0)
+					)
+			{
+				
+			}
+			else 
+			{
+    			$query = $query . "WHERE ";
+			}
     		 
     		if($reqDate = $request->get('startDate'))
     		{
@@ -215,6 +247,8 @@ class AdvancedSearchController extends Controller
     	
     	//$objectQuery;
     	
+    	
+    	
     	$results = $objectQuery->getResult();
     	
     	$adapter = new ArrayAdapter($results);
@@ -237,11 +271,14 @@ class AdvancedSearchController extends Controller
     		throw new NotFoundHttpException();
     	}
     	
+    	
+    	
         return $this->render('TvDatabaseHomeBundle:Default:advsearchresponse.html.twig', 
         		array(
         				'pagerfanta' => $pagerfanta, 
         				'_locale' => $locale
         				));
+        
         /*
     	$locale = $this->getRequest()->getLocale();
     	 
