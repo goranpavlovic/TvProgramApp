@@ -93,10 +93,10 @@
 					<li><a href="/{{ _locale }}/search">{% trans %}Search{% endtrans %}</a></li>
 				{% endblock %}
 			</ul>
-		</div>
-		<div id='facebookDiv' style='float: right;width: 19%;'>
+			<div id='facebookDiv' style='position:relative;float: right;top:25%;'>
 						{{ facebook_initialize({'xfbml': true, 'fbAsyncInit': 'onFbInit();'}) }}
 						{{ facebook_login_button({'autologoutlink': true}) }}
+			</div>
 		</div>
 	</div>
 	<div id="page">

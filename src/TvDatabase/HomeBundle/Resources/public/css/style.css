@@ -175,22 +175,7 @@ img.aligncenter {
 }
 
 #menu {
-	/*width: 940px;*/
-	position:relative;
-	width: 700px;
-	float: left;
-	height: 58px;
-	margin: 0px auto;
-	margin-left: 176px;
-	padding: 0px 20px 0px 20px;
-}
-
-#facebookDiv
-{
-	width: 240%;
-	float: right;
-	position: relative;
-	top: 25%;
+	width: 940px;
 	height: 58px;
 	margin: 0px auto;
 	padding: 0px 20px 0px 20px;
