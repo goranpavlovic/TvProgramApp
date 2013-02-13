@@ -20,7 +20,7 @@
 {% endblock %}
 
 {% block content %}
-<form action="/{{ _locale }}/edit/{{ attribute.ValueId }}" method="post">
+<form action="{{ path('tv_database_edit_attribute',{'attribute' : attribute.ValueId}) }}" method="post">
 <table>
 	<tr>
 		<td>Entity Name:</td>
