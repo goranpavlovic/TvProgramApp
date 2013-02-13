@@ -39,7 +39,8 @@
 {% block content %} 
 	<div id="stations_table">
 	<div>{{ date.today }}</div>
-	<form action="/{{ _locale }}/tv/{{ tv.TvId }}" method="post">
+{# 	<form action="/{{ _locale }}/tv/{{ tv.TvId }}" method="post">#}
+	<form action="{{ path('tv_database_show_tv',{'id' : tv.TvId}) }}" method="post">
 	<table>
     	<tr>
     	    <td>
@@ -51,9 +52,24 @@
     	</tr>
 	</table>
 	</form>
-	<div id="date-prev"><a href="/{{ _locale }}/tv/{{ tv.TvId }}/{{ date.yesterday }}">{% trans %}Day before{% endtrans %}</a></div>
-	<div id="date-today"><a href="/{{ _locale }}/tv/{{ tv.TvId }}">{% trans %}Today{% endtrans %}</a></div>
-	<div id="date-next"><a href="/{{ _locale }}/tv/{{ tv.TvId }}/{{ date.tomorrow }}">{% trans %}Day after{% endtrans %}</a></div>
+	<div id="date-prev">
+{# 	<a href="/{{ _locale }}/tv/{{ tv.TvId }}/{{ date.yesterday }}">{% trans %}Day before{% endtrans %}</a>#}
+			<a href="{{ path('tv_database_show_tv', {'id' : tv.TvId, 'date' : date.yesterday}) }}">
+			{% trans %}Day before{% endtrans %}
+			</a>
+		</div>
+		<div id="date-today">
+{# 	<a href="/{{ _locale }}/tv/{{ tv.TvId }}">{% trans %}Today{% endtrans %}</a>#}
+		<a href="{{ path('tv_database_show_tv', {'id' : tv.TvId}) }}">
+		{% trans %}Today{% endtrans %}
+		</a>
+	</div>
+	<div id="date-next">
+{# 	<a href="/{{ _locale }}/tv/{{ tv.TvId }}/{{ date.tomorrow }}">{% trans %}Day after{% endtrans %}</a>#}
+		<a href="{{ path('tv_database_show_tv', {'id' : tv.TvId, 'date' : date.tomorrow}) }}">
+		{% trans %}Day after{% endtrans %}
+		</a>
+	</div>
 	<div style='clear:both'>
 	</div>
 		<table>
@@ -63,7 +79,9 @@
 			{% for program in results %}
 				<tr>
 					<td>{{ program.datetime.format('H:i')}}</td>
-					<td><a href="/{{ _locale }}/show/{{program.EntityId}}">
+					<td>
+{# 					<a href="/{{ _locale }}/show/{{program.EntityId}}">#}
+					<a href="{{ path('tv_database_show_broadcast',{'id' : program.EntityId}) }}">
 					{% for attribute in program.attributes %}
 						{% if attribute.AttributeId == 7 and attribute.AttributeSetId == 1 %} 
 							{{ attribute.Value }} 
