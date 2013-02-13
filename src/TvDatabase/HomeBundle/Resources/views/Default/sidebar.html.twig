@@ -8,14 +8,19 @@
 	</tr>
 {% for result in results %}
 	<tr class='sidebarTr'> 
-		<td class='sidebarTd'>{{ result.tv.TvName }}</td>
+		<td class='sidebarTd'>
+		<a href="{{ path('tv_database_show_tv', {'id' : result.tv.TvId}) }}">
+		{{ result.tv.TvName }}
+		</a></td>
 		<td class='sidebarTd'>{{ result.datetime.format('H:i') }}</td>
-		<td class='sidebarTd'>{% for attribute in result.attributes %}
-					{% if attribute.AttributeId == 7 and attribute.AttributeSetId == 1 %} 
+		<td class='sidebarTd'>
+		{% for attribute in result.attributes %}
+					{% if attribute.AttributeId == 7 and attribute.AttributeSetId == 1 %}
+					<a href="{{ path('tv_database_show_broadcast', {'id' : result.entityId}) }}"> 
 						{{ attribute.Value }} 
 					{% endif %}
 				{% endfor %}
-		</td>
+		</a></td>
 	</tr>
 {% endfor %}
 </table>
