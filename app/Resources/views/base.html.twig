@@ -95,7 +95,7 @@
 				{% endblock %}
 			</ul>
 			<div id='facebookDiv' style='position:relative;float: right;top:25%;'>
-						{{ facebook_initialize({'xfbml': true, 'fbAsyncInit': 'onFbInit();'}) }}
+						{{ facebook_initialize({'cookie': true, 'oauth': true,'xfbml': true, 'fbAsyncInit': 'onFbInit();'}) }}
 						{{ facebook_login_button({'autologoutlink': true}) }}
 			</div>
 		</div>

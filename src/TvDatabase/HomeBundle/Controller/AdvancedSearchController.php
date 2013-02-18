@@ -49,28 +49,6 @@ class AdvancedSearchController extends Controller
     		$report = $report . "Token null!!!\n";
     	}
     	
-    	$appId = '1060810547390883';
-    	$appSecret = '58bfdc57e57ab87796ddb788bb4e0b67';
-    	try 
-    	{
-	    	$fb = new Facebook(array('appId' => $appId, 'secret' => $appSecret));
-	    	$user = $fb->getUser();
-	    	if($user)
-	    	{
-	    			$user_profile = $fb->api('/me');
-	    			$email = $user_profile['email'];
-	    			//$report = $report . var_export($user_profile, true);
-	    			$report = $report . ' Email: ' . $email;
-	    	}
-	    	else
-	    	{
-	    		$report = $report . "User null";
-	    	}
-    	}
-    	catch(FacebookApiException $e)
-    	{
-    	}
-    	
     	
     	$locale = $this->getRequest()->getLocale();
     	
@@ -93,8 +71,7 @@ class AdvancedSearchController extends Controller
         return $this->render('TvDatabaseHomeBundle:Default:advsearchform.html.twig', array(
                 'types' => $typeNameArray,
                 'televisions' => $tvNameArray,
-        		'_locale' => $locale,
-        		'report' => $report
+        		'_locale' => $locale
         ));
         /*
     	
