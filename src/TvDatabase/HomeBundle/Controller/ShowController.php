@@ -106,7 +106,8 @@ class ShowController extends Controller
     								->setParameters(array(	'ent'=> $ent,
     														'att' => $attribute,
     														'set' => $set));
-    	if($attr = $query->getResult())
+    	$attr = $query->getResult();
+    	if($attr != null)
     	{
     			$locale = $this->getRequest()->getLocale();
     			return $this->render('TvDatabaseHomeBundle:Default:editshow.html.twig',
@@ -141,7 +142,7 @@ class ShowController extends Controller
     		return $this->render('TvDatabaseHomeBundle:Default:editshow.html.twig',
     				array(	'_locale' => $locale,
     						'attribute' => $att->getValueId(),
-    						'entity' => $attr[0]->getEntity()
+    						'entity' => $att->getEntity()
     				));
     	}
     }
