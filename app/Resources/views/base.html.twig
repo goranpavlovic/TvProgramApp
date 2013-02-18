@@ -30,9 +30,10 @@
 	                }
 	            });
 				
-	        	//FB.Event.subscribe('auth.logout', function(response){
-		            //alert("auth.logout");
-	            //});
+	        	FB.Event.subscribe('auth.logout', function(response){
+		        	
+	        		window.location.href = "{{ path("_security_logout") }}";
+	            });
 	        	
 	        	//FB.Event.subscribe('auth.authResponseChange', function(response){
 		            //alert("auth response");
