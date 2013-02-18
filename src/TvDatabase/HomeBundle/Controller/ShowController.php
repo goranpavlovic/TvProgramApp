@@ -2,6 +2,8 @@
 
 namespace TvDatabase\HomeBundle\Controller;
 
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
 use Acme\StoreBundle\Entity\EAVAttributeValue;
 
 use Acme\StoreBundle\AcmeStoreBundle;
@@ -138,11 +140,14 @@ class ShowController extends Controller
     		$em->persist($att);
     		$em->flush();
     		
+			return $this->forward('TvDatabaseHomeBundle:Show:add', 
+					array('entity' => $entity,'set' => $set, 'attribute' => $attribute));
+    		
     		$locale = $this->getRequest()->getLocale();
     		return $this->render('TvDatabaseHomeBundle:Default:editshow.html.twig',
     				array(	'_locale' => $locale,
-    						'attribute' => $att->getValueId(),
-    						'entity' => $att->getEntity()
+    						'attribute' => $attr[0]->getValueId(),//$att->getValueId(),
+    						'entity' => $attr[0]->getEntity()
     				));
     	}
     }
