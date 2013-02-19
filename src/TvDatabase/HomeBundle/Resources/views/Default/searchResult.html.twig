@@ -40,8 +40,8 @@
 {# 	            <td><a href="/{{ _locale }}/tv/{{ result.TvStation }}/{{ result.DateTime }}">{{ result.TvName }}</a></td>#}
 				<td><a href="{{ path('tv_database_show_tv', {'id' : result.TvStation, 'date' : result.DateTime}) }}">{{ result.TvName }}</a></td>
 {# 	            <td><a href="/{{ _locale }}/show/{{ result.EntityId }}">{{ result.DateTime }}</a></td>#}
-				<td><a href="{{ path('tv_database_show_broadcast', {'id' : result.EntityId}) }}">{{ result.DateTime }}</a></td>
-	            <td>{{ result.Value }}</td>
+				<td>{{ result.DateTime }}</td>
+	            <td><a href="{{ path('tv_database_show_broadcast', {'id' : result.EntityId}) }}">{{ result.Value }}</a></td>
 	        </tr>
 	{% endfor %}
 	</table>

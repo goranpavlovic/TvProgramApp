@@ -32,7 +32,7 @@ class SearchController extends Controller
             $query = 'SELECT t.TvName, e.DateTime, a.Value, e.TvStation, e.EntityId
                             FROM EAVEntity e,EAVAttributeValue a, TVStation t
                         WHERE a.EntityId = e.EntityId AND e.TvStation = t.TvId AND MATCH(a.Value) AGAINST
-                        ("' . $text . '" IN BOOLEAN MODE);';
+                        ("' . $text . '" IN BOOLEAN MODE) ORDER BY DATE(e.DateTime) ASC, t.TvName ASC;';
             
             $result = mysql_query($query);
             
@@ -102,12 +102,10 @@ class SearchController extends Controller
         		$filterString = '';
         		if(empty($bTypes)) //ako se traze svi broadcast tipovi
         		{
-        			//$filterString = 't.TvName IN (';
         			foreach ($tvs as $tv)
         			{
         				$filterString =  $filterString . ",'" . $tv . "'";
         			}
-        			//$filterString = strstr($filterString,',');
         			$pos = strpos( $filterString, ',' );
         			if( $pos !== FALSE )
         			{
@@ -117,12 +115,10 @@ class SearchController extends Controller
         		}
         		else if(empty($tvs)) //ako se traze sve emisije
         		{
-        			//$filterString = 't.TvName IN (';
         			foreach ($bTypes as $bt)
         			{
         				$filterString =  ',' . $filterString . "'" . $bt . "'";
         			}
-        			//$filterString = strstr($filterString,',');
         			$pos = strpos( $filterString, ',' );
         			if( $pos !== FALSE )
         			{
@@ -132,27 +128,24 @@ class SearchController extends Controller
         		}
         		else //ako se filtrira po oba kriterijuma
         		{
-        			//$filterString = 't.TvName IN (';
         			foreach ($tvs as $tv)
         			{
         				$filterString = $filterString . ",'" . $tv . "'";
         			}
-        			//$filterString = strstr($filterString,',');
         			$pos = strpos( $filterString, ',' );
         			if( $pos !== FALSE )
         			{
         				$filterString = substr_replace( $filterString, '', $pos, 1 );
         			}
+        			
         			$filterString = 't.TvName IN (' . $filterString . ')';
         			
-        			//$filterString = 't.TvName IN (';
-        			//$filterString = $filterString . ' AND me.EntityTypeName IN (';
         			$subfilterString = '';
         			foreach ($bTypes as $bt)
         			{
         				$subfilterString =  $subfilterString . ",'" . $bt . "'";
         			}
-        			//$filterString = strstr($filterString,',');
+        			
         			$pos = strpos( $subfilterString, ',' );
         			if( $pos !== FALSE )
         			{
@@ -164,24 +157,39 @@ class SearchController extends Controller
         			
         			
         		}
+        		$history = $this->getRequest()->get('history');
+        		if($history === 'hist')
+        		{
+        			$today = date_create(date('Y-m-d H:i:s'));//trenutni datum
+        			$history = 'AND e.DateTime > "' . $today->format('Y-m-d H-i-s') . '"';
+        		}
+        		else $history = '';
+        		
 	        	$query = 'SELECT t.TvName, e.DateTime, a.Value, e.TvStation, e.EntityId, me.EntityTypeName
 	                            FROM EAVEntity e,EAVAttributeValue a, TVStation t, MetaEAVEntityType me
 	                        WHERE a.EntityId = e.EntityId 
 	        					AND e.TvStation = t.TvId
 	        					AND  me.EntityTypeId = e.EntityTypeId
-	        					AND ' . $filterString . '
+	        					AND ' . $filterString . $history . '
 	        					AND MATCH(a.Value) AGAINST
-	                        ("' . $req . '" IN BOOLEAN MODE);';
+	                        ("' . $req . '" IN BOOLEAN MODE) ORDER BY DATE(e.DateTime) ASC, t.TvName DESC;';
         	}
         	else 
         	{
+        		$history = $this->getRequest()->get('history');
+        		if($history === 'hist')
+        		{
+        			$today = date_create(date('Y-m-d H:i:s'));//trenutni datum
+        			$history = 'AND e.DateTime > "' . $today->format('Y-m-d H-i-s') . '"';
+        		}
+        		else $history = '';
         		$query = 'SELECT t.TvName, e.DateTime, a.Value, e.TvStation, e.EntityId, me.EntityTypeName
 	                            FROM EAVEntity e,EAVAttributeValue a, TVStation t, MetaEAVEntityType me
 	                        WHERE a.EntityId = e.EntityId
-	        					AND e.TvStation = t.TvId
+	        					AND e.TvStation = t.TvId ' . $history . '
 	        					AND  me.EntityTypeId = e.EntityTypeId
 	        					AND MATCH(a.Value) AGAINST
-	                        ("' . $req . '" IN BOOLEAN MODE);';
+	                        ("' . $req . '" IN BOOLEAN MODE) ORDER BY DATE(e.DateTime) ASC, t.TvName DESC;';
         	}
         	
         	if(!$result = mysql_query($query))
