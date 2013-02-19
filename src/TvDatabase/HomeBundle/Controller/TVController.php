@@ -64,6 +64,15 @@ class TVController extends Controller
     
     public function showTVAction($id, $date, Request $req)
     {
+    	$connection = mysql_connect('localhost','root','Praksa2012');
+    	$db = mysql_select_db('Praksa2012', $connection);
+    	$result = mysql_query('SELECT DATE(MAX(DateTime)) FROM EAVEntity WHERE TvStation='. $id, $connection);
+    	$row = mysql_fetch_array($result);
+    	$maxDate = $row[0];
+    	$result = mysql_query('SELECT DATE(MIN(DateTime)) FROM EAVEntity WHERE TvStation=' . $id, $connection);
+    	$row = mysql_fetch_array($result);
+    	$minDate = $row[0];
+    	
         $today = null;
         if($reqDate = $req->get('startDate'))
         {
@@ -93,7 +102,14 @@ class TVController extends Controller
     				$yesterday = date_sub(date_create($today), date_interval_create_from_date_string('1 day'))->format('Y-m-d');
     				$date = array('today' => $today, 'tomorrow' => $tomorrow, 'yesterday' => $yesterday);
     				return $this->render('TvDatabaseHomeBundle:Default:showTV.html.twig',
-    				        array('results' => $results,'tv' => $tv, 'date' => $date, '_locale' => $locale));
+    				        array(
+    				        		'results' => $results,
+    				        		'tv' => $tv, 
+    				        		'date' => $date, 
+    				        		'_locale' => $locale,
+    				        		'maxDate' => $maxDate,
+    				        		'minDate' => $minDate
+    				        		));
     }
     public function submitEmailChangesAction(Request $rq)
     {

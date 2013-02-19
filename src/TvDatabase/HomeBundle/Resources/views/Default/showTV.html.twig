@@ -41,6 +41,8 @@
 	<div>{{ date.today }}</div>
 {# 	<form action="/{{ _locale }}/tv/{{ tv.TvId }}" method="post">#}
 	<form id='searchResponseForm' action="{{ path('tv_database_show_tv',{'id' : tv.TvId}) }}" method="post">
+	<input id='minDate' type="hidden" value='{{ minDate }}'/>
+	<input id='maxDate' type="hidden" value='{{ maxDate }}'
 	<table>
     	<tr>
     	    <td>
