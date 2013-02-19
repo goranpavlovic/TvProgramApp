@@ -129,8 +129,13 @@ class ShowController extends Controller
     		$att->setAttributeSetMeta($em->getRepository('AcmeStoreBundle:MetaEAVAttributeSet')->find($set));
     		$att->setEntity($em->getRepository('AcmeStoreBundle:EAVEntity')->find($entity));
     		
-    		$con = mysql_connect('localhost','root','Praksa2012');
-    		mysql_select_db('Praksa2012');
+    		$host = $this->container->getParameter('database_host');
+    		$name = $this->container->getParameter('database_name');
+    		$user = $this->container->getParameter('database_user');
+    		$pass = $this->container->getParameter('database_password');
+    		
+    		$con = mysql_connect($host,$user,$pass);
+    		mysql_select_db($name);
     		$query = 'SELECT GenerateGUID() AS GUID';
     		$res = mysql_query($query);
     		$id = mysql_fetch_array($res);

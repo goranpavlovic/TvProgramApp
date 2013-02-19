@@ -25,8 +25,12 @@ class SearchController extends Controller
     	{
             //$text = $req->get('searchText');
 
-            $con = mysql_connect('localhost','root','Praksa2012');
-            mysql_select_db('Praksa2012');
+    		$host = $this->container->getParameter('database_host');
+    		$name = $this->container->getParameter('database_name');
+    		$user = $this->container->getParameter('database_user');
+    		$pass = $this->container->getParameter('database_password');
+            $con = mysql_connect($host,$user,$pass);
+            mysql_select_db($name);
             mysql_set_charset('utf8',$con);
             
             $query = 'SELECT t.TvName, e.DateTime, a.Value, e.TvStation, e.EntityId
@@ -92,9 +96,13 @@ class SearchController extends Controller
 	        	}
 	        	$filter = true;
         	}
+        	$host = $this->container->getParameter('database_host');
+        	$name = $this->container->getParameter('database_name');
+        	$user = $this->container->getParameter('database_user');
+        	$pass = $this->container->getParameter('database_password');
         	
-        	$con = mysql_connect('localhost','root','Praksa2012');
-        	mysql_select_db('Praksa2012');
+        	$con = mysql_connect($host,$user,$pass);
+        	mysql_select_db($name);
         	mysql_set_charset('utf8',$con);
         	$query = '';
         	if($filter)

@@ -16,7 +16,36 @@ public function indexAction()
 	//$today = date_create('2013-01-11 11:45:00');
 	$results = array();
 
-	$displays = array('RTS1','Prva TV', 'RTS2', "TV Zona", "B92");//koje se prikazuju
+	$token = $this->get('security.context')->getToken();
+	$user = null;
+	if($token !== null)
+		$user = $token->getUser();
+	
+	$displays = array();
+	if($user === null)
+		$displays = array('RTS1','Prva TV', 'RTS2', "TV Zona", "B92");//koje se prikazuju
+	else
+	{
+		$em = $this->getDoctrine()->getManager();
+		$u = $em->getRepository('AcmeStoreBundle:User')->find($user);
+		if($u === null)
+			$displays = array('RTS1','Prva TV', 'RTS2', "TV Zona", "B92");//koje se prikazuju
+		else
+		{
+			$check = $u->getTVStations();
+			if($check[0] === null)
+				$displays = array('RTS1','Prva TV', 'RTS2', "TV Zona", "B92");//koje se prikazuju
+			else
+			{
+				foreach($u->getTVStations() as $tv)
+				{
+					array_push($displays,$tv->getTvName());
+				}
+			}
+		}
+	}
+	
+	
 	foreach($displays as $display)
 	{
 		$em = $this->getDoctrine()->GetManager();

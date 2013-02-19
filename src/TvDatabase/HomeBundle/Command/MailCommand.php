@@ -50,40 +50,44 @@ class MailCommand extends ContainerAwareCommand
 // 			$message = $this->getContainer()->get('mailer');
 		foreach($results as $user)
 		{
-			$inClause = ' IN(';
-			foreach($user->getTVStations() as $station)
+			$check = $user->getTVStations();
+			if($check[0] !== null)
 			{
-				$inClause = $inClause  . ',' . strval($station->getTvID());
+				$inClause = ' IN(';
+				foreach($user->getTVStations() as $station)
+				{
+					$inClause = $inClause  . ',' . strval($station->getTvID());
+				}
+				$inClause = $inClause . ') ';
+				
+				$pos = strpos( $inClause, ',' );
+				if( $pos !== FALSE )
+				{
+					$inClause = substr_replace( $inClause, '', $pos, 1 );
+				}
+				$today = $today = date_create(date('Y-m-d'));
+				$em->getRepository('AcmeStoreBundle:EAVEntity');
+				$query = $em->createQuery('SELECT e FROM AcmeStoreBundle:EAVEntity e WHERE e.TvStation' . $inClause . 
+										 'AND e.Datetime > :pre AND e.Datetime < :posle
+										ORDER BY e.TvStation DESC, e.Datetime ASC')
+										->setParameters(array(
+																'pre' => $today->format('Y-m-d') . ' 00:00:00',
+																'posle' => $today->format('Y-m-d') . ' 23:59:59'
+													));
+				$program = $query->getResult();
+				//send email
+				$twig = $this->getContainer()->get('twig');
+				$message = \Swift_Message::newInstance()
+				->setSubject("TV Program Schedule for " . $today->format('d.m.Y'))
+				->setFrom("admin@symfonyserver.com")
+				->setTo($user->getEmail())
+				->setBody($twig->render('TvDatabaseHomeBundle:Default:mail.html.twig',
+						array(
+								'programs' => $program)),'text/html');
+				
+				$this->getContainer()->get('mailer')->send($message);
+				$output->writeln('email sent to: ' . $user->getEmail());
 			}
-			$inClause = $inClause . ') ';
-			
-			$pos = strpos( $inClause, ',' );
-			if( $pos !== FALSE )
-			{
-				$inClause = substr_replace( $inClause, '', $pos, 1 );
-			}
-			$today = $today = date_create(date('Y-m-d'));
-			$em->getRepository('AcmeStoreBundle:EAVEntity');
-			$query = $em->createQuery('SELECT e FROM AcmeStoreBundle:EAVEntity e WHERE e.TvStation' . $inClause . 
-									 'AND e.Datetime > :pre AND e.Datetime < :posle
-									ORDER BY e.TvStation DESC, e.Datetime ASC')
-									->setParameters(array(
-															'pre' => $today->format('Y-m-d') . ' 00:00:00',
-															'posle' => $today->format('Y-m-d') . ' 23:59:59'
-												));
-			$program = $query->getResult();
-			//send email
-			$twig = $this->getContainer()->get('twig');
-			$message = \Swift_Message::newInstance()
-			->setSubject("TV Program Schedule for " . $today->format('d.m.Y'))
-			->setFrom("admin@symfonyserver.com")
-			->setTo($user->getEmail())
-			->setBody($twig->render('TvDatabaseHomeBundle:Default:mail.html.twig',
-					array(
-							'programs' => $program)),'text/html');
-			
-			$this->getContainer()->get('mailer')->send($message);
-			$output->writeln('email sent to: ' . $user->getEmail());
 		}
 	}
 }

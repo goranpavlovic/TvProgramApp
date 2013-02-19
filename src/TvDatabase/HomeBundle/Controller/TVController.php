@@ -64,8 +64,13 @@ class TVController extends Controller
     
     public function showTVAction($id, $date, Request $req)
     {
-    	$connection = mysql_connect('localhost','root','Praksa2012');
-    	$db = mysql_select_db('Praksa2012', $connection);
+    	$host = $this->container->getParameter('database_host');
+    	$name = $this->container->getParameter('database_name');
+    	$user = $this->container->getParameter('database_user');
+    	$pass = $this->container->getParameter('database_password');
+    	
+    	$connection = mysql_connect($host,$user,$pass);
+    	$db = mysql_select_db($name, $connection);
     	$result = mysql_query('SELECT DATE(MAX(DateTime)) FROM EAVEntity WHERE TvStation='. $id, $connection);
     	$row = mysql_fetch_array($result);
     	$maxDate = $row[0];
