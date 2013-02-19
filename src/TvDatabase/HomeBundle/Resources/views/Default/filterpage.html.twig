@@ -41,6 +41,11 @@
 					</select>
 				</td>
 			</tr>
+			<tr>
+				<td>
+					<input type="checkbox" name="history" value="hist">{% trans %}Ignore history{% endtrans %}
+				</td>
+			</tr>
 		</table>
 		<input type="submit" Value="{% trans %} Filter {% endtrans %}">
 	    </form>
@@ -53,8 +58,8 @@
 	    {% for result in results %}
 	        <tr>
 	            <td><a href="{{ path('tv_database_show_tv', {'id' : result.TvStation, 'date' : result.DateTime}) }}">{{ result.TvName }}</a></td>
-	            <td><a href="{{ path('tv_database_show_broadcast', {'id' : result.EntityId}) }}">{{ result.DateTime }}</a></td>
-	            <td>{{ result.Value }}</td>
+	            <td>{{ result.DateTime }}</td>
+	            <td><a href="{{ path('tv_database_show_broadcast', {'id' : result.EntityId}) }}">{{ result.Value }}</a></td>
 	        </tr>
 	{% endfor %}
 	</table>

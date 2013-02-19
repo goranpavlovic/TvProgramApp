@@ -42,7 +42,10 @@
 	</tr>
 	<tr>
 		<td>Value:</td>
-		<td><input type="text" name="value" value="{{ attribute.value }}"</td>
+		<td>
+		<!--  input type="text" name="value" value="{{ attribute.value }}" /-->
+		<textarea rows="4" cols="50" name="value">{{ attribute.value }}</textarea>
+		</td>
 	</tr>
 	<tr>
 		<td><input type="submit" value="accept"></td>

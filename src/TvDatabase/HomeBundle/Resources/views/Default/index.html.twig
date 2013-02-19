@@ -23,7 +23,8 @@
 	<a href="{{ path('tv_database_search') }}">{% trans %}Search{% endtrans %}</a></li>
 {% endblock %}
 
-{% block content %} 
+{% block content %}
+<h2>{% trans %}Showing now{% endtrans %}</h2> 
 	{% for result in results %}
 	<div id="TV">
 {# 	<a href="/{{ _locale }}/tv/{{result.tv.tvid}}">{{ result.tv.tvname }}</a>#}
