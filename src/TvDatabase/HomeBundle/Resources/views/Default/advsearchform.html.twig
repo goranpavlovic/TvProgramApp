@@ -38,6 +38,8 @@
 {% block content %} 
 
 	<form action="/{{ _locale }}/advancedsearchresponse" method="post" >
+		<input id='minDate' type="hidden" value='{{ minDate }}' />
+		<input id='maxDate' type="hidden" value='{{ maxDate }}' />
 		<table>
 			<tr>
 				<td><label>{% trans %}Broadcast Types{% endtrans %}: </label></td>

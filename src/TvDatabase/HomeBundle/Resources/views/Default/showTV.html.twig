@@ -14,7 +14,7 @@
 	<script type='text/javascript' src='{{ asset('bundles/tvdatabasehome/javascript/timepickeraddon.js') }}'></script>
 	<script type='text/javascript' src='{{ asset('bundles/tvdatabasehome/javascript/jquery.multiselect.js') }}'></script>
 	<script type='text/javascript' src='{{ asset('bundles/tvdatabasehome/javascript/dropdownchecklist.js') }}'></script>
-	<script type='text/javascript' src='{{ asset('bundles/tvdatabasehome/javascript/searchForm.js') }}'></script>
+	<script type='text/javascript' src='{{ asset('bundles/tvdatabasehome/javascript/searchResponse.js') }}'></script>
 {% endblock %}
 
 {% block bodyopen %}
@@ -40,15 +40,13 @@
 	<div id="stations_table">
 	<div>{{ date.today }}</div>
 {# 	<form action="/{{ _locale }}/tv/{{ tv.TvId }}" method="post">#}
-	<form action="{{ path('tv_database_show_tv',{'id' : tv.TvId}) }}" method="post">
+	<form id='searchResponseForm' action="{{ path('tv_database_show_tv',{'id' : tv.TvId}) }}" method="post">
 	<table>
     	<tr>
     	    <td>
     	        <label>{% trans %}Select date{% endtrans %}:</label></td>
     	    <td>
     	        <input type='text' id='startDate' name='startDate'></td>
-    	    <td>
-    	        <input type='submit' value='{% trans %}View{% endtrans %}'></td>
     	</tr>
 	</table>
 	</form>

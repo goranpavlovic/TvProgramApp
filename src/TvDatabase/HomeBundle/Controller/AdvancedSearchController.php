@@ -27,6 +27,15 @@ class AdvancedSearchController extends Controller
 {
     public function advancedSearchAction()
     {
+    	$connection = mysql_connect('localhost','root','Praksa2012');
+    	$db = mysql_select_db('Praksa2012', $connection);
+    	$result = mysql_query('SELECT DATE(MAX(DateTime)) FROM EAVEntity', $connection);
+    	$row = mysql_fetch_array($result);
+    	$maxDate = $row[0];
+    	$result = mysql_query('SELECT DATE(MIN(DateTime)) FROM EAVEntity', $connection);
+    	$row = mysql_fetch_array($result);
+    	$minDate = $row[0];
+    	
     	$user = $this->getUser();
     	 
     	$report = "User: " . $user . "\n";
@@ -71,7 +80,9 @@ class AdvancedSearchController extends Controller
         return $this->render('TvDatabaseHomeBundle:Default:advsearchform.html.twig', array(
                 'types' => $typeNameArray,
                 'televisions' => $tvNameArray,
-        		'_locale' => $locale
+        		'_locale' => $locale,
+        		'minDate' => $minDate,
+        		'maxDate' => $maxDate
         ));
         /*
     	
