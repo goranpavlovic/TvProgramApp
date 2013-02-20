@@ -23,18 +23,18 @@ public function indexAction()
 	
 	$displays = array();
 	if($user === null)
-		$displays = array('RTS1','Prva TV', 'RTS2', "TV Zona", "B92");//koje se prikazuju
+		$displays = array('Prva TV','RTS1', 'RTS2','Pink', "TV Zona", "B92");//koje se prikazuju
 	else
 	{
 		$em = $this->getDoctrine()->getManager();
 		$u = $em->getRepository('AcmeStoreBundle:User')->find($user);
 		if($u === null)
-			$displays = array('RTS1','Prva TV', 'RTS2', "TV Zona", "B92");//koje se prikazuju
+			$displays = array('Prva TV','RTS1', 'RTS2','Pink', "TV Zona", "B92");//koje se prikazuju
 		else
 		{
 			$check = $u->getTVStations();
 			if($check[0] === null)
-				$displays = array('RTS1','Prva TV', 'RTS2', "TV Zona", "B92");//koje se prikazuju
+				$displays = array('Prva TV','RTS1', 'RTS2','Pink', "TV Zona", "B92");//koje se prikazuju
 			else
 			{
 				foreach($u->getTVStations() as $tv)

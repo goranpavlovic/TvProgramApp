@@ -30,8 +30,10 @@
 			<div id="{{ attribute.attributeMeta.AttributeName }}">
 			{% if attribute.attributeMeta.AttributeName == "Link" %}
 				<a href={{ attribute.Value }}> link </a>
+				<a href="{{ path('tv_database_edit_attribute', {'attribute' : attribute.ValueId}) }}">edit</a>
 			{% elseif attribute.attributeMeta.AttributeName == "Picture" %}
 				<img src={{ attribute.Value }}>
+				<a href="{{ path('tv_database_edit_attribute', {'attribute' : attribute.ValueId}) }}">edit</a>
 			{% else %}
 				{{ attribute.AttributeMeta.AttributeName }}: {{ attribute.Value }} 
 {# 				<a href="/{{ _locale }}/edit/{{ attribute.ValueId }}">edit</a>#}
