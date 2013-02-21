@@ -50,6 +50,8 @@ public function indexAction()
 	{
 		$em = $this->getDoctrine()->GetManager();
 		$tv =	$em->getRepository('AcmeStoreBundle:TVStation')->findOneBy(array('TvName' => $display));
+		if(!$tv)
+			break;
 		$query = $em->createQuery
 			('SELECT e FROM AcmeStoreBundle:EAVEntity as e WHERE e.TvStation = :tv AND e.Datetime <= :stampmax ORDER BY e.Datetime DESC')
 				->setParameters(array('tv' => $tv->getTvId(),
