@@ -24,9 +24,11 @@ class SidebarController extends Controller
 									JOIN e.tv t WHERE
 									e.Datetime > :pre AND e.Datetime < :post 
 									AND et.EntityTypeName = :type ORDER BY e.TvStation ASC, e.Datetime ASC')
-							->setParameters(array(   'pre' => $today->format('Y-m-d') . ' 00-00-00',  
+							->setParameters(array(   'pre' => $today->format('Y-m-d H-i-s'),  
 													'post' => $today->format('Y-m-d') . ' 23-59-59',
 													'type' => $EntityType));
+							
+		//$query->setMaxResults(20);
 							
 		$results = $query->getResult();
 		

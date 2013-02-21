@@ -45,7 +45,7 @@
 				<td><label>{% trans %}Broadcast Types{% endtrans %}: </label></td>
 				<td><select id="broadcastType" name="broadcastType" multiple="multiple">
 						{% for type in types %}
-							<option>{{type}}</option>
+							<option>{{ type|trans }}</option>
 						{% endfor %}
 					</select>
 				</td>
