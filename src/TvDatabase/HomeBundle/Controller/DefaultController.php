@@ -13,7 +13,6 @@ class DefaultController extends Controller
 public function indexAction()
 {
 	$today = date_create(date('Y-m-d H:i:s'));//trenutni datum
-	//$today = date_create('2013-01-11 11:45:00');
 	$results = array();
 
 	$token = $this->get('security.context')->getToken();
@@ -56,7 +55,6 @@ public function indexAction()
 			('SELECT e FROM AcmeStoreBundle:EAVEntity as e WHERE e.TvStation = :tv AND e.Datetime <= :stampmax ORDER BY e.Datetime DESC')
 				->setParameters(array('tv' => $tv->getTvId(),
 							'stampmax' => $today->format('Y-m-d H-i-s')
-							/*'stampmin' => date_sub($today,date_interval_create_from_date_string('1 day'))*/
 							));
 		$query->setMaxResults(1);
 		$shows = $query->getResult();
@@ -76,7 +74,6 @@ public function indexAction()
 			('SELECT e FROM AcmeStoreBundle:EAVEntity as e WHERE e.TvStation = :tv AND e.Datetime >= :stampmax ORDER BY e.Datetime ASC')
 				->setParameters(array('tv' => $tv->getTvId(),
 							'stampmax' => $today->format('Y-m-d H-i-s')
-							//'stampmin' => date_add($today,date_interval_create_from_date_string('1 day'))
 							));
 		$queryNext->setMaxResults(1);
 		$showsNext = $queryNext->getResult();
@@ -91,7 +88,6 @@ public function indexAction()
 			$nNext=$nameNext->getValue();
 		else
 			$nNext = 'Name not in database';
-		//$shows = $em->getRepository('AcmeStoreBundle:EAVEntity')->findBy(array('TvStation' => $tv->GetTvId()));
 		if($shows && $showsNext)
 		{
 		array_push($results,array(
