@@ -28,8 +28,6 @@ class SidebarController extends Controller
 													'post' => $today->format('Y-m-d') . ' 23-59-59',
 													'type' => $EntityType));
 							
-		//$query->setMaxResults(20);
-							
 		$results = $query->getResult();
 		
 		$locale = $this->getRequest()->getLocale();

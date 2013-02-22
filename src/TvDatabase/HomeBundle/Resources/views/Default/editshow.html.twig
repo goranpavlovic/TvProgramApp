@@ -6,16 +6,12 @@
 
 {% block mainmany %}
 	<li>
-{# 	<a href="/{{ _locale }}">{% trans %}Home{% endtrans %}#}
 	<a href="{{ path('tv_database_home_homepage')}}">{% trans %}Home{% endtrans %}</a></li>
 	<li>
-{# 	<a href="/{{ _locale }}/tvstations">{% trans %}Tv Stations{% endtrans %}</a></li>#}
 	<a href="{{ path('tv_database_stations_page')}}">{% trans %}Tv Stations{% endtrans %}</a></li>
 	<li>
-{# 	<a href="/{{ _locale }}/advancedsearch">{% trans %}Detailed View{% endtrans %}</a>#}
 	<a href="{{ path('tv_database_program_page') }}">{% trans %}Detailed View{% endtrans %}</a></li>
 	<li>
-{# 	<a href="/{{ _locale }}/search">{% trans %}Search{% endtrans %}</a>#}
 	<a href="{{ path('tv_database_search') }}">{% trans %}Search{% endtrans %}</a></li>
 {% endblock %}
 
@@ -52,7 +48,6 @@
 	</tr>
 </table>
 </form>
-{# <a href="/{{ _locale }}/show/{{ entity.EntityId }}">{% trans %}Back{% endtrans %}</a>#}
 <a href="{{ path('tv_database_show_broadcast', {'id' : entity.EntityId}) }}">{% trans %}Back{% endtrans %}</a>
 {% endblock %}
 

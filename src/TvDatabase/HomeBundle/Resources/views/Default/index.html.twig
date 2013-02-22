@@ -10,16 +10,12 @@
 
 {% block mainmany %}
 	<li class="current_page_item" >
-{# 	<a href="/{{ _locale }}">{% trans %}Home{% endtrans %}#}
 	<a href="{{ path('tv_database_home_homepage')}}">{% trans %}Home{% endtrans %}</a></li>
 	<li>
-{# 	<a href="/{{ _locale }}/tvstations">{% trans %}Tv Stations{% endtrans %}</a></li>#}
 	<a href="{{ path('tv_database_stations_page')}}">{% trans %}Tv Stations{% endtrans %}</a></li>
 	<li>
-{# 	<a href="/{{ _locale }}/advancedsearch">{% trans %}Detailed View{% endtrans %}</a>#}
 	<a href="{{ path('tv_database_program_page') }}">{% trans %}Detailed View{% endtrans %}</a></li>
 	<li>
-{# 	<a href="/{{ _locale }}/search">{% trans %}Search{% endtrans %}</a>#}
 	<a href="{{ path('tv_database_search') }}">{% trans %}Search{% endtrans %}</a></li>
 {% endblock %}
 
@@ -27,20 +23,17 @@
 <h2>{% trans %}Showing now{% endtrans %}</h2> 
 	{% for result in results %}
 	<div id="TV">
-{# 	<a href="/{{ _locale }}/tv/{{result.tv.tvid}}">{{ result.tv.tvname }}</a>#}
 	<a href="{{ path('tv_database_show_tv', {'id' : result.tv.tvid}) }}">{{ result.tv.tvname }}</a>
 	<div id="broadcast table">
 		<table>
 			<tr>
 				<td>{{ result.shows }}</td>
-{# 				<td><a href="/{{ _locale }}/show/{{ result.nameId }}">{{ result.name }}</td>#}
 				<td><a href="{{ path('tv_database_show_broadcast', {'id' : result.nameId}) }}">
 				{{ result.name }}
 				</a></td>
 			</tr>
 			<tr>
 				<td>{{ result.showsNext }}</td>
-{# 				<td><a href="/{{ _locale }}/show/{{ result.nameNextId }}">{{ result.nameNext }}</td>#}
 				<td><a href="{{ path('tv_database_show_broadcast', {'id' : result.nameNextId}) }}">
 				{{ result.nameNext }}
 				</a></td>
@@ -49,8 +42,6 @@
 	</div>
 	</div>
 	{% endfor %}
-	{# <a href="/{{ _locale }}/mail">mail</a> #}
-
 {% endblock %}
 
 

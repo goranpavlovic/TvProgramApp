@@ -19,19 +19,13 @@ class ShowController extends Controller
     public function showAction($id)
     {
         $em = $this->getDoctrine()->GetManager();
-        //$show = $em->getRepository('AcmeStoreBundle:EAVEntity')->find($id);
         
         $query = $em->createQuery('SELECT e,a,am from AcmeStoreBundle:EAVEntity as e JOIN e.attributes as a
 									JOIN a.attributeMeta am
         							WHERE e.EntityId = :id')->setParameter('id', $id);
         
         $result = $query->getResult();
-//         $result = array();
-//         foreach($show->getAttributes() as $attribute)
-//         {
-//             $name = $em->getRepository('AcmeStoreBundle:MetaEAVAttribute')->find($attribute->getAttributeId());
-//             array_push($result, array('name' => $name->getAttributeName(),'value' => $attribute->getValue()));
-//         }
+        
         $locale = $this->getRequest()->getLocale();
         return $this->render('TvDatabaseHomeBundle:Default:show.html.twig', 
         		array(    'entity' => $result[0],
@@ -101,8 +95,6 @@ class ShowController extends Controller
     	$em = $this->getDoctrine()->getManager();
     	$ent = $em->getRepository('AcmeStoreBundle:EAVEntity')->find($entity);
     	
-    	//$att = $em->getRepository('AcmeStoreBundle:EAVAttributeValue')->findBy(array('entity' => $ent, 'AttributeId' => $attribute));
-    	
     	$query = $em->createQuery('SELECT a FROM AcmeStoreBundle:EAVAttributeValue a JOIN a.entity e
     								WHERE e.EntityId = :ent AND a.AttributeId = :att AND a.AttributeSetId = :set')
     								->setParameters(array(	'ent'=> $ent,
@@ -151,7 +143,7 @@ class ShowController extends Controller
     		$locale = $this->getRequest()->getLocale();
     		return $this->render('TvDatabaseHomeBundle:Default:editshow.html.twig',
     				array(	'_locale' => $locale,
-    						'attribute' => $attr[0]->getValueId(),//$att->getValueId(),
+    						'attribute' => $attr[0]->getValueId(),
     						'entity' => $attr[0]->getEntity()
     				));
     	}

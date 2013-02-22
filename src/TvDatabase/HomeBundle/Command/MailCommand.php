@@ -22,32 +22,20 @@ class MailCommand extends ContainerAwareCommand
 		$this
 		->setName('home:mail')
 		->setDescription('Send emails')
-// 		->addArgument('name', InputArgument::OPTIONAL, 'Who do you want to greet?')
-// 		->addOption('yell', null, InputOption::VALUE_NONE, 'If set, the task will yell in uppercase letters')
 		;
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
-// 		$name = $input->getArgument('name');
-// 		if ($name) {
-// 			$text = 'Hello '.$name;
-// 		} else {
 			$text = 'Hello';
-// 		}
 
-// 		if ($input->getOption('yell')) {
-// 			$text = strtoupper($text);
-// 		}
 			$em = $this->getContainer()->get('doctrine');
 			$em = $em->getManager();
-// 			$em = $this->getDoctrine()->getManager();
 			$catalogue = $em->getRepository('AcmeStoreBundle:MetaEAVEntityType');
 			$query = $em->createQuery('SELECT u FROM AcmeStoreBundle:User as u');
 			
 			$results = $query->getResult();
-			
-// 			$message = $this->getContainer()->get('mailer');
+
 		foreach($results as $user)
 		{
 			$check = $user->getTVStations();

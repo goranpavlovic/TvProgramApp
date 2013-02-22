@@ -84,10 +84,8 @@ class TVController extends Controller
             $today = date_create($reqDate)->format('Y-m-d');
         }
         else if($date === 'today')
-            //$today = date_create('2013-01-11 11:45:00');
             $today = date('Y-m-d');
         else
-            //$today = date_create($date . '12:00:00');
             $today = $date;
         $em = $this->getDoctrine()->getManager();
         $tv = $em->getRepository('AcmeStoreBundle:TVStation')->find($id);
@@ -97,7 +95,7 @@ class TVController extends Controller
     				->setParameters(array(
     				        'postDate' => $today . ' 00:00:00',
     				        'preDate' => $today . ' 24:00:00',
-    				        'tv' => $id));//$tv->getTvId()));
+    				        'tv' => $id));
     				
     				$results = $query->getResult();
     				
@@ -130,7 +128,6 @@ class TVController extends Controller
     	$repository = $this->getDoctrine()->getRepository('AcmeStoreBundle:TVStation');
     	$userRepository = $this->getDoctrine()->getRepository('AcmeStoreBundle:User');
     	$token = $this->get('security.context')->getToken();
-    	//$rq->getQueryString();
     	
     	if($token != null)
     	{
