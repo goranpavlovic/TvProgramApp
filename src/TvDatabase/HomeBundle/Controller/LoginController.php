@@ -54,7 +54,6 @@ class LoginController extends Controller
 		{
 			return $this->forward('TvDatabaseHomeBundle:Default:index');
 		}
-		//return new RedirectResponse("/");
 		return $this->forward('TvDatabaseHomeBundle:Default:index');
 	}
 	public function logoutAction()

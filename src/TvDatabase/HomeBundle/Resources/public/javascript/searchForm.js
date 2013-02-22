@@ -1,6 +1,5 @@
 function bodyLoad()
-{
-	
+{	
 	$minDateInput = document.getElementById('minDate');
 	$minDate = $minDateInput.value;
 	$maxDateInput = document.getElementById('maxDate');
